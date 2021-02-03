@@ -1,4 +1,3 @@
-
 // import { Resource } from "./resource.model";
 // extends Resource 
 export class UserModel {
