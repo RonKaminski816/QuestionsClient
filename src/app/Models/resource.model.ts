@@ -1,3 +1,4 @@
 export class Resource {
-    id: number
+    id: number;
+    name:string;
   }
