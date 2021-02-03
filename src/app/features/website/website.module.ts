@@ -4,13 +4,16 @@ import { CommonModule } from '@angular/common';
 import { WebsiteRoutingModule } from './website-routing.module';
 import { QuestionsManagementModule } from './questions-management/questions-management.module'
 import { ChartsPageModule } from "./charts-page/charts-page.module";
+import { WebsiteComponent } from './website.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [WebsiteComponent],
   imports: [
     CommonModule,
+    // QuestionsManagementModule,
+    // ChartsPageModule,
     WebsiteRoutingModule,
   ],
 })

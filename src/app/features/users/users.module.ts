@@ -10,11 +10,13 @@ import { UsersRoutingModule } from './users-routing.module';
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [
+    LoginComponent,
+  ],
   imports: [
     CommonModule,
     UsersRoutingModule,
-    MaterialModule,
+    //MaterialModule,
     FormsModule,
   ],
 })

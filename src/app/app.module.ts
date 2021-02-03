@@ -9,6 +9,10 @@ import { AuthInterceptor } from './Core/authentication/interceptors/auth-interce
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from "./Core/core.module";
 import { AppComponent } from './app.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { LocalStorageService } from './Core/storages/local-storage/local-storage.service';
+import { UserStateService } from './core/state-managments/users-state/user-state.service';
 
 
 @NgModule({
@@ -17,14 +21,18 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    CoreModule,
+    //MaterialModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    //CoreModule,
     CommonModule,
     HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [
+    //LocalStorageService,
+    //UserStateService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

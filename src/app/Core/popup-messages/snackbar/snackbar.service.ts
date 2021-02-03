@@ -15,5 +15,4 @@ export class SnackbarService {
       //the class is set in style.css file
     });
   }
-
 }

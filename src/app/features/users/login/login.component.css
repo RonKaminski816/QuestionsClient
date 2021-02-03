@@ -88,30 +88,36 @@ button:hover {
   font-weight: 200;
 }
 
+/*every dialog title*/
+[dialog-title]{
+  margin-bottom: 0.3rem;
+}
+
 /*All the Dialog Buttons:*/
 /*every button in the dialog design*/
 .btn-dialog {
-  border: 1px solid #53768c;
+  border: 1px solid #444c54;
   padding: .375rem .75rem;
+  margin-top: 1rem;
   font-size: 1rem;
   line-height: 1.5;
   border-radius: .25rem;
 }
 
-.btn-dialog:focus {
-  outline: #53768c auto;
-}
 /*the close dailog button*/
 .close-btn {
-  color: #53768c;
+  color: #444c54;
   background-color: #fff;
-  border: 1px solid #53768c;
+  border: 1px solid #444c54;
 }
-
+.btn-dialog:focus {
+  outline: #444c54 auto;
+}
 .close-btn:hover {
-  background-color: #53768c;
+  background-color: #444c54;
   color: #fff;
   border-color: #fff;
+  opacity:unset;
 }
 
 /*all the page attributes:*/
