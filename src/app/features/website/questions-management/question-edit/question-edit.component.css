@@ -1,0 +1,73 @@
+.actions-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form {
+    width: 100%;
+}
+strong, label{
+    color: #464d55;
+}
+
+textarea {
+    height: 10rem;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.isDisabled {
+    color: currentColor;
+    opacity: 0.5;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+.actions-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-required {
+    color: red;
+}
+
+input.ng-dirty.ng-invalid:focus, textarea.ng-dirty.ng-invalid:focus {
+    border: solid 1px red;
+}
+
+button:focus{
+    outline: 0px  transparent;
+}
+button[color="blue-medium"] {
+    color: #53768c;
+    background-color: inherit;
+}
+
+button[color="blue-medium"]:hover {
+    color: #53768c;
+    background-color: #333333;
+}
+button[color="blue-dark"] {
+    background-color: #444c54;
+    color: white;
+}
+
+[color="blue-light"] {
+    background-color: #a9c2e6;
+}
+[color="blue-medium"] {
+    color: #53768c;
+}
+[color="blue-dark"] {
+    color: #444c54;
+}
+[stroked-button]{
+    border: none;
+    padding: 0 16px;
+    border-radius: 4px;
+}

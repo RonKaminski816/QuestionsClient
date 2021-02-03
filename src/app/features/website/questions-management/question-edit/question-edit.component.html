@@ -1,0 +1,31 @@
+<div class="actions-container">
+    <div *ngIf="actionedQuestion.id.trim().length >= 1">
+        <h1> <strong>{{actionedQuestion.id}}</strong></h1>
+        <p>Creation Date: <strong>{{actionedQuestion.creationDate |date:"fullDate"}}</strong></p>
+    </div>
+
+    <form #quesForm="ngForm" class="form-group" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <label for="name"><b>Question name<span class="icon-required">*</span></b></label>
+            <input type="text" name="name" class="form-control" [ngClass]="{ 'is-invalid': submitted===true && !qname.valid }"
+                required [(ngModel)]="actionedQuestion.name" #qname="ngModel" />
+        </div>
+
+        <div class="form-group">
+            <label for="description"><b>Question description<span class="icon-required">*</span></b></label>
+            <textarea type="text" name="description" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted===true && !qdesc.valid}" required
+                [(ngModel)]="actionedQuestion.description" #qdesc="ngModel"></textarea>
+        </div>
+
+        <div class="form-group actions-btns">
+            <button [ngClass]="{isDisabled: !quesForm.form.valid}" mat-raised-button type="submit" color="blue-dark">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                <span *ngIf="actionedQuestion.id.trim().length < 1">Create</span>
+                <span *ngIf="actionedQuestion.id.trim().length >= 1">Save</span>
+            </button>
+            <button stroked-button (click)="cancelActions()" type="button" color="blue-medium">Cancel</button>
+        </div>
+    </form>
+</div>

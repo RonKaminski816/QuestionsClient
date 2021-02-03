@@ -1,0 +1,157 @@
+.table-view {
+    width: 55%;
+    flex-direction: column;
+    padding-top: 1.3rem;
+}
+
+.table-features {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.table-features>mat-form-field {
+    width: 30%;
+    cursor: pointer;
+}
+
+:host ::ng-deep .mat-form-field-ripple {
+    background-color: #444c54;
+}
+
+:host ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: #444c54;
+}
+
+:host ::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: #444c54;
+}
+
+.field-labl {
+    color: #444c54;
+}
+
+table {
+    width: 100%;
+    font-size: medium;
+    background-color: #eeeeee;
+}
+
+mat-paginator {
+    margin-bottom: 1rem;
+    font-size: small;
+    background-color: #eeeeee;
+}
+
+:host ::ng-deep .mat-paginator-range-actions >button:focus {
+    outline: 0px auto transparent;
+}
+
+td, th {
+    width: 25%;
+    font-size: medium;
+}
+
+.edit-btns-cell>button:focus {
+    outline: 0px auto transparent;
+}
+
+.btn-dialog {
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+.btn-dialog:focus {
+    outline: transparent auto;
+}
+
+.del {
+    color: #fff;
+    background-color: #444c54;
+    border-color: #444c54;
+}
+
+.can {
+    color: #444c54;
+    background-color: #fff;
+    border-color: #fff;
+}
+
+.add-btn {
+    background-color: #444c54;
+}
+
+.bottom-page {
+    margin-bottom: 1rem;
+}
+
+[content="end"] {
+    display: flex;
+    justify-content: flex-end;
+}
+
+[color="blue-light"] {
+    color: #a9c2e6;
+}
+
+[color="blue-medium"] {
+    color: #53768c;
+}
+
+[color="blue-dark"] {
+    background-color: #444c54;
+    color: white;
+}
+
+mat-icon[color="blue-dark"] {
+    background-color: inherit;
+    color: #444c54;
+}
+
+mat-form-field[color="blue-dark"] {
+    background-color: inherit;
+    color: #444c54;
+}
+
+@media (max-width: 776px) {
+    .table-view {
+        max-width: 85%;
+        width: max-content;
+    }
+    .table-features {
+        justify-content: space-between;
+        margin-bottom: 0rem;
+    }
+    .table-features>mat-form-field {
+        margin-bottom: 1rem;
+    }
+    .edit-btns-cell {
+        padding: 0;
+        text-align: center;
+    }
+}
+
+@media (max-width: 525px) {
+    .table-features {
+        flex-direction: column;
+    }
+    .table-features>mat-form-field {
+        width: 85%;
+    }
+    th[mat-header-cell]:last-of-type, td[mat-cell]:last-of-type {
+        padding-right: 3%;
+    }
+    th[mat-header-cell], td[mat-cell] {
+        font-size: small;
+        padding-left: 3%;
+    }
+}
+
+@media (max-width: 400px) {
+    td[mat-cell] {
+        font-size: x-small;
+    }
+}

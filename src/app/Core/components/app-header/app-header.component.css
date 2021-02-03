@@ -1,0 +1,112 @@
+/*the Application Header with logo*/
+
+.app-header {
+    margin: 0px;
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+    padding: 0.5em;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    white-space: nowrap;
+}
+
+/*the header title text*/
+
+.title {
+    font-size: 2.3rem;
+    font-weight: 100;
+}
+
+/*the menu layout*/
+
+.menu-header {
+    width: 100%;
+    margin-bottom: 0px;
+    box-shadow: 1px 1px 5px #888888;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+}
+
+/*Logged user name*/
+
+.greeting {
+    font-size: larger;
+    margin-left: 2%;
+}
+
+/*nav bar buttons container layout*/
+
+.menu-navbar-btns {
+    margin-left: 1rem;
+    text-align: center;
+    height: max-content;
+}
+
+/*the general container's links design */
+
+.menu-navbar-btns>a {
+    font-size: smaller;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+/*all the attributes*/
+
+/*colors*/
+
+[color="blue-dark"] {
+    background-color: #444c54;
+    color: white;
+}
+
+/*cudtom design of the the attribute for the User name*/
+
+.greeting[color="blue-dark"] {
+    background-color: inherit;
+    color: #444c54;
+    text-decoration: none;
+}
+
+/*cudtom design of the the attribute for the navbar links*/
+
+a[color="blue-medium"] {
+    color: #53768c;
+}
+
+/*log out button*/
+
+.logout-btn {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    color: #b82e2e;
+    background-color: #fff;
+    border: 1px solid #b82e2e;
+}
+
+.logout-btn:hover {
+    background-color: #b82e2e;
+    color: #fff;
+    border-color: #fff;
+  }
+.logout-btn:focus {
+    outline: #b82e2e auto;
+}
+
+@media (max-width: 525px) {
+    .title {
+        font-size: 1.8rem;
+    }
+    .greeting {
+        font-size: large;
+    }
+    .menu-navbar-btns>a {
+        font-size: small;
+    }
+}

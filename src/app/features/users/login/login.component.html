@@ -1,0 +1,40 @@
+<div class="flex-container">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+    <div class="imgcontainer">
+      <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" class="avatar">
+    </div>
+    <div class="login-container">
+      <div class="form-set">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" autocomplete="off" class="form-input" placeholder="Enter Username" name="username"
+          [ngClass]="{ 'is-invalid': !isValidFormSubmitted && (loginForm.submitted===true || username.touched) && username.errors }"
+          required [(ngModel)]="loginUser.username" #username="ngModel">
+        <div *ngIf="!isValidFormSubmitted && (loginForm.submitted===true || username.touched) && username.errors"
+          class="error">
+          <div *ngIf="password.errors?.required">This field is required.</div>
+        </div>
+      </div>
+      <div class="form-set">
+        <label for="psw"><b>Password</b></label>
+        <input type="password" class="form-input" placeholder="Enter Password" name="psw" required [minlength]="6"
+          [maxlength]="20" [pattern]="regex"
+          [ngClass]="{ 'is-invalid': !isValidFormSubmitted && (loginForm.submitted===true || password.touched) && password.errors }"
+          [(ngModel)]="loginUser.password" #password="ngModel">
+        <div *ngIf="!isValidFormSubmitted && (loginForm.submitted===true || password.touched) && password.errors"
+          class="error">
+          <div *ngIf="password.errors?.required">This field is required.</div>
+          <div *ngIf="password.errors?.minlength">Password must be at least 6 characters.</div>
+          <div *ngIf="password.value?.length >= 20">Password has reached its maximum of 20 characters.</div>
+          <div *ngIf="password.errors?.pattern">Password must contains at least one number and one capital letter.</div>
+        </div>
+      </div>
+      <button btn-design="raised" [disabled]="loading" color="blue-dark" class="btn-login" type="submit">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Login
+      </button>
+      <!-- <label>
+          <span class="rgtr">Forgot to<a routerLink='/register'> register?</a></span>
+        </label> -->
+    </div>
+  </form>
+</div>

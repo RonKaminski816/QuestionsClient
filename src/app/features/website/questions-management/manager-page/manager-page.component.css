@@ -1,0 +1,15 @@
+.side-container {
+    background-color: transparent;
+}
+
+mat-drawer-content{
+    height: 100%;
+}
+.manager-main-page {
+    display: block;
+    text-align: -webkit-center;
+}
+
+[color="grey-dark"] {
+    background-color: #cccccc;
+}

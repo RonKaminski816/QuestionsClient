@@ -1,0 +1,18 @@
+<mat-drawer-container class="side-container" (backdropClick)="close('backdrop')">
+  <mat-drawer color="grey-dark" position="end" #sidenav (keydown.escape)="close('escape')" disableClose>
+
+    <app-question-edit [actionedQuestion]="actionedQuestion" (onNewQuestion)="getNewQuestion($event)"
+      (onUpdatededQuestion)="getUpdatedQuestion($event)" (onCancelActions)="close('cancel button')">
+    </app-question-edit>
+
+  </mat-drawer>
+
+  <mat-drawer-content>
+    
+    <div class="manager-main-page">
+      <app-questions-list [qTableData]="qList" (onQuestionActions)="getActionedQuestion($event)">
+      </app-questions-list>
+    </div>
+    
+  </mat-drawer-content> 
+</mat-drawer-container>

@@ -1,0 +1,171 @@
+/* page font*/
+/* body {
+  font-family: Arial, Helvetica, sans-serif;
+} */
+
+/* login page container layout*/
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* form design*/
+form {
+  border: 3px solid #f1f1f1;
+  width: 65%;
+  margin: 0.1rem;
+}
+/*the div containing the avatar image */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+/*the image itself*/
+img.avatar {
+  width: 17%;
+  border-radius: 50%;
+}
+
+/*the container of all form feilds and buttons:*/
+/*the layout of the container*/
+.login-container {
+  padding: 1rem;
+}
+/*set is a common grop of parts that make up a full form field */
+.form-set {
+  margin-bottom: 0.5rem;
+}
+
+label {
+  margin-bottom: 0rem;
+}
+/*input design*/
+.form-input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  height: calc(1.5em + .75rem + 2px);
+  font-size: 1rem;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+/*input hover design*/
+.form-input:hover {
+  border: 3px solid #53768c;
+}
+/*input focus design*/
+.form-input:focus {
+  outline: 0px solid #53768c;
+  border: 2px solid #53768c;
+}
+
+
+/*login button design*/
+.btn-login {
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  width: 100%;
+  font-size: 1.6rem;
+}
+/*every button hover*/
+button:hover {
+  opacity: 0.8;
+}
+
+/*form error for the inputs*/
+.is-invalid {
+  border: solid 1px red;
+}
+/*the error massege div class*/
+.error {
+  color: red;
+  font-weight: 200;
+}
+
+/*All the Dialog Buttons:*/
+/*every button in the dialog design*/
+.btn-dialog {
+  border: 1px solid #53768c;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+}
+
+.btn-dialog:focus {
+  outline: #53768c auto;
+}
+/*the close dailog button*/
+.close-btn {
+  color: #53768c;
+  background-color: #fff;
+  border: 1px solid #53768c;
+}
+
+.close-btn:hover {
+  background-color: #53768c;
+  color: #fff;
+  border-color: #fff;
+}
+
+/*all the page attributes:*/
+/*colors:*/
+[color="blue-light"] {
+  background-color: #a9c2e6;
+}
+
+[color="blue-medium"] {
+  background-color: #53768c;
+}
+
+[color="blue-dark"] {
+  background-color: #444c54;
+}
+
+/*button designs:*/
+/*button raised design*/
+[btn-design="raised"] {
+  font-weight: 500;
+  outline: 0px solid transparent;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+/* span.rgtr {
+  float: right;
+  padding-top: 16px;
+  font: 1.2em sans-serif;
+} */
+
+/* Change styles on differents screen sizes */
+
+@media screen and (max-width: 769px) {
+  form {
+    width: 70%;
+    margin: 0.3rem;
+  }
+  img.avatar {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  form {
+    width: 80%;
+    margin: 0.3rem;
+  }
+  img.avatar {
+    width: 35%;
+  }
+  /* span.rgt {
+    display: block;
+    float: none;
+  } */
+}

@@ -1,0 +1,11 @@
+.charts-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.chart{
+    height:20rem;
+}
+
