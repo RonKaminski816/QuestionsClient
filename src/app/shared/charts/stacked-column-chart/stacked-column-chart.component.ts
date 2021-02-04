@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -13,6 +13,17 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy {
 
   private chart: am4charts.XYChart;
   private stackedSeries: string[];
+
+  /**This property is the name of the group to which the objects we receive and measure belong.
+   * Since it's a generic chart and we do not know in advance what the objects will be or
+   * what their type will be, I would like to get from the outside what these objects are and
+   * what their name is as a multiple group.
+   * 
+   * For Example:
+   *  "Questions" is possible name for a group of objects.
+   */
+  @Input()
+  chartMeasuredObjectsGroupName: string;
   constructor(private questionsState: QuestionsStateService) { }
 
   ngOnInit(): void {
@@ -40,7 +51,7 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy {
     let categoryAxis = this.chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = "category";
     categoryAxis.renderer.grid.template.location = 0;
-    
+
     let valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.renderer.inside = true;
     valueAxis.renderer.labels.template.disabled = true;
@@ -63,6 +74,7 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy {
     let series = this.chart.series.push(new am4charts.ColumnSeries());
     series.dataFields.valueY = field;
     series.name = name;
+    series.readerValueText = this.chartMeasuredObjectsGroupName;
     series.dataFields.categoryX = "category";
     series.sequencedInterpolation = true;
 
@@ -71,7 +83,15 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy {
 
     // Configure columns
     series.columns.template.width = am4core.percent(60);
-    series.columns.template.tooltipText = "[bold,white]{name}[/]\n[white,font-size:14px]{categoryX}: {valueY}";
+    // series.columns.template.tooltipText = "[bold,white]{name}[/]\n[white,font-size:14px]{categoryX}: {valueY}";
+    series.columns.template.tooltipHTML = `
+   <div class="tooltip-container">
+   <div id="stackedtooltipcategory">{categoryX}</div>
+   <div class="field-container">
+   <span class="field-name">{name}</span>
+   <span class="field-value">{valueY} {readerValueText}</span>
+   </div>
+   </div>`;
     //TODO Finish the tooltip HTML text.
 
     // Add label
