@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/Core/authentication/http/auth.service';
-import { UserStateService } from 'src/app/Core/state-managments/users-state/user-state.service';
+import { AuthService } from 'src/app/core/authentication/http/auth.service';
+import { UserStateService } from 'src/app/core/state-managments/users-state/user-state.service';
 
 
 @Component({
@@ -11,10 +11,10 @@ import { UserStateService } from 'src/app/Core/state-managments/users-state/user
 })
 export class WebsiteComponent implements OnInit {
 
-  loggedName: string //= "Ron";
+  loggedName: string; //= "Ron";
   constructor(
     private authService: AuthService,
-   // private userState: UserStateService,
+    private userState: UserStateService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -23,11 +23,12 @@ export class WebsiteComponent implements OnInit {
   getLoggedName() {
     this.authService.retrieveMappedLoggedInUser()
       .subscribe(res => {
-        if (res) {          
-          this.loggedName = res.username
+        if (res) {
+          this.loggedName = res.username;
         } else {
           this.loggedName = null;
-        }});
+        }
+      });
   }
 
   navigateInsideWebsite(insideAppRouteUrl: string) {

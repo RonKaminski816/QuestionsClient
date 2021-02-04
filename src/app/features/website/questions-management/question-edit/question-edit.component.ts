@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { QuestionModel } from 'src/app/Models/question.model';
-import { SnackbarService } from 'src/app/Core/popup-messages/snackbar/snackbar.service';
+import { QuestionModel } from 'src/app/core/models/question.model';
+import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsService } from '../Services/questions.service';
 
 @Component({

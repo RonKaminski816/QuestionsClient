@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { QuestionModel } from "src/app/Models/question.model";
+import { QuestionModel } from "src/app/core/models/question.model";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';

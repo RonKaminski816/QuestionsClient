@@ -2,11 +2,11 @@ import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, Simp
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { QuestionModel } from 'src/app/Models/question.model';
-import { SnackbarService } from 'src/app/Core/popup-messages/snackbar/snackbar.service';
+import { QuestionModel } from 'src/app/core/models/question.model';
+import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsService } from '../Services/questions.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { QuestionsStateService } from 'src/app/Core/state-managments/questions-state/questions-state.service';
+import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 
 @Component({
   selector: 'app-questions-list',

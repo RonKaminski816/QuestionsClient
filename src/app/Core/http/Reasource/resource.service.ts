@@ -2,12 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Resource } from 'src/app/Models/resource.model';
+import { Resource } from 'src/app/core/models/resource.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ResourceService<T extends Resource> {
+export class ResourceService {
   // constructor(
   //     private httpClient: HttpClient,
   //     private url: string,
