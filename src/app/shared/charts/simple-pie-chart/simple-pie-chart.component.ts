@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -9,28 +9,28 @@ import { QuestionsStateService } from 'src/app/core/state-managments/questions-s
   templateUrl: './simple-pie-chart.component.html',
   styleUrls: ['./simple-pie-chart.component.css']
 })
-export class SimplePieChartComponent implements OnInit, OnDestroy {
+export class SimplePieChartComponent implements OnInit, OnDestroy, OnChanges {
 
   private chart: am4charts.PieChart;
+
+  @Input() pieData: any[]
+
   constructor(private questionsState: QuestionsStateService) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.chartDispose();
+    console.log(changes.pieData);
+    if (!this.pieData) {
+      return;
+    }
+    this.chart = am4core.create("piechartdiv", am4charts.PieChart);
+    this.chart.data = this.pieData;
+    this.chartConfigue();
+  }
 
 
   ngOnInit(): void {
     am4core.useTheme(am4themes_animated);
-    this.getChartData();
-  }
-  getChartData() {
-    this.questionsState.dataForChartsState().subscribe(
-      res => {
-        console.log(res);
-        if (!res.data) {
-          return;
-        }
-        this.chart = am4core.create("piechartdiv", am4charts.PieChart);
-        this.chart.data = res.data;
-        this.chartConfigue();
-      }
-    )
   }
 
   chartConfigue() {
@@ -56,8 +56,12 @@ export class SimplePieChartComponent implements OnInit, OnDestroy {
     this.chart.legend = new am4charts.Legend();
     this.chart.legend.itemContainers.template.width = am4core.percent(8);
   }
-  
+
   ngOnDestroy(): void {
+    this.chartDispose();
+  }
+
+  private chartDispose() {
     if (this.chart) {
       this.chart.dispose();
     }

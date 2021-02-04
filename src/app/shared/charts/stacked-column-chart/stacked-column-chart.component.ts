@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -9,11 +9,12 @@ import { QuestionsStateService } from 'src/app/core/state-managments/questions-s
   templateUrl: './stacked-column-chart.component.html',
   styleUrls: ['./stacked-column-chart.component.css']
 })
-export class StackedColumnChartComponent implements OnInit, OnDestroy {
+export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges {
 
   private chart: am4charts.XYChart;
-  private stackedSeries: string[];
 
+  @Input() stackedData: any[]
+  @Input() stackedSeries: string[];
   /**This property is the name of the group to which the objects we receive and measure belong.
    * Since it's a generic chart and we do not know in advance what the objects will be or
    * what their type will be, I would like to get from the outside what these objects are and
@@ -26,23 +27,19 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy {
   chartMeasuredObjectsGroupName: string;
   constructor(private questionsState: QuestionsStateService) { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.chartDispose();
+    console.log(changes.pieData);
+    if (!this.stackedData && !this.stackedSeries) {
+      return;
+    }
+    this.chart = am4core.create("stackedchartdiv", am4charts.XYChart);
+    this.chart.data = this.stackedData;
+    this.chartConfigue();
+  }
+
   ngOnInit(): void {
     am4core.useTheme(am4themes_animated);
-    this.getChartData();
-  }
-  getChartData() {
-    this.questionsState.dataForChartsState().subscribe(
-      res => {
-        console.log(res);
-        if (!res.data && !res.series) {
-          return;
-        }
-        this.chart = am4core.create("stackedchartdiv", am4charts.XYChart);
-        this.chart.data = res.data;
-        this.stackedSeries = res.series;
-        this.chartConfigue();
-      }
-    )
   }
 
   chartConfigue() {
@@ -60,7 +57,7 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy {
     this.stackedSeries.forEach(q => {
       this.createSeries(q, q);
     });
-    
+
     // Legend
     this.chart.legend = new am4charts.Legend();
   }
@@ -102,6 +99,10 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.chartDispose();
+  }
+
+  private chartDispose() {
     if (this.chart) {
       this.chart.dispose();
     }

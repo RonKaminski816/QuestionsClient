@@ -11,8 +11,6 @@ import { map } from 'rxjs/operators';
 export class QuestionsStateService {
 
   private sharedQues = new BehaviorSubject<QuestionModel[]>([]);
-  chartsData: any[];
-  chartSeries: string[];
 
   constructor(private questionsService: QuestionsService) {
     this.questionsService.getAllQuestions().subscribe(
@@ -24,44 +22,12 @@ export class QuestionsStateService {
   }
 
   private mapQuestionListState(questions: QuestionModel[]) {
-    this.chartsData = [];
-    this.chartSeries = [];
-    const days = [];
-    for (let index = 0; index < questions.length; index++) {
-      const q = questions[index];
-      if (q.creationDate && q.creationDate !== null) {
-        const date = new Date(q.creationDate);
-        const day = date.toLocaleString('en-us', { weekday: 'long' });
-        const hour = date.toLocaleString('en-us', { hour: "numeric" });
-        this.chartsData[day] = this.chartsData[day] || {};
-        this.chartsData[day][hour] = this.chartsData[day][hour] || 0;
-        this.chartsData[day][hour] += 1;
-        this.chartsData[day]["count"] = this.chartsData[day]["count"] || 0;
-        this.chartsData[day]["count"] += 1;
-        if (!days.includes(day)) {
-          this.chartsData[day]["category"] = day;
-          days.push(day);
-          this.chartsData.push(this.chartsData[day]);
-        }
-        if (!this.chartSeries.includes(hour)) {
-          this.chartSeries.push(hour);
-        }
-      }
-    }
-    this.chartsData = [...this.chartsData];
-    console.log(this.chartsData);
     this.sharedQues.next(questions);
   }
 
   //used to share the data received from the backend
   public retrieveMappedQuestionListState(): Observable<QuestionModel[]> {
     return this.sharedQues.asObservable();
-  }
-
-  public dataForChartsState(): Observable<{data: any[], series:string[]}> {
-    return this.sharedQues.asObservable().pipe(
-      map(_ => ({data: this.chartsData,series: this.chartSeries}))
-    );
   }
 
   addQuestion(q: QuestionModel) {
