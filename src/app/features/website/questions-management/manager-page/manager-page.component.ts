@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { QuestionModel } from 'src/app/Models/question.model';
-import { SnackbarService } from 'src/app/Core/popup-messages/snackbar/snackbar.service';
-import { QuestionsStateService } from 'src/app/Core/state-managments/questions-state/questions-state.service';
+import { QuestionModel } from 'src/app/core/models/question.model';
+import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
+import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 
 @Component({
   selector: 'app-manager-page',

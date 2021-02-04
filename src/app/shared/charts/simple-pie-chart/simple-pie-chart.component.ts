@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import { QuestionsStateService } from 'src/app/Core/state-managments/questions-state/questions-state.service';
+import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 
 @Component({
   selector: 'app-simple-pie-chart',

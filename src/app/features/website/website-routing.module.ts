@@ -3,7 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { WebsiteComponent } from "./website.component";
 import { ChartsViewComponent } from "./charts-page/charts-view/charts-view.component";
 import { ManagerPageComponent } from "./questions-management/manager-page/manager-page.component";
-import { AuthGuard } from "src/app/Core/authentication/guards/auth.guard";
+import { AuthGuard } from "src/app/core/authentication/guards/auth.guard";
 
 
 // { path: 'login', loadChildren:() => import('./features/users/users.module').then(m => m.UsersModule) },

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { QuestionModel } from 'src/app/Models/question.model';
+import { QuestionModel } from 'src/app/core/models/question.model';
 import { QuestionsService } from 'src/app/features/website/questions-management/Services/questions.service';
 import { map } from 'rxjs/operators';
 

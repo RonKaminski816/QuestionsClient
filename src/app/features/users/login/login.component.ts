@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UserModel } from 'src/app/Models/user.model';
+import { UserModel } from 'src/app/core/models/user.model';
 import { NgForm } from '@angular/forms';
-import { AuthService } from 'src/app/Core/authentication/http/auth.service';
-import { UserStateService } from 'src/app/Core/state-managments/users-state/user-state.service';
+import { AuthService } from 'src/app/core/authentication/http/auth.service';
+import { UserStateService } from 'src/app/core/state-managments/users-state/user-state.service';
 
 @Component({
   selector: 'app-login',
