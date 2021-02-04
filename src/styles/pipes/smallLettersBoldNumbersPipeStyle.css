@@ -1,0 +1,9 @@
+.q-id-letter {
+    font-weight: lighter;
+    font-size: smaller;
+}
+
+.q-id-number {
+    font-weight: bold;
+    font-size: larger;
+}

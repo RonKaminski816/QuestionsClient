@@ -1,0 +1,25 @@
+
+/*amChart tooltipHTML design*/
+.tooltip-container {
+    color: white;
+}
+
+/*The current category shown in the tooltip*/
+.tooltip-category {
+    text-align: center;
+    margin: 0.1rem;
+    font-weight: bold;
+}
+
+/*data field container of the tooltip*/
+.tooltip-container>.field-container {
+    width: 10rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*the series name field of the tooltip*/
+.tooltip-container>.field-container>.field-name {
+    color: #e69138;
+    font-weight: bold;
+}

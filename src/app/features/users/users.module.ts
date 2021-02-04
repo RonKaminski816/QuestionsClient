@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login/login.component';
 import { UsersRoutingModule } from './users-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -16,7 +17,7 @@ import { UsersRoutingModule } from './users-routing.module';
   imports: [
     CommonModule,
     UsersRoutingModule,
-    //MaterialModule,
+    SharedModule,
     FormsModule,
   ],
 })

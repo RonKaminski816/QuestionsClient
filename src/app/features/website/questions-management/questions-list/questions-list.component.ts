@@ -15,6 +15,7 @@ import { QuestionsStateService } from 'src/app/core/state-managments/questions-s
 })
 export class QuestionsListComponent implements OnInit, OnChanges {
 
+
   @Input() qTableData: QuestionModel[];
 
   @Output() onQuestionActions: EventEmitter<QuestionModel> = new EventEmitter();

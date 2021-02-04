@@ -13,6 +13,10 @@ import { UserStateService } from 'src/app/core/state-managments/users-state/user
 })
 export class LoginComponent implements OnInit {
 
+  Q34 = "Q34";
+  Q56 = "Q56";
+  Q2 = "Q2";
+
   loading = false;
   isValidFormSubmitted: boolean = false;
   regex = new RegExp("((?=.*[0-9])(?=.*[A-Z]))");

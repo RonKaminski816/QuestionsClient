@@ -10,25 +10,10 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+/*////////////////////////////////////////////////////////////////////////////*/
+
+/*the snackbar design*/
 .snackbar-blue, .mat-simple-snackbar-action {
     background-color: #444c54;
     color: white;
 }
-
-.tooltip-container {
-    color: white;
-}
-
-.tooltip-category {
-    text-align: center;
-    margin: 0.1rem;
-}
-
-.tooltip-container>.field-container {
-    width: 10rem;
-    display: flex;
-    justify-content: space-between;
-}
-/* .field-name{
-
-} */

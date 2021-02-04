@@ -16,7 +16,6 @@ export class UserStateService {
       this.mapUserLogged(LoggedInUser);
     }
   }
-//TODO Check Why the service isn't running
 
   isLoggedIn(): boolean {
     const isLoggedIn = JSON.parse(this.localStorageService.getItem('isLogged'));

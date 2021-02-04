@@ -49,6 +49,12 @@ export class SimplePieChartComponent implements OnInit, OnDestroy {
     pieSeries.hiddenState.properties.opacity = 1;
     pieSeries.hiddenState.properties.endAngle = -90;
     pieSeries.hiddenState.properties.startAngle = -90;
+
+    pieSeries.legendSettings.labelText = "{category}";
+    pieSeries.legendSettings.valueText = "[none]";
+
+    this.chart.legend = new am4charts.Legend();
+    this.chart.legend.itemContainers.template.width = am4core.percent(8);
   }
   
   ngOnDestroy(): void {

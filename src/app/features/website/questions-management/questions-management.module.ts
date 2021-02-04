@@ -7,6 +7,7 @@ import { ManagerPageComponent } from './manager-page/manager-page.component';
 
 import { QuestionsListComponent } from './questions-list/questions-list.component';
 import { QuestionEditComponent } from './question-edit/question-edit.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -22,6 +23,7 @@ import { QuestionEditComponent } from './question-edit/question-edit.component';
     QuestionsManagementRoutingModule,
     MaterialModule,
     FormsModule,
+    SharedModule,
   ],
 })
 export class QuestionsManagementModule { }

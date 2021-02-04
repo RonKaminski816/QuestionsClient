@@ -59,9 +59,8 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy {
 
     this.stackedSeries.forEach(q => {
       this.createSeries(q, q);
-
     });
-
+    
     // Legend
     this.chart.legend = new am4charts.Legend();
   }
@@ -92,7 +91,6 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy {
        <span class="field-value">{valueY} {readerValueText}</span>
      </div>
     </div>`;
-    //TODO Finish the tooltip HTML text.
 
     // Add label
     let labelBullet = series.bullets.push(new am4charts.LabelBullet());
