@@ -21,7 +21,7 @@ export class WebsiteComponent implements OnInit {
     this.getLoggedName();
   }
   getLoggedName() {
-    this.authService.retrieveMappedLoggedInUser()
+    this.userState.retrieveMappedLoggedInUser()
       .subscribe(res => {
         if (res) {
           this.loggedName = res.username;
@@ -38,6 +38,7 @@ export class WebsiteComponent implements OnInit {
 
   logOut() {
     if (this.authService.logout()) {
+      this.userState.currentUserLoggingOut();
       this.router.navigate(['/users/login']);
     }
   }

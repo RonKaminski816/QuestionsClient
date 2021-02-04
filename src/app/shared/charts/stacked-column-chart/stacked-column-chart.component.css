@@ -7,11 +7,3 @@ body {
   height: 100%;
 }
 
-#stackedtooltipcategory {
-  /* display: flex;
-    justify-content: center; */
-  text-align: center;
-  background-color: green;
-  color: hotpink;
-  border: 1px solid brown;
-}

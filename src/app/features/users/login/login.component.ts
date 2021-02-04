@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    //private userState: UserStateService,
+    private userState: UserStateService,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginUser).subscribe(
       res => {
         if (res) {
-          //this.userState.userLoggingIn(res);
+          this.userState.userLoggingIn(res);
           this.router.navigate(['/website']);
           this.loading = false;
         }

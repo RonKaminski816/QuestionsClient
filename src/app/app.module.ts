@@ -23,14 +23,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     //MaterialModule,
     MatSnackBarModule,
     MatDialogModule,
-    //CoreModule,
+    CoreModule,
     CommonModule,
     HttpClientModule,
     AppRoutingModule,
   ],
   providers: [
-    //LocalStorageService,
-    //UserStateService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -85,13 +85,13 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy {
     series.columns.template.width = am4core.percent(60);
     // series.columns.template.tooltipText = "[bold,white]{name}[/]\n[white,font-size:14px]{categoryX}: {valueY}";
     series.columns.template.tooltipHTML = `
-   <div class="tooltip-container">
-   <div id="stackedtooltipcategory">{categoryX}</div>
-   <div class="field-container">
-   <span class="field-name">{name}</span>
-   <span class="field-value">{valueY} {readerValueText}</span>
-   </div>
-   </div>`;
+    <div class="tooltip-container">
+     <div class="tooltip-category">{categoryX}</div>
+     <div class="field-container">
+       <span class="field-name">{name}</span>
+       <span class="field-value">{valueY} {readerValueText}</span>
+     </div>
+    </div>`;
     //TODO Finish the tooltip HTML text.
 
     // Add label

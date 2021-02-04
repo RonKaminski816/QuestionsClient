@@ -31,7 +31,7 @@ export class UserStateService {
     this.sharedUserName.next(user);
   }
 
-  public retrieveMappedLoggedInUserNameState(): Observable<UserModel> {
+  public retrieveMappedLoggedInUser(): Observable<UserModel> {
     return this.sharedUserName.asObservable();
   }
 
