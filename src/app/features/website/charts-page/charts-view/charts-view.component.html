@@ -1,6 +1,6 @@
 <div class="charts-container">
-    <h1>Stacked Column Chart</h1>
-    <app-stacked-column-chart [stackedData]="chartsData" [stackedSeries]="chartSeries" chartMeasuredObjectsGroupName="Questions" class="chart"></app-stacked-column-chart>
-    <h1>Pie Chart</h1>
+    <!-- <nz-range-picker [nzRanges]="ranges" ngModel (ngModelChange)="onChange($event)"></nz-range-picker> -->
+    <app-stacked-column-chart [stackedData]="chartsData" [stackedSeries]="chartSeries"
+        chartMeasuredObjectsGroupName="Questions" class="chart"></app-stacked-column-chart>
     <app-simple-pie-chart [pieData]="chartsData" class="chart"></app-simple-pie-chart>
 </div>

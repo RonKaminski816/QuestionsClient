@@ -2,8 +2,8 @@
     <a class="logout-btn" (click)="logOut()">Log out</a>
     <div class="greeting" color="blue-dark">{{loggedName}}</div>
     <div class="menu-navbar-btns" #btnsmenu>
-        <a color="blue-medium" #mngrLink (click)="navigateInsideWebsite(mngrLink.innerText)">Manager</a>
-        <a color="blue-medium" #chrtLink (click)="navigateInsideWebsite(chrtLink.innerText)">Charts</a>
+        <a color="blue-medium" (click)="navigateInsideWebsite('Manager')">Manager</a>
+        <a color="blue-medium" (click)="navigateInsideWebsite('Charts')">Charts</a>
     </div>
 </h2>
 <router-outlet></router-outlet>

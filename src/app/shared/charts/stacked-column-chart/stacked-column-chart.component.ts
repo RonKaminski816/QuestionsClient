@@ -78,15 +78,17 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
     series.stacked = true;
 
     // Configure columns
-    series.columns.template.width = am4core.percent(60);
-    // series.columns.template.tooltipText = "[bold,white]{name}[/]\n[white,font-size:14px]{categoryX}: {valueY}";
+    series.columns.template.width = am4core.percent(85);
+    series.columns.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+
+    //Configure tooltip
     series.columns.template.tooltipHTML = `
     <div class="tooltip-container">
-     <div class="tooltip-category">{categoryX}</div>
-     <div class="field-container">
-       <span class="field-name">{name}</span>
-       <span class="field-value">{valueY} {readerValueText}</span>
-     </div>
+    <div class="tooltip-category">{categoryX}</div>
+    <div class="field-container">
+    <span class="field-name">{name}</span>
+    <span class="field-value">{valueY} {readerValueText}</span>
+    </div>
     </div>`;
 
     // Add label
@@ -94,6 +96,19 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
     labelBullet.label.text = "{valueY}";
     labelBullet.locationY = 0.5;
     labelBullet.label.hideOversized = true;
+    
+    // let hoverState = labelBullet.states.create("hover");
+    
+    // /* Create a gentle shadow for columns */
+    // let shadow = series.columns.template.filters.push(new am4core.DropShadowFilter);
+    // shadow.opacity = 0.1;
+    
+    /* Create hover state */
+    let hoverState = series.columns.template.states.create("hover");
+    hoverState.properties.scale = 1.1;
+    hoverState.properties.dx = -8;
+    hoverState.properties.fillOpacity = 0.5;
+    hoverState.properties.dy = -2;
 
     return series;
   }
