@@ -3,6 +3,8 @@ import { QuestionModel } from 'src/app/core/models/question.model';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 
+import { startOfWeek, startOfMonth } from 'date-fns';
+
 @Component({
   selector: 'app-charts-view',
   templateUrl: './charts-view.component.html',
@@ -10,12 +12,12 @@ import { QuestionsStateService } from 'src/app/core/state-managments/questions-s
 })
 export class ChartsViewComponent implements OnInit {
 
-  qList: QuestionModel[];
   chartsData: any[];
   chartSeries: string[];
+  ranges = { Today: [new Date(), new Date()], 'This Week': [startOfWeek(new Date), new Date()], 'This Month': [startOfMonth(new Date), new Date()] };
 
-//TODO Install ANT and make the date picker
-//TODO Create the popular toggle logic with 'others'
+  //TODO make the date picker logic
+  //TODO Create the popular toggle logic with 'others'
   constructor(private questionsState: QuestionsStateService, private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
@@ -25,13 +27,13 @@ export class ChartsViewComponent implements OnInit {
   getChartsData() {
     return this.questionsState.retrieveMappedQuestionListState().subscribe(
       res => {
-        this.createChartsObjects(res);
+        this.createFullChartsObjects(res);
       },
       error => this.snackbarService.openSimpleTextSnackBar(`An error occurred, please refresh the page: ${error['message']}`)
     );
   }
 
-  createChartsObjects(questions: QuestionModel[]) {
+  createFullChartsObjects(questions: QuestionModel[]) {
     this.chartsData = [];
     this.chartSeries = [];
     const days = [];
@@ -59,5 +61,22 @@ export class ChartsViewComponent implements OnInit {
     this.chartsData = [...this.chartsData];
     //this.chartSeries = this.chartSeries.sort();
     //TODO Fix the sorting
+  }
+
+  onAdjustDateChange(range: Date[]){
+    if (range.length < 2) {
+      this.snackbarService.openSimpleTextSnackBar('Date range must contain two dates!')
+      return;
+    }
+    this.snackbarService.openSimpleTextSnackBar(`From: ${range[0]} to: ${range[1]}`);
+  }
+
+  rages = {
+    Today: [new Date(), new Date()],
+    "This Month":  [startOfMonth(new Date), new Date()]
+  };
+
+  onChange(result: Date[]): void {
+    console.log("From: ", result[0], ", to: ", result[1]);
   }
 }

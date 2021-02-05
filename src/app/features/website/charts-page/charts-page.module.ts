@@ -4,6 +4,7 @@ import { ChartsViewComponent } from './charts-view/charts-view.component';
 import { SharedModule } from "src/app/shared/shared.module";
 import { ChartsPageRoutingModule } from './charts-page-routing.module';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -14,6 +15,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     CommonModule,
     ChartsPageRoutingModule,
     SharedModule,
+    FormsModule,
     NzDatePickerModule,
   ],
 })

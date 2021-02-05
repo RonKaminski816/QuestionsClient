@@ -1,6 +1,7 @@
 <div class="charts-container">
-    <!-- <nz-range-picker [nzRanges]="ranges" ngModel (ngModelChange)="onChange($event)"></nz-range-picker> -->
+    <nz-range-picker  nzFormat="dd/MM/yyyy" ngModel (ngModelChange)="onAdjustDateChange($event)" ></nz-range-picker>
     <app-stacked-column-chart [stackedData]="chartsData" [stackedSeries]="chartSeries"
         chartMeasuredObjectsGroupName="Questions" class="chart"></app-stacked-column-chart>
     <app-simple-pie-chart [pieData]="chartsData" class="chart"></app-simple-pie-chart>
 </div>
+<!-- [nzRanges]="ranges"  (ngModelChange)="onAdjustDateChange($event)" -->

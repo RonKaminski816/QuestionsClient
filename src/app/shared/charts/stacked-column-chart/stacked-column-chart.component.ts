@@ -105,10 +105,10 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
     
     /* Create hover state */
     let hoverState = series.columns.template.states.create("hover");
-    hoverState.properties.scale = 1.1;
-    hoverState.properties.dx = -8;
-    hoverState.properties.fillOpacity = 0.5;
-    hoverState.properties.dy = -2;
+    hoverState.properties.scale = 1.02;
+    hoverState.properties.dx = -2;
+    hoverState.properties.dy = -0.2;
+    hoverState.properties.fillOpacity = 0.75;
 
     return series;
   }
