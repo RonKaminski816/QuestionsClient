@@ -3,7 +3,7 @@ import { QuestionModel } from 'src/app/core/models/question.model';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 
-import { startOfWeek, startOfMonth } from 'date-fns';
+import { startOfDay, endOfDay, startOfWeek, startOfMonth } from 'date-fns';
 
 @Component({
   selector: 'app-charts-view',
@@ -12,12 +12,14 @@ import { startOfWeek, startOfMonth } from 'date-fns';
 })
 export class ChartsViewComponent implements OnInit {
 
+  chartQListTemp: QuestionModel[];
+  qCount: number;//amount of question measured in charts
+  isChanged: boolean;//bool for checking if the chart values has changed in the previous date-range adjust 
   chartsData: any[];
   chartSeries: string[];
   ranges = { Today: [new Date(), new Date()], 'This Week': [startOfWeek(new Date), new Date()], 'This Month': [startOfMonth(new Date), new Date()] };
 
-  //TODO make the date picker logic
-  //TODO Create the popular toggle logic with 'others'
+  //TODO Create toggle logic 'others' in chart
   constructor(private questionsState: QuestionsStateService, private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
@@ -27,7 +29,9 @@ export class ChartsViewComponent implements OnInit {
   getChartsData() {
     return this.questionsState.retrieveMappedQuestionListState().subscribe(
       res => {
-        this.createFullChartsObjects(res);
+        this.chartQListTemp = res;
+        this.qCount = res.length;
+        this.createFullChartsObjects(this.chartQListTemp);
       },
       error => this.snackbarService.openSimpleTextSnackBar(`An error occurred, please refresh the page: ${error['message']}`)
     );
@@ -63,20 +67,32 @@ export class ChartsViewComponent implements OnInit {
     //TODO Fix the sorting
   }
 
-  onAdjustDateChange(range: Date[]){
-    if (range.length < 2) {
-      this.snackbarService.openSimpleTextSnackBar('Date range must contain two dates!')
+  onAdjustDateChange(range: Date[]) {
+    if (range.length == 0 && this.qCount != this.chartQListTemp.length) {
+      this.createFullChartsObjects(this.chartQListTemp);
+      this.qCount = this.chartQListTemp.length;
       return;
     }
-    this.snackbarService.openSimpleTextSnackBar(`From: ${range[0]} to: ${range[1]}`);
-  }
-
-  rages = {
-    Today: [new Date(), new Date()],
-    "This Month":  [startOfMonth(new Date), new Date()]
-  };
-
-  onChange(result: Date[]): void {
-    console.log("From: ", result[0], ", to: ", result[1]);
+    else if (range.length === 0) {
+      return;
+    }
+    try {
+      const qTempList = [];
+      this.chartQListTemp.forEach(q => {
+        const dateCheck = new Date(q.creationDate);
+        if (dateCheck >= startOfDay(range[0]) && dateCheck <= endOfDay(range[1])) {
+          qTempList.push(q);
+        }
+      });
+      if (qTempList.length < 1) {
+        this.isChanged = false;
+        return this.snackbarService.openSimpleTextSnackBar('No questions were created within this date range!');
+      }
+      this.createFullChartsObjects(qTempList);
+      this.qCount = qTempList.length;
+      this.isChanged = true;
+    } catch (error) {
+      this.snackbarService.openSimpleTextSnackBar(error);
+    }
   }
 }

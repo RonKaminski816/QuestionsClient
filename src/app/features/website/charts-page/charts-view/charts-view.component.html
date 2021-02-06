@@ -1,7 +1,17 @@
 <div class="charts-container">
-    <nz-range-picker  nzFormat="dd/MM/yyyy" ngModel (ngModelChange)="onAdjustDateChange($event)" ></nz-range-picker>
+    <div class="chart-manipulation-container">
+        <nz-range-picker class="date-range" nzFormat="dd/MM/yyyy" [nzRanges]="ranges" ngModel
+            (ngModelChange)="onAdjustDateChange($event)">
+        </nz-range-picker>
+        <div class="popular-toggle-container">
+            <label class="toggle">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <p class="toggle-lable">5 most popular hours</p>
+        </div>
+    </div>
     <app-stacked-column-chart [stackedData]="chartsData" [stackedSeries]="chartSeries"
         chartMeasuredObjectsGroupName="Questions" class="chart"></app-stacked-column-chart>
     <app-simple-pie-chart [pieData]="chartsData" class="chart"></app-simple-pie-chart>
 </div>
-<!-- [nzRanges]="ranges"  (ngModelChange)="onAdjustDateChange($event)" -->
