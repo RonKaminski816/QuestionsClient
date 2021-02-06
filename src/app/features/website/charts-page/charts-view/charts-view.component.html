@@ -3,7 +3,7 @@
         <nz-range-picker class="date-range" nzFormat="dd/MM/yyyy" [nzRanges]="ranges" ngModel
             (ngModelChange)="onAdjustDateChange($event)">
         </nz-range-picker>
-        <div class="popular-toggle-container">
+        <div class="popular-toggle-container" [ngClass]="{isDisabled: !isPopularAvailable}">
             <label class="toggle">
                 <input type="checkbox">
                 <span class="slider round"></span>

@@ -112,6 +112,13 @@ input:checked+.slider:before {
     border-radius: 50%;
 }
 
+.isDisabled {
+    color: currentColor;
+    opacity: 0.5;
+    text-decoration: none;
+    pointer-events: none;
+}
+
 
 @media screen and (max-width: 769px) {
     .popular-toggle-container{
