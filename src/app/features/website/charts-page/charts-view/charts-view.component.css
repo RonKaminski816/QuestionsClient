@@ -13,6 +13,7 @@
 /*div containing the manipulation on charts element*/
 .chart-manipulation-container{
     margin: 0.75rem;
+    margin-top: 1.2rem;
     max-width: 50%;
     display: flex;
     flex-direction: column;

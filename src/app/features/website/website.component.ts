@@ -38,8 +38,8 @@ export class WebsiteComponent implements OnInit {
 
   logOut() {
     if (this.authService.logout()) {
-      this.userState.currentUserLoggingOut();
       this.router.navigate(['/users/login']);
+      this.userState.currentUserLoggingOut();
     }
   }
 
