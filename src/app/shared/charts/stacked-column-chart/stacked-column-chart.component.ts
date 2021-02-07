@@ -63,11 +63,9 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
     this.chart.legend = new am4charts.Legend();
   }
 
-
-
   // Create series
   private createSeries(field, name, colorIndex) {
-    
+
     //Set up colors
     let currentColor = this.chart.colors.getIndex(colorIndex);
 
