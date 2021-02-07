@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionModel } from 'src/app/core/models/question.model';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
-
 import { startOfDay, endOfDay, startOfWeek, startOfMonth } from 'date-fns';
 
 @Component({
@@ -81,10 +80,6 @@ export class ChartsViewComponent implements OnInit {
     //TODO Fix the sorting
   }
 
-
-  
-
-  //TODO Fix the popular logic
   async onTogglePopularHoursChanged() {
     this.isPopularAvailable = false;
     if (this.isToggleChecked) {
