@@ -4,6 +4,9 @@
 /*@import "~ng-zorro-antd/ng-zorro-antd.dark.css";*/
 /*@import "~ng-zorro-antd/ng-zorro-antd.compact.css";*/
 /*@import "~ng-zorro-antd/ng-zorro-antd.aliyun.css";*/
+@import "./amCharts/amChartsIndex.css";
+@import "./pipes/smallLettersBoldNumbersPipeStyle.css";
+ /* "node_modules/bootstrap/dist/css/bootstrap.min.css", */
 
 html, body {
     height: 100%;

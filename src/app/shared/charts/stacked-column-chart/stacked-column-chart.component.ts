@@ -12,6 +12,7 @@ import { QuestionsStateService } from 'src/app/core/state-managments/questions-s
 export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges {
 
   private chart: am4charts.XYChart;
+  private colorIndex: number = 4;
 
   @Input() stackedData: any[]
   @Input() stackedSeries: string[];
@@ -55,7 +56,7 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
     valueAxis.min = 0;
 
     this.stackedSeries.forEach(q => {
-      this.createSeries(q, q);
+      this.createSeries(q, q, this.colorIndex);
     });
 
     // Legend
@@ -63,8 +64,12 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
   }
 
 
+
   // Create series
-  private createSeries(field, name) {
+  private createSeries(field, name, colorIndex) {
+    
+    //Set up colors
+    let currentColor = this.chart.colors.getIndex(colorIndex);
 
     // Set up series
     let series = this.chart.series.push(new am4charts.ColumnSeries());
@@ -81,7 +86,10 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
     series.columns.template.width = am4core.percent(85);
     series.columns.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
 
-    //Configure tooltip
+    //Configure tooltip    
+    series.tooltip.getFillFromObject = false;
+    series.tooltip.label.fill = currentColor
+    series.tooltip.background.stroke = currentColor;
     series.columns.template.tooltipHTML = `
     <div class="tooltip-container">
     <div class="tooltip-category">{categoryX}</div>
@@ -96,13 +104,13 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
     labelBullet.label.text = "{valueY}";
     labelBullet.locationY = 0.5;
     labelBullet.label.hideOversized = true;
-    
+
     // let hoverState = labelBullet.states.create("hover");
-    
+
     // /* Create a gentle shadow for columns */
     // let shadow = series.columns.template.filters.push(new am4core.DropShadowFilter);
     // shadow.opacity = 0.1;
-    
+
     /* Create hover state */
     let hoverState = series.columns.template.states.create("hover");
     hoverState.properties.scale = 1.02;
@@ -110,6 +118,7 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
     hoverState.properties.dy = -0.2;
     hoverState.properties.fillOpacity = 0.75;
 
+    this.colorIndex += 1;
     return series;
   }
 
@@ -119,6 +128,7 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
 
   private chartDispose() {
     if (this.chart) {
+      this.colorIndex = 0;
       this.chart.dispose();
     }
   }
