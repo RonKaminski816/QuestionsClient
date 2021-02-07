@@ -25,7 +25,7 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
    */
   @Input()
   chartMeasuredObjectsGroupName: string;
-  constructor(private questionsState: QuestionsStateService) { }
+  constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.chartDispose();
@@ -122,5 +122,4 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
       this.chart.dispose();
     }
   }
-
 }

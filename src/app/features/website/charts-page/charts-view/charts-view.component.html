@@ -5,7 +5,7 @@
         </nz-range-picker>
         <div class="popular-toggle-container" [ngClass]="{isDisabled: !isPopularAvailable}">
             <label class="toggle">
-                <input type="checkbox">
+                <input type="checkbox" [(ngModel)]="isToggleChecked" (change)="onTogglePopularHoursChanged()">
                 <span class="slider round"></span>
             </label>
             <p class="toggle-lable">5 most popular hours</p>

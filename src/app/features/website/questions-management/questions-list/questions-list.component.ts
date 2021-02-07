@@ -82,7 +82,7 @@ export class QuestionsListComponent implements OnInit, OnChanges {
               this.snackbars.openSimpleTextSnackBar(data.message);
               this.questionsState.deleteQuestion(questionId);
             },
-            error => alert(error)
+            error =>this.snackbars.openSimpleTextSnackBar(`${error.message}, please refresh the page`)
           );
         }
       }
