@@ -1,3 +1,4 @@
+/* actions page container layout*/
 .actions-container {
     padding: 20px;
     display: flex;
@@ -5,26 +6,55 @@
     align-items: flex-start;
 }
 
+/* form design*/
 form {
     width: 100%;
 }
-strong, label{
-    color: #464d55;
+
+/*the container of all form feilds and buttons:*/
+/*the layout of the container*/
+.form-container {
+    padding: 0.5rem;
+}
+
+/*set is a common grop of parts that make up a full form field */
+.form-set {
+    margin-bottom: 0.8rem;
+}
+
+/*input design*/
+.form-input {
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid ;
+    border-color: #ccc;
+    box-sizing: border-box;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+/*input hover design*/
+.form-input:hover {
+    box-shadow: 0 0 8px #444c54;
+    cursor: pointer;
+}
+
+/*input focus design*/
+.form-input:focus {
+    outline: 0px solid #444c54;
+    box-shadow: 0 0 4px #444c54;
 }
 
 textarea {
-    height: 10rem;
+    height: 7rem;
 }
 
 button:hover {
     opacity: 0.8;
-}
-
-.isDisabled {
-    color: currentColor;
-    opacity: 0.5;
-    text-decoration: none;
-    pointer-events: none;
+    cursor: pointer;
 }
 
 .actions-btns {
@@ -40,18 +70,20 @@ input.ng-dirty.ng-invalid:focus, textarea.ng-dirty.ng-invalid:focus {
     border: solid 1px red;
 }
 
-button:focus{
-    outline: 0px  transparent;
+button:focus {
+    outline: 0px transparent;
 }
+
 button[color="blue-medium"] {
     color: #53768c;
     background-color: inherit;
 }
 
 button[color="blue-medium"]:hover {
-    color: #53768c;
-    background-color: #333333;
+    color: white;
+    background-color: #53768c;
 }
+
 button[color="blue-dark"] {
     background-color: #444c54;
     color: white;
@@ -60,14 +92,21 @@ button[color="blue-dark"] {
 [color="blue-light"] {
     background-color: #a9c2e6;
 }
+
 [color="blue-medium"] {
     color: #53768c;
 }
+
 [color="blue-dark"] {
     color: #444c54;
 }
-[stroked-button]{
+
+[stroked-button] {
     border: none;
     padding: 0 16px;
     border-radius: 4px;
+}
+
+[weight="bold"]{
+    font-weight: bold;
 }
