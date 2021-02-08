@@ -6,12 +6,13 @@
 }
 
 .chart {
-    height: 25rem;
-    padding-bottom: 4rem;
+    height: 29rem;
+    padding-bottom: 2rem;
 }
 
 /*div containing the manipulation on charts element*/
-.chart-manipulation-container{
+
+.chart-manipulation-container {
     margin: 0.75rem;
     margin-top: 1.2rem;
     max-width: 50%;
@@ -21,11 +22,11 @@
 }
 
 /*Date picker*/
-.date-range{
+
+.date-range {
     width: 50%;
     margin-bottom: 0.3rem;
 }
-
 
 /*Toggle*/
 
@@ -69,6 +70,7 @@
 }
 
 /*toggle button design*/
+
 .slider:before {
     position: absolute;
     content: "";
@@ -83,6 +85,7 @@
 
 /*Selects the first element with class .slider that are placed immediately after checked input elements.
 change the background of the togggle when cheked*/
+
 input:checked+.slider {
     background-color: #2196F3;
     box-shadow: 0 0 4px #2196F3;
@@ -90,12 +93,14 @@ input:checked+.slider {
 
 /*Selects the first element with class .slider that are placed immediately after input elements with focus.
 shdow the toggle when hover*/
+
 input:hover+.slider {
     box-shadow: 0 0 6px #2196F3;
 }
 
 /*Selects the first .slider:before class element that are placed immediately after input:checked elements.
 Moving the toggle button when the toggle is checked*/
+
 input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
@@ -103,25 +108,19 @@ input:checked+.slider:before {
 }
 
 /* Rounded sliders */
+
 .slider.round {
     border-radius: 34px;
 }
 
 /*Rounded toggle*/
+
 .slider.round:before {
     border-radius: 50%;
 }
 
-.isDisabled {
-    color: currentColor;
-    opacity: 0.5;
-    text-decoration: none;
-    pointer-events: none;
-}
-
-
 @media screen and (max-width: 769px) {
-    .popular-toggle-container{
+    .popular-toggle-container {
         max-width: 100%;
     }
     input:hover+.slider {
@@ -131,4 +130,19 @@ input:checked+.slider:before {
         background-color: #2196F3;
         box-shadow: 0 0 4px #2196F3;
     }
-  }
+}
+
+@media screen and (max-width: 500px) {
+    .chart {
+        height: 33rem;
+        padding-bottom: 4rem;
+    }
+    .chart-manipulation-container {
+        max-width: 75%;
+    }
+    /*Date picker*/
+    .date-range {
+        width: 100%;
+        margin-bottom: 0.3rem;
+    }
+}

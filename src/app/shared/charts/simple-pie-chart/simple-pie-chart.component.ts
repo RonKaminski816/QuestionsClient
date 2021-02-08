@@ -14,7 +14,7 @@ export class SimplePieChartComponent implements OnInit, OnDestroy, OnChanges {
   private chart: am4charts.PieChart;
 
   @Input() pieData: any[]
-
+  @Input() chartMeasuredObjectsGroupName: string;
   constructor(private questionsState: QuestionsStateService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -34,11 +34,17 @@ export class SimplePieChartComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   chartConfigue() {
+    // Create Title
+    let title = this.chart.titles.create();
+    title.text = `${this.chartMeasuredObjectsGroupName} Pie Chart`;
+    title.fontSize = 25;
+    title.marginBottom = 20;
 
     let pieSeries = this.chart.series.push(new am4charts.PieSeries());
     pieSeries.dataFields.value = "count";
     pieSeries.dataFields.category = "category";
 
+    // Pie slices
     pieSeries.slices.template.stroke = am4core.color("#fff");
     pieSeries.slices.template.strokeWidth = 2;
     pieSeries.slices.template.strokeOpacity = 1;
@@ -53,8 +59,11 @@ export class SimplePieChartComponent implements OnInit, OnDestroy, OnChanges {
     pieSeries.legendSettings.labelText = "{category}";
     pieSeries.legendSettings.valueText = "[none]";
 
+    // Legend
     this.chart.legend = new am4charts.Legend();
-    this.chart.legend.itemContainers.template.width = am4core.percent(8);
+    this.chart.legend.itemContainers.template.width = 100;
+    this.chart.legend.properties.paddingTop = 25;
+    this.chart.legend.properties.marginBottom = 20;
   }
 
   ngOnDestroy(): void {

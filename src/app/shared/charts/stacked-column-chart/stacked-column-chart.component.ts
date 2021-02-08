@@ -30,7 +30,6 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
 
   ngOnChanges(changes: SimpleChanges): void {
     this.chartDispose();
-    console.log(changes.pieData);
     if (!this.stackedData && !this.stackedSeries) {
       return;
     }
@@ -44,6 +43,11 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
   }
 
   chartConfigue() {
+    //Create title
+    let title = this.chart.titles.create();
+    title.text = `${this.chartMeasuredObjectsGroupName} Stacked Column Chart`;
+    title.fontSize = 25;
+    title.marginBottom = 30;
 
     // Create axes
     let categoryAxis = this.chart.xAxes.push(new am4charts.CategoryAxis());
@@ -61,7 +65,26 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
 
     // Legend
     this.chart.legend = new am4charts.Legend();
+
+    // this.chart.scrollbarX =new am4core.Scrollbar();
+    // this.chart.scrollbarX.disabled = true;
+
+    // this.chart.responsive.enabled = true;
+    // this.chart.responsive.rules.push({
+    //   relevant: am4core.ResponsiveBreakpoints.maybeL,
+    //   state: function (target, stateId) {
+    //     if (target instanceof am4charts.XYChart) {
+    //       let state = target.states.create(stateId);
+    //       let scrollState = target.scrollbarX.states.create(stateId);
+    //       scrollState.properties.disabled = false;
+    //       return scrollState;
+    //     }
+    //     return null;
+    //   }
+    // });
   }
+
+  
 
   // Create series
   private createSeries(field, name, colorIndex) {

@@ -1,9 +1,4 @@
 #piechartdiv {
   width: 100%;
-  height: 90%;
-}
-
-.amchart-title{
-  text-align: center;
-  /* margin: 1.6rem 0 0; */
+  height: 100%;
 }

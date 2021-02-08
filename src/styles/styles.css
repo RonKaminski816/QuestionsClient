@@ -18,6 +18,14 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+/*class to disable click  any html  elements */
+.isDisabled {
+    color: currentColor;
+    opacity: 0.5;
+    text-decoration: none;
+    pointer-events: none;
+}
+
 /*////////////////////////////////////////////////////////////////////////////*/
 
 /*the snackbar design*/
