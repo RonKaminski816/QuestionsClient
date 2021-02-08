@@ -16,6 +16,7 @@ export class ManagerPageComponent implements OnInit {
   reason: string;
 
   qList: QuestionModel[];
+  isSideBarOpen: boolean;
 
   actionedQuestionId: number;
   actionedQuestion: QuestionModel;
@@ -41,14 +42,15 @@ export class ManagerPageComponent implements OnInit {
     else {
       this.actionedQuestion = new QuestionModel();
     }
-    this.sidenav.open();
+    this.openSideBar();
+  //this.sidenav.open();
   }
 
 
   getUpdatedQuestion(ques: QuestionModel) {
     try {
       if (ques) {
-        this.sidenav.close();       
+        this.closeSideBar('ron');       
         this.questionsState.updateQuestion(ques);
       }
     } catch (err) {
@@ -60,14 +62,17 @@ export class ManagerPageComponent implements OnInit {
     if (ques) {
       this.qList = [...this.qList, ques];
       this.questionsState.addQuestion(ques);
-      this.sidenav.close();
+     // this.sidenav.close();
     }
   }
 
-
-  close(reason: string) {
+openSideBar(){
+  this.isSideBarOpen = true;
+}
+  closeSideBar(reason: string) {
+    this.isSideBarOpen = false;
     this.reason = reason;
-    this.sidenav.close();
+    //this.sidenav.close();
   }
 
 }

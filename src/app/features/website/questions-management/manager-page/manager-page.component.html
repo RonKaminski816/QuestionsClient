@@ -1,8 +1,8 @@
-<mat-drawer-container class="side-container" (backdropClick)="close('backdrop')">
-  <mat-drawer color="grey-dark" position="end" #sidenav (keydown.escape)="close('escape')" disableClose>
+<!-- <mat-drawer-container class="manager-container" (backdropClick)="closeSideBar('backdrop')">
+  <mat-drawer color="grey-dark" position="end" #sidenav (keydown.escape)="closeSideBar('escape')" disableClose>
 
     <app-question-edit [actionedQuestion]="actionedQuestion" (onNewQuestion)="getNewQuestion($event)"
-      (onUpdatededQuestion)="getUpdatedQuestion($event)" (onCancelActions)="close('cancel button')">
+      (onUpdatededQuestion)="getUpdatedQuestion($event)" (onCancelActions)="closeSideBar('cancel button')">
     </app-question-edit>
 
   </mat-drawer>
@@ -15,5 +15,25 @@
     </div>
     
   </mat-drawer-content> 
-</mat-drawer-container>
+</mat-drawer-container> -->
 <!--TODO Create the custom side-bar-->
+
+<div class="manager-container" [ngClass]="{'container-has-open ':isSideBarOpen}">
+
+  <div class="manager-backdrop" [ngClass]="{'sidebar-shown': isSideBarOpen}"></div>
+
+  <div class="sidebar" color="grey-dark" [ngClass]="{'sidebar-open':isSideBarOpen}">
+    <app-question-edit [actionedQuestion]="actionedQuestion" (onNewQuestion)="getNewQuestion($event)"
+      (onUpdatededQuestion)="getUpdatedQuestion($event)" (onCancelActions)="closeSideBar('cancel button')">
+    </app-question-edit>
+
+  </div>
+
+  <div class="manager-content">
+
+    <div class="manager-main-page">
+      <app-questions-list [qTableData]="qList" (onQuestionActions)="getActionedQuestion($event)">
+      </app-questions-list>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@
             <div class="form-set">
                 <label for="name" weight="bold" color="blue-dark">Question name<span
                         class="icon-required">*</span></label>
-                <input type="text" name="name" class="form-input"
+                <input autocomplete="off" type="text" name="name" class="form-input"
                     [ngClass]="{ 'is-invalid': submitted===true && !qname.valid }" required
                     [(ngModel)]="actionedQuestion.name" #qname="ngModel" />
             </div>

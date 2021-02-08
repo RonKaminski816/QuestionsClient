@@ -1,15 +1,57 @@
-.side-container {
+
+/*the whole container*/
+.manager-container {
     background-color: transparent;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    display: block;
+    overflow: hidden;
+    height:max-content;
 }
 
-mat-drawer-content{
-    height: 100%;
-}
+/*th*/
 .manager-main-page {
+    height: 100%;
     display: block;
     text-align: -webkit-center;
 }
 
+.sidebar {
+    z-index: 4;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    outline: 0;
+    overflow-y: auto;
+    box-shadow: none;
+    visibility: hidden;
+    transform: translate3d(100%, 0, 0);
+    transition-duration: 0.4s;
+}
+
+.sidebar-open {
+    transform:none;
+    visibility: visible;
+}
+
 [color="grey-dark"] {
     background-color: #cccccc;
+}
+
+.manager-backdrop{
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    position:absolute;
+    display:block;
+    z-index:3;
+    visibility:hidden;
+    background-color: rgba(0, 0, 0, .6);
+}
+.manager-backdrop.sidebar-shown{
+    visibility:visible
 }
