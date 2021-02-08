@@ -1,4 +1,4 @@
-<div class="table-view">
+<div class="table-view" >
 
     <div class="table-features">
         <mat-form-field color="blue-dark" hintLabel="Max 10 characters" appearance="fill">
@@ -71,5 +71,18 @@
 
     <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> -->
     <!--TODO Add the Delete Modal-->
+    <button (click)="openDeleteModal($event)" style="width:auto;">Delete test</button>
+
+    <div id="id01" class="modal" [ngClass]="{'show-modal': isDelModalOpen}" (click)="closeDeleteModal($event)">
+        <div id="deldialog" class="modal-content animate" >
+            <h1 >Delete</h1>
+            <div >Are you sure you to delete question?</div>
+            <div content="end">
+            <button class="btn-dialog can"  mat-dialog-close>Cancel</button>
+            
+            <button class="btn-dialog del" (click)="openDeleteModal($event)">Yes</button>
+          </div>
+        </div>
+      </div>
 </div>
 

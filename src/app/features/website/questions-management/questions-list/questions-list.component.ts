@@ -15,6 +15,7 @@ import { QuestionsStateService } from 'src/app/core/state-managments/questions-s
 })
 export class QuestionsListComponent implements OnInit, OnChanges {
 
+  isDelModalOpen: boolean;
 
   @Input() qTableData: QuestionModel[];
 
@@ -82,7 +83,7 @@ export class QuestionsListComponent implements OnInit, OnChanges {
               this.snackbars.openSimpleTextSnackBar(data.message);
               this.questionsState.deleteQuestion(questionId);
             },
-            error =>this.snackbars.openSimpleTextSnackBar(`${error.message}, please refresh the page`)
+            error => this.snackbars.openSimpleTextSnackBar(`${error.message}, please refresh the page`)
           );
         }
       }
@@ -105,6 +106,17 @@ export class QuestionsListComponent implements OnInit, OnChanges {
     this.dataSource.sort.active = sortState.active;//Set the single column that is active to sorting at the datasource
     this.dataSource.sort.direction = sortState.direction;//Set the direction of sorting in the datasource
     this.dataSource.sort.sortChange.emit(sortState);//Datasource Invoke the sorting operation
+  }
+
+  openDeleteModal(event: any) {
+    this.isDelModalOpen = true;
+  }
+  
+  closeDeleteModal(event: any) {
+    //TODO find the dialog id for closing right
+    if (event.target.id !== "deldialog") {
+      this.isDelModalOpen = false;
+    }
   }
 }
 
