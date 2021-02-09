@@ -12,7 +12,7 @@ import { QuestionsStateService } from 'src/app/core/state-managments/questions-s
 export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges {
 
   private chart: am4charts.XYChart;
-  private colorIndex: number = 4;
+  private colorIndex: number = 0;
 
   @Input() stackedData: any[]
   @Input() stackedSeries: string[];

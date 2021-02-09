@@ -77,10 +77,13 @@
         [ngClass]="{'show-modal': questionToDeleteID && questionToDeleteID.trim() !== '' && questionToDeleteID.length >= 1}"
         (click)="closeDeleteModal($event)">
         <div class="modal-content animate">
-            <h1>Delete</h1>
-            <div>Are you sure you to delete question {{questionToDeleteID}}?</div>
-            <div content="end">
-                <button id="cancelDelModal" stroked-button class="btn-dialog can" (click)="closeDeleteModal($event)">Cancel</button>
+            <div class="modal-text">
+                <h1>Delete</h1>
+                <div>Are you sure you to delete question {{questionToDeleteID}}?</div>
+            </div>
+            <div class="modal-actions" content="end">
+                <button id="cancelDelModal" stroked-button class="btn-dialog can"
+                    (click)="closeDeleteModal($event)">Cancel</button>
                 <button class="btn-dialog del" raised-button (click)="deleteQuestion(questionToDeleteID)">Yes</button>
             </div>
         </div>

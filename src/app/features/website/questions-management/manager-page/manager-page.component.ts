@@ -51,7 +51,8 @@ export class ManagerPageComponent implements OnInit {
   getUpdatedQuestion(ques: QuestionModel) {
     try {
       if (ques) {
-        this.closeSideBar('ron');       
+        this.closeSideBar(`Question ${ques.id} was updated`);
+        // this.sidenav.close();       
         this.questionsState.updateQuestion(ques);
       }
     } catch (err) {
@@ -63,6 +64,7 @@ export class ManagerPageComponent implements OnInit {
     if (ques) {
       this.qList = [...this.qList, ques];
       this.questionsState.addQuestion(ques);
+      this.closeSideBar(`Question ${ques.id} was created`);   
      // this.sidenav.close();
     }
   }
@@ -72,7 +74,7 @@ openSideBar(){
 }
   closeSideBar(reason: string) {
     this.isSideBarOpen = false;
-    this.reason = reason;
+    console.log(`side bar close because ${reason}`);
     //this.sidenav.close();
   }
 

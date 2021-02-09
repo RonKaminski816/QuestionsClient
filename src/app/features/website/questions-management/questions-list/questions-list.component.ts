@@ -90,35 +90,26 @@ export class QuestionsListComponent implements OnInit, OnChanges {
 
 
   deleteQuestion(questionId: string) {
-    // const dialogRef = this.dialog.open(DialogElementsDialog,
-    //   { data: { qId: questionId } });
-
-    // dialogRef.afterClosed().subscribe(
-    //   res => {
-    //     if (res) {
-      if (questionId) {
-        this.questionsService.deleteQuestion(questionId).subscribe(
-          data => {
-            this.questionToDeleteID = undefined;
-            this.dataSource.data = this.dataSource.data.filter(ques => ques.id !== questionId);
-            this.snackbars.openSimpleTextSnackBar(data.message);
-            this.questionsState.deleteQuestion(questionId);
-          },
-          error => this.snackbars.openSimpleTextSnackBar(`${error.message}, please refresh the page and try again if necessary`)
-          );
-        }
-      //   }
-      // }
-    // )
+    if (questionId) {
+      this.questionsService.deleteQuestion(questionId).subscribe(
+        data => {
+          this.questionToDeleteID = undefined;
+          this.dataSource.data = this.dataSource.data.filter(ques => ques.id !== questionId);
+          this.snackbars.openSimpleTextSnackBar(data.message);
+          this.questionsState.deleteQuestion(questionId);
+        },
+        error => this.snackbars.openSimpleTextSnackBar(`${error.message}, please refresh the page and try again if necessary`)
+      );
+    }
   }
 
-  questionToDeleteID:string;
+  questionToDeleteID: string;
 
-  openDeleteModal(selectedQuestionId:string) {
+  openDeleteModal(selectedQuestionId: string) {
     //this.isDelModalOpen = true;
     this.questionToDeleteID = selectedQuestionId;
   }
-  
+
   closeDeleteModal(event: any) {
     if (event.target.id === "id01" || event.target.id === "cancelDelModal") {
       this.questionToDeleteID = undefined;
