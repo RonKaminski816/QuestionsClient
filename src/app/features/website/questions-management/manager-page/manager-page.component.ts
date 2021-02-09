@@ -12,7 +12,7 @@ import { QuestionsStateService } from 'src/app/core/state-managments/questions-s
 export class ManagerPageComponent implements OnInit {
 
   // @ViewChild('sidenav') sidenav: MatSidenav;
-  
+
   canLeave: boolean = false;
   reason: string;
 
@@ -44,15 +44,12 @@ export class ManagerPageComponent implements OnInit {
       this.actionedQuestion = new QuestionModel();
     }
     this.openSideBar();
-  //this.sidenav.open();
   }
-
 
   getUpdatedQuestion(ques: QuestionModel) {
     try {
       if (ques) {
-        this.closeSideBar(`Question ${ques.id} was updated`);
-        // this.sidenav.close();       
+        this.closeSideBar(`Question ${ques.id} was updated`);      
         this.questionsState.updateQuestion(ques);
       }
     } catch (err) {
@@ -64,19 +61,19 @@ export class ManagerPageComponent implements OnInit {
     if (ques) {
       this.qList = [...this.qList, ques];
       this.questionsState.addQuestion(ques);
-      this.closeSideBar(`Question ${ques.id} was created`);   
-     // this.sidenav.close();
+      this.closeSideBar(`Question ${ques.id} was created`);
     }
   }
 
-openSideBar(){
-  this.isSideBarOpen = true;
-}
+  openSideBar() {
+    this.isSideBarOpen = true;
+     //this.sidenav.open();
+  }
+
   closeSideBar(reason: string) {
     this.isSideBarOpen = false;
     console.log(`side bar close because ${reason}`);
     //this.sidenav.close();
   }
-
 }
 

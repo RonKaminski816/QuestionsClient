@@ -9,10 +9,10 @@ import { QuestionsService } from '../Services/questions.service';
   styleUrls: ['./question-edit.component.css']
 })
 export class QuestionEditComponent implements OnInit, OnChanges {
+
   loading: boolean = false;
   submitted: boolean = false;
   canceled: boolean;
-
 
   @Input() actionedQuestion: QuestionModel;
 
@@ -23,6 +23,7 @@ export class QuestionEditComponent implements OnInit, OnChanges {
   @Output() onCancelActions: EventEmitter<null> = new EventEmitter();
 
   constructor(private questionsService: QuestionsService, private snackbarService: SnackbarService) { }
+  
   ngOnChanges(changes: SimpleChanges): void {
    console.log(this.actionedQuestion);
   }
@@ -40,7 +41,6 @@ export class QuestionEditComponent implements OnInit, OnChanges {
       } else {
         this.editQuestion();
       }
-
     } catch (error) {
       alert(error["message"]);
     }
@@ -62,7 +62,6 @@ export class QuestionEditComponent implements OnInit, OnChanges {
         this.snackbarService.openSimpleTextSnackBar(`An error occurred while add a new question`);
       }
     );
-
   }
 
   private editQuestion() {

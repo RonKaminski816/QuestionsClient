@@ -23,12 +23,7 @@ body {
 
 /*class to disable click  any html  elements */
 
-.isDisabled {
-    color: currentColor;
-    opacity: 0.5;
-    text-decoration: none;
-    pointer-events: none;
-}
+
 
 /*Adds a red asterisk to the end to emphasize that this field is required */
 
@@ -43,7 +38,12 @@ body {
     border: 0.5px solid #8f8f8f38;
     border-radius: 4px;
     padding: 0.5rem 1rem;
+    cursor: pointer;
 }
+[stroked-button]:focus{
+    outline: transparent ;
+}
+
 
 [raised-button] {
     border-radius: 4px;
@@ -52,8 +52,23 @@ body {
     border: none;
     /*shadowing with 3 layers of differents styles of shadows*/
     box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    opacity: 0.95;
+}
+[raised-button]:hover{
+    opacity: 1;
+}
+[raised-button]:focus{
+    outline: transparent ;
 }
 
+
+/*for disabling any element needed to be disable*/
+.isDisabled {
+    color: currentColor;
+    opacity: 0.5;
+    text-decoration: none;
+    pointer-events: none;
+}
 /*////////////////////////////////////////////////////////////////////////////*/
 
 /*the snackbar design*/

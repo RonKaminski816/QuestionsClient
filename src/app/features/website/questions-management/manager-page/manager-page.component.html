@@ -26,14 +26,10 @@
     <app-question-edit [actionedQuestion]="actionedQuestion" (onNewQuestion)="getNewQuestion($event)"
       (onUpdatededQuestion)="getUpdatedQuestion($event)" (onCancelActions)="closeSideBar('cancel button')">
     </app-question-edit>
-
   </div>
 
-  <div class="manager-content">
-
-    <div class="manager-main-page">
-      <app-questions-list [qTableData]="qList" (onQuestionActions)="getActionedQuestion($event)">
-      </app-questions-list>
-    </div>
+  <div class="manager-main-page">
+    <app-questions-list [qTableData]="qList" (onQuestionActions)="getActionedQuestion($event)">
+    </app-questions-list>
   </div>
 </div>

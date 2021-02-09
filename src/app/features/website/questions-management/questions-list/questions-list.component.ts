@@ -15,7 +15,7 @@ import { QuestionsStateService } from 'src/app/core/state-managments/questions-s
 })
 export class QuestionsListComponent implements OnInit, OnChanges {
 
-  isDelModalOpen: boolean;
+  questionToDeleteID: string;
 
   @Input() qTableData: QuestionModel[];
 
@@ -38,8 +38,6 @@ export class QuestionsListComponent implements OnInit, OnChanges {
   *sort property of the dataSource of our table.
   */
   @ViewChild(MatSort) sort: MatSort;
-
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
@@ -65,10 +63,10 @@ export class QuestionsListComponent implements OnInit, OnChanges {
     this.dataSource.paginator = this.paginator;
 
   }
+
   openQuestionActions(question?: QuestionModel) {
     this.onQuestionActions.emit(question);
   }
-
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -88,7 +86,6 @@ export class QuestionsListComponent implements OnInit, OnChanges {
     this.dataSource.sort.sortChange.emit(sortState);//Datasource Invoke the sorting operation
   }
 
-
   deleteQuestion(questionId: string) {
     if (questionId) {
       this.questionsService.deleteQuestion(questionId).subscribe(
@@ -103,10 +100,7 @@ export class QuestionsListComponent implements OnInit, OnChanges {
     }
   }
 
-  questionToDeleteID: string;
-
   openDeleteModal(selectedQuestionId: string) {
-    //this.isDelModalOpen = true;
     this.questionToDeleteID = selectedQuestionId;
   }
 
@@ -115,26 +109,25 @@ export class QuestionsListComponent implements OnInit, OnChanges {
       this.questionToDeleteID = undefined;
     }
   }
-
 }
 
-@Component({
-  selector: 'dialog-elements-dialog',
-  template: `<h1 mat-dialog-title>Delete</h1>
-  <div mat-dialog-content>Are you sure you to delete question {{data.qId}}?</div>
-  <div mat-dialog-actions content="end">
-  <button class="btn-dialog can" (click)="confirmDelete()" mat-dialog-close>Cancel</button>
+// @Component({
+//   selector: 'dialog-elements-dialog',
+//   template: `<h1 mat-dialog-title>Delete</h1>
+//   <div mat-dialog-content>Are you sure you to delete question {{data.qId}}?</div>
+//   <div mat-dialog-actions content="end">
+//   <button class="btn-dialog can" (click)="confirmDelete()" mat-dialog-close>Cancel</button>
   
-  <button class="btn-dialog del" (click)="confirmDelete(true)" mat-dialog-close cdkFocusInitial>Yes</button>
-</div>`,
-  styleUrls: ['./questions-list.component.css']
-})
-export class DialogElementsDialog {
-  constructor(
-    public dialogRef: MatDialogRef<DialogElementsDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: { qId: string }) { }
+//   <button class="btn-dialog del" (click)="confirmDelete(true)" mat-dialog-close cdkFocusInitial>Yes</button>
+// </div>`,
+//   styleUrls: ['./questions-list.component.css']
+// })
+// export class DialogElementsDialog {
+//   constructor(
+//     public dialogRef: MatDialogRef<DialogElementsDialog>,
+//     @Inject(MAT_DIALOG_DATA) public data: { qId: string }) { }
 
-  confirmDelete(confirmDelete?: boolean) {
-    this.dialogRef.close(confirmDelete);
-  }
-}
+//   confirmDelete(confirmDelete?: boolean) {
+//     this.dialogRef.close(confirmDelete);
+//   }
+// }
