@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { QuestionModel } from 'src/app/core/models/question.model';
+import { IQuestionModel } from 'src/app/core/models/question.model';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsService } from '../Services/questions.service';
 
@@ -14,22 +14,22 @@ export class QuestionEditComponent implements OnInit, OnChanges {
   submitted: boolean = false;
   canceled: boolean;
 
-  @Input() actionedQuestion: QuestionModel;
+  @Input() actionedQuestion: IQuestionModel;
 
-  @Output() onNewQuestion: EventEmitter<QuestionModel> = new EventEmitter();
+  @Output() onNewQuestion: EventEmitter<IQuestionModel> = new EventEmitter();
 
-  @Output() onUpdatededQuestion: EventEmitter<QuestionModel> = new EventEmitter();
+  @Output() onUpdatededQuestion: EventEmitter<IQuestionModel> = new EventEmitter();
 
   @Output() onCancelActions: EventEmitter<null> = new EventEmitter();
 
   constructor(private questionsService: QuestionsService, private snackbarService: SnackbarService) { }
-  
+
   ngOnChanges(changes: SimpleChanges): void {
-   console.log(this.actionedQuestion);
+    console.log(this.actionedQuestion);
   }
 
   ngOnInit(): void {
-    this.actionedQuestion = new QuestionModel();
+    this.actionedQuestion = { id: '', name: '', creationDate: '', description: '' }
   }
 
   onSubmit() {
@@ -50,7 +50,7 @@ export class QuestionEditComponent implements OnInit, OnChanges {
     this.actionedQuestion.creationDate = new Date().toString();
     this.questionsService.addQuestion(this.actionedQuestion).subscribe(
       res => {
-        this.actionedQuestion = new QuestionModel();
+        this.actionedQuestion = { id: '', name: '', creationDate: '', description: '' }
         this.submitted = false;
         this.loading = false;
         this.snackbarService.openSimpleTextSnackBar(`${res.message}: ${res.qa.id}`);
@@ -81,6 +81,7 @@ export class QuestionEditComponent implements OnInit, OnChanges {
   }
 
   cancelActions(): void {
+    this.actionedQuestion = { id: '', name: '', creationDate: '', description: '' }
     this.canceled = true;
     this.onCancelActions.emit();
   }

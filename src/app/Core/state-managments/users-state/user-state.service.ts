@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { UserModel } from 'src/app/core/models/user.model';
+import { IUserModel } from 'src/app/core/models/user.model';
 import { LocalStorageService } from '../../storages/local-storage/local-storage.service';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { LocalStorageService } from '../../storages/local-storage/local-storage.
 })
 export class UserStateService {
 
-  private sharedUserName = new BehaviorSubject<UserModel>(new UserModel);
+  private sharedUserName = new BehaviorSubject<IUserModel>({id: '', username:'', password:''});
 
   constructor(private localStorageService: LocalStorageService) {
     if (this.isLoggedIn()) {
@@ -26,11 +26,11 @@ export class UserStateService {
     return isLoggedIn;
   }
 
-  mapUserLogged(user?: UserModel) {
+  mapUserLogged(user?: IUserModel) {
     this.sharedUserName.next(user);
   }
 
-  public retrieveMappedLoggedInUser(): Observable<UserModel> {
+  public retrieveMappedLoggedInUser(): Observable<IUserModel> {
     return this.sharedUserName.asObservable();
   }
 

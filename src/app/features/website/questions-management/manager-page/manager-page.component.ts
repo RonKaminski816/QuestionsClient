@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { QuestionModel } from 'src/app/core/models/question.model';
+import { IQuestionModel } from 'src/app/core/models/question.model';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 
@@ -16,11 +16,11 @@ export class ManagerPageComponent implements OnInit {
   canLeave: boolean = false;
   reason: string;
 
-  qList: QuestionModel[];
+  qList: IQuestionModel[];
   isSideBarOpen: boolean;
 
   actionedQuestionId: number;
-  actionedQuestion: QuestionModel;
+  actionedQuestion: IQuestionModel;
   constructor(private questionsState: QuestionsStateService, private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
@@ -36,17 +36,14 @@ export class ManagerPageComponent implements OnInit {
     );
   }
 
-  getActionedQuestion(question: QuestionModel) {
+  getActionedQuestion(question: IQuestionModel) {
     if (question) {
       this.actionedQuestion = question;
-    }
-    else {
-      this.actionedQuestion = new QuestionModel();
     }
     this.openSideBar();
   }
 
-  getUpdatedQuestion(ques: QuestionModel) {
+  getUpdatedQuestion(ques: IQuestionModel) {
     try {
       if (ques) {
         this.closeSideBar(`Question ${ques.id} was updated`);      
@@ -57,7 +54,7 @@ export class ManagerPageComponent implements OnInit {
     }
   }
 
-  getNewQuestion(ques: QuestionModel) {
+  getNewQuestion(ques: IQuestionModel) {
     if (ques) {
       this.qList = [...this.qList, ques];
       this.questionsState.addQuestion(ques);

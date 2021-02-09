@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { QuestionModel } from 'src/app/core/models/question.model';
+import { IQuestionModel } from 'src/app/core/models/question.model';
 import { QuestionsService } from 'src/app/features/website/questions-management/Services/questions.service';
 import { map } from 'rxjs/operators';
 
@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class QuestionsStateService {
 
-  private sharedQues = new BehaviorSubject<QuestionModel[]>([]);
+  private sharedQues = new BehaviorSubject<IQuestionModel[]>([]);
 
   constructor(private questionsService: QuestionsService) {
     this.questionsService.getAllQuestions().subscribe(
@@ -21,21 +21,21 @@ export class QuestionsStateService {
     )
   }
 
-  private mapQuestionListState(questions: QuestionModel[]) {
+  private mapQuestionListState(questions: IQuestionModel[]) {
     this.sharedQues.next(questions);
   }
 
   //used to share the data received from the backend
-  public retrieveMappedQuestionListState(): Observable<QuestionModel[]> {
+  public retrieveMappedQuestionListState(): Observable<IQuestionModel[]> {
     return this.sharedQues.asObservable();
   }
 
-  addQuestion(q: QuestionModel) {
+  addQuestion(q: IQuestionModel) {
     const questions = [...this.sharedQues.value, q];
     this.mapQuestionListState(questions);
   }
 
-  updateQuestion(q: QuestionModel) {
+  updateQuestion(q: IQuestionModel) {
     const updatedQuestion = this.sharedQues.value.find(ques => ques.id === q.id)
     let index = this.sharedQues.value.indexOf(updatedQuestion);
     this.sharedQues.value[index] = q;

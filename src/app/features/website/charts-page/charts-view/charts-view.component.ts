@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionModel } from 'src/app/core/models/question.model';
+import { IQuestionModel } from 'src/app/core/models/question.model';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 import { startOfDay, endOfDay, startOfWeek, startOfMonth } from 'date-fns';
@@ -12,7 +12,7 @@ import { startOfDay, endOfDay, startOfWeek, startOfMonth } from 'date-fns';
 export class ChartsViewComponent implements OnInit {
 
   /**Full List with all the questions its porpuse is to refill and get all the question if needed without another request */
-  chartQListTemp: QuestionModel[];
+  chartQListTemp: IQuestionModel[];
   /**amount of question measured in charts */
   qCount: number;
   /**bool for checking if the chart values has changed in the previous date-range adjust  */
@@ -21,7 +21,7 @@ export class ChartsViewComponent implements OnInit {
   ranges = { 'Today': [new Date(), new Date()], 'This Week': [startOfWeek(new Date), new Date()], 'This Month': [startOfMonth(new Date), new Date()] };
 
   /**A state of the current questions that measured inside the charts */
-  afterChangeQList: QuestionModel[];
+  afterChangeQList: IQuestionModel[];
   /**Two way binding object thats bind with the html toggle for 'popular hours'  */
   isToggleChecked: boolean;
   /**To disable the toggle after clicking it until the data is inserted to chart */
@@ -50,7 +50,7 @@ export class ChartsViewComponent implements OnInit {
     );
   }
 
-  createFullChartsObjects(questions: QuestionModel[]) {
+  createFullChartsObjects(questions: IQuestionModel[]) {
     this.chartsData = [];
     this.chartSeries = [];
     const days = [];
@@ -93,7 +93,7 @@ export class ChartsViewComponent implements OnInit {
     }
   }
   
-  private toggleChecked(questions: QuestionModel[]): Promise<any> {
+  private toggleChecked(questions: IQuestionModel[]): Promise<any> {
     return new Promise((resolve, reject) => {
       this.chartSeries = [];
       const chartHoursTempData = [];

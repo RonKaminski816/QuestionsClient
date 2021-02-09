@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { UserModel } from 'src/app/core/models/user.model';
+import { IUserModel } from 'src/app/core/models/user.model';
 import { environment } from 'src/environments/environment';
 import { LocalStorageService } from '../../storages/local-storage/local-storage.service';
 
@@ -11,7 +11,6 @@ import { LocalStorageService } from '../../storages/local-storage/local-storage.
 })
 export class AuthService {
 
-  // private sharedUser = new BehaviorSubject<UserModel>(new UserModel);
   private usersPath = environment.baseUrl + environment.userPath;
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });//, "Authorization": 
 
@@ -20,8 +19,8 @@ export class AuthService {
     private localStorageService: LocalStorageService,
   ) { }
 
-  login(loginUser: UserModel): Observable<UserModel> {
-    return this.http.post<{ user: UserModel, token: string }>(`${this.usersPath}/login`, JSON.stringify(loginUser), { headers: this.headers })
+  login(loginUser: IUserModel): Observable<IUserModel> {
+    return this.http.post<{ user: IUserModel, token: string }>(`${this.usersPath}/login`, JSON.stringify(loginUser), { headers: this.headers })
       .pipe(catchError(this.handleError),
         map(res => {
           this.setSession(res.token)

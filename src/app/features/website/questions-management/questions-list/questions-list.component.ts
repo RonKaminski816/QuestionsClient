@@ -2,7 +2,7 @@ import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, Simp
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { QuestionModel } from 'src/app/core/models/question.model';
+import { IQuestionModel } from 'src/app/core/models/question.model';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsService } from '../Services/questions.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -17,11 +17,11 @@ export class QuestionsListComponent implements OnInit, OnChanges {
 
   questionToDeleteID: string;
 
-  @Input() qTableData: QuestionModel[];
+  @Input() qTableData: IQuestionModel[];
 
-  @Output() onQuestionActions: EventEmitter<QuestionModel> = new EventEmitter();
+  @Output() onQuestionActions: EventEmitter<IQuestionModel> = new EventEmitter();
 
-  dataSource = new MatTableDataSource<QuestionModel>();
+  dataSource = new MatTableDataSource<IQuestionModel>();
   columnsToDisplay: string[] = ['id', 'name', 'creationDate', 'edit-btns'];
 
   selectedColumn: string;
@@ -38,6 +38,7 @@ export class QuestionsListComponent implements OnInit, OnChanges {
   *sort property of the dataSource of our table.
   */
   @ViewChild(MatSort) sort: MatSort;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
@@ -63,10 +64,10 @@ export class QuestionsListComponent implements OnInit, OnChanges {
     this.dataSource.paginator = this.paginator;
 
   }
-
-  openQuestionActions(question?: QuestionModel) {
+  openQuestionActions(question?: IQuestionModel) {
     this.onQuestionActions.emit(question);
   }
+
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -86,6 +87,7 @@ export class QuestionsListComponent implements OnInit, OnChanges {
     this.dataSource.sort.sortChange.emit(sortState);//Datasource Invoke the sorting operation
   }
 
+
   deleteQuestion(questionId: string) {
     if (questionId) {
       this.questionsService.deleteQuestion(questionId).subscribe(
@@ -98,7 +100,10 @@ export class QuestionsListComponent implements OnInit, OnChanges {
         error => this.snackbars.openSimpleTextSnackBar(`${error.message}, please refresh the page and try again if necessary`)
       );
     }
+
   }
+
+
 
   openDeleteModal(selectedQuestionId: string) {
     this.questionToDeleteID = selectedQuestionId;
@@ -109,6 +114,7 @@ export class QuestionsListComponent implements OnInit, OnChanges {
       this.questionToDeleteID = undefined;
     }
   }
+
 }
 
 // @Component({

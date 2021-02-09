@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UserModel } from 'src/app/core/models/user.model';
+import { IUserModel } from 'src/app/core/models/user.model';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/core/authentication/http/auth.service';
 import { UserStateService } from 'src/app/core/state-managments/users-state/user-state.service';
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   isValidFormSubmitted: boolean = false;
   regex = new RegExp("((?=.*[0-9])(?=.*[A-Z]))");
 
-  loginUser: UserModel;
+  loginUser: IUserModel;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.loginUser = new UserModel();
+    this.loginUser = { id: '', username: '', password: '' };
     //this.isFromRegister();
   }
   // private isFromRegister() {
