@@ -8,23 +8,21 @@
     <form #quesForm="ngForm" class="form-group" (ngSubmit)="onSubmit()">
         <div class="form-container">
             <div class="form-set">
-                <label for="name" weight="bold" color="blue-dark">Question name<span
-                        class="icon-required">*</span></label>
+                <label for="name" weight="bold" color="blue-dark" required-icon>Question name</label>
                 <input autocomplete="off" type="text" name="name" class="form-input"
                     [ngClass]="{ 'is-invalid': submitted===true && !qname.valid }" required
                     [(ngModel)]="actionedQuestion.name" #qname="ngModel" />
             </div>
 
             <div class="form-set">
-                <label for="description" weight="bold" color="blue-dark">Question description<span
-                        class="icon-required">*</span></label>
+                <label for="description" weight="bold" color="blue-dark" required-icon>Question description</label>
                 <textarea type="text" name="description" class="form-input"
                     [ngClass]="{ 'is-invalid': submitted===true && !qdesc.valid}" required
                     [(ngModel)]="actionedQuestion.description" #qdesc="ngModel"></textarea>
             </div>
 
             <div class="form-set actions-btns">
-                <button [ngClass]="{isDisabled: !quesForm.form.valid}" mat-raised-button type="submit"
+                <button [ngClass]="{isDisabled: !quesForm.form.valid}" raised-button type="submit"
                     color="blue-dark">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     <span *ngIf="actionedQuestion.id.trim().length < 1">Create</span>

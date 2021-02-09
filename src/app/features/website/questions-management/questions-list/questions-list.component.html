@@ -64,7 +64,7 @@
         <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
     </div>
     <div class="bottom-page" content="end">
-        <button (click)="openQuestionActions()" mat-raised-button color="blue-dark">
+        <button (click)="openQuestionActions()" raised-button color="blue-dark">
             Add a question
         </button>
     </div>
@@ -78,7 +78,7 @@
             <h1 >Delete</h1>
             <div >Are you sure you to delete question?</div>
             <div content="end">
-            <button class="btn-dialog can"  mat-dialog-close>Cancel</button>
+            <button class="btn-dialog can">Cancel</button>
             
             <button class="btn-dialog del" (click)="openDeleteModal($event)">Yes</button>
           </div>

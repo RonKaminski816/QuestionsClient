@@ -49,33 +49,49 @@ form {
     cursor:text;
 }
 
+/*the textarea input for the questions description*/
 textarea {
     height: 7rem;
     max-height: 11rem;
 }
 
-button:hover {
-    opacity: 0.8;
-    cursor: pointer;
-}
-
+/*the buttons container*/
 .actions-btns {
     display: flex;
     justify-content: space-between;
 }
 
-.icon-required {
-    color: red;
+/*behaviors for all buttons*/
+button:hover {
+    opacity: 0.8;
+    cursor: pointer;
 }
-
-input.ng-dirty.ng-invalid:focus, textarea.ng-dirty.ng-invalid:focus {
-    border: solid 1px red;
-}
-
 button:focus {
     outline: 0px transparent;
 }
 
+/*invalid form-input value behavior*/
+input.ng-dirty.ng-invalid:focus, textarea.ng-dirty.ng-invalid:focus {
+    border: solid 1px red;
+}
+
+
+/*Attributes*/
+/*1.colors and fills*/
+[color="blue-light"] {
+    background-color: #a9c2e6;
+}
+
+[color="blue-medium"] {
+    color: #53768c;
+}
+
+[color="blue-dark"] {
+    color: #444c54;
+}
+
+/*2.Buttons*/
+/*2.1button colors*/
 button[color="blue-medium"] {
     color: #53768c;
     background-color: inherit;
@@ -91,24 +107,8 @@ button[color="blue-dark"] {
     color: white;
 }
 
-[color="blue-light"] {
-    background-color: #a9c2e6;
-}
-
-[color="blue-medium"] {
-    color: #53768c;
-}
-
-[color="blue-dark"] {
-    color: #444c54;
-}
-
-[stroked-button] {
-    border: none;
-    padding: 0 16px;
-    border-radius: 4px;
-}
-
+/*3.text decorations*/
 [weight="bold"]{
     font-weight: bold;
 }
+

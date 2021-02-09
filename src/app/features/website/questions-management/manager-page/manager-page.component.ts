@@ -11,8 +11,9 @@ import { QuestionsStateService } from 'src/app/core/state-managments/questions-s
 })
 export class ManagerPageComponent implements OnInit {
 
+  // @ViewChild('sidenav') sidenav: MatSidenav;
+  
   canLeave: boolean = false;
-  @ViewChild('sidenav') sidenav: MatSidenav;
   reason: string;
 
   qList: QuestionModel[];
