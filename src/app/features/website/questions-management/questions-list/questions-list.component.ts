@@ -70,26 +70,6 @@ export class QuestionsListComponent implements OnInit, OnChanges {
   }
 
 
-  deleteQuestion(questionId: string) {
-    const dialogRef = this.dialog.open(DialogElementsDialog,
-      { data: { qId: questionId } });
-
-    dialogRef.afterClosed().subscribe(
-      res => {
-        if (res) {
-          this.questionsService.deleteQuestion(questionId).subscribe(
-            data => {
-              this.dataSource.data = this.dataSource.data.filter(ques => ques.id !== questionId);
-              this.snackbars.openSimpleTextSnackBar(data.message);
-              this.questionsState.deleteQuestion(questionId);
-            },
-            error => this.snackbars.openSimpleTextSnackBar(`${error.message}, please refresh the page`)
-          );
-        }
-      }
-    )
-  }
-
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches 
@@ -108,16 +88,43 @@ export class QuestionsListComponent implements OnInit, OnChanges {
     this.dataSource.sort.sortChange.emit(sortState);//Datasource Invoke the sorting operation
   }
 
-  openDeleteModal(event: any) {
-    this.isDelModalOpen = true;
+
+  deleteQuestion(questionId: string) {
+    // const dialogRef = this.dialog.open(DialogElementsDialog,
+    //   { data: { qId: questionId } });
+
+    // dialogRef.afterClosed().subscribe(
+    //   res => {
+    //     if (res) {
+      if (questionId) {
+        this.questionsService.deleteQuestion(questionId).subscribe(
+          data => {
+            this.questionToDeleteID = undefined;
+            this.dataSource.data = this.dataSource.data.filter(ques => ques.id !== questionId);
+            this.snackbars.openSimpleTextSnackBar(data.message);
+            this.questionsState.deleteQuestion(questionId);
+          },
+          error => this.snackbars.openSimpleTextSnackBar(`${error.message}, please refresh the page and try again if necessary`)
+          );
+        }
+      //   }
+      // }
+    // )
+  }
+
+  questionToDeleteID:string;
+
+  openDeleteModal(selectedQuestionId:string) {
+    //this.isDelModalOpen = true;
+    this.questionToDeleteID = selectedQuestionId;
   }
   
   closeDeleteModal(event: any) {
-    //TODO find the dialog id for closing right
-    if (event.target.id !== "deldialog") {
-      this.isDelModalOpen = false;
+    if (event.target.id === "id01" || event.target.id === "cancelDelModal") {
+      this.questionToDeleteID = undefined;
     }
   }
+
 }
 
 @Component({

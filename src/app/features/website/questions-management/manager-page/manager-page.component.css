@@ -7,7 +7,7 @@
     box-sizing: border-box;
     display: block;
     overflow: hidden;
-    height:max-content;
+    min-height: 100%;
 }
 
 /*th*/

@@ -42,5 +42,4 @@ export class WebsiteComponent implements OnInit {
       this.userState.currentUserLoggingOut();
     }
   }
-
 }

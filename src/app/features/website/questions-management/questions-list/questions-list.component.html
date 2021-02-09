@@ -1,4 +1,4 @@
-<div class="table-view" >
+<div class="table-view">
 
     <div class="table-features">
         <mat-form-field color="blue-dark" hintLabel="Max 10 characters" appearance="fill">
@@ -24,7 +24,8 @@
             <!-- ID Column -->
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> ID</th>
-                <td mat-cell *matCellDef="let question"><span [outerHTML]="question.id | smallLettersBoldNumbers"></span></td>
+                <td mat-cell *matCellDef="let question"><span
+                        [outerHTML]="question.id | smallLettersBoldNumbers"></span></td>
             </ng-container>
             <!--TODO Add the expandeble rows-->
 
@@ -47,7 +48,7 @@
                     <button mat-icon-button (click)="openQuestionActions(question)" color="blue-light">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button (click)="deleteQuestion(question.id)" color="blue-medium">
+                    <button mat-icon-button (click)="openDeleteModal(question.id)" color="blue-medium">
                         <mat-icon>delete_forever</mat-icon>
                     </button>
                 </td>
@@ -70,19 +71,18 @@
     </div>
 
     <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> -->
-    <!--TODO Add the Delete Modal-->
-    <button (click)="openDeleteModal($event)" style="width:auto;">Delete test</button>
+    <!-- <button (click)="openDeleteModal($event)" style="width:auto;">Delete test</button> -->
 
-    <div id="id01" class="modal" [ngClass]="{'show-modal': isDelModalOpen}" (click)="closeDeleteModal($event)">
-        <div id="deldialog" class="modal-content animate" >
-            <h1 >Delete</h1>
-            <div >Are you sure you to delete question?</div>
+    <div id="id01" class="modal"
+        [ngClass]="{'show-modal': questionToDeleteID && questionToDeleteID.trim() !== '' && questionToDeleteID.length >= 1}"
+        (click)="closeDeleteModal($event)">
+        <div class="modal-content animate">
+            <h1>Delete</h1>
+            <div>Are you sure you to delete question {{questionToDeleteID}}?</div>
             <div content="end">
-            <button class="btn-dialog can">Cancel</button>
-            
-            <button class="btn-dialog del" (click)="openDeleteModal($event)">Yes</button>
-          </div>
+                <button id="cancelDelModal" stroked-button class="btn-dialog can" (click)="closeDeleteModal($event)">Cancel</button>
+                <button class="btn-dialog del" raised-button (click)="deleteQuestion(questionToDeleteID)">Yes</button>
+            </div>
         </div>
-      </div>
+    </div>
 </div>
-
