@@ -42,4 +42,7 @@ export class WebsiteComponent implements OnInit {
       this.userState.currentUserLoggingOut();
     }
   }
+
+  //for the sticky side
+  //document.body.scrollTop > 20
 }

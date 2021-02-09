@@ -1,0 +1,9 @@
+[design="subtitle"] {
+    white-space:nowrap; 
+   font-family:sans-serif;
+   color: lightslategrey;
+   font-size: x-small;
+   width: -webkit-fill-available;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}

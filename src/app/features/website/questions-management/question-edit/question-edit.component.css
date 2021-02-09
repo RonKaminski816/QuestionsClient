@@ -112,3 +112,8 @@ button[color="blue-dark"] {
     font-weight: bold;
 }
 
+
+.p-to-del{
+    display: flex;
+    flex-wrap: wrap;
+}
