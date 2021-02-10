@@ -70,7 +70,7 @@ export class QuestionEditComponent implements OnInit, OnChanges {
         this.submitted = false;
         this.loading = false;
         console.log(err["message"])
-        this.snackbarService.openSimpleTextSnackBar(`An error occurred while add a new question`);
+        this.snackbarService.openSimpleTextSnackBar(err["message"]);
       }
     );
   }
@@ -93,9 +93,6 @@ export class QuestionEditComponent implements OnInit, OnChanges {
   }
 
   canCloseActions(reason: string): void {
-
-    this.questionName = '';
-    this.questionDescription = '';
     this.onCancelActions.emit(reason);
   }
 }

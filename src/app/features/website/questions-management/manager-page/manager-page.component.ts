@@ -40,9 +40,6 @@ export class ManagerPageComponent implements OnInit {
     if (question) {
       this.actionedQuestion = question;
     }
-    else {
-      this.actionedQuestion = { name: '', description: '', id: '', creationDate: null };
-    }
     this.openSideBar();
   }
 
@@ -75,4 +72,3 @@ export class ManagerPageComponent implements OnInit {
     //this.sidenav.close();
   }
 }
-
