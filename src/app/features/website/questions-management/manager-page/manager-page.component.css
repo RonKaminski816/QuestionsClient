@@ -1,4 +1,8 @@
 
+body .side-has-open{
+    overflow: hidden;
+}
+
 /*the whole container*/
 .manager-container {
     background-color: transparent;
@@ -30,7 +34,7 @@
     visibility: hidden;
     transform: translate3d(100%, 0, 0);
     transition-duration: 0.4s;
-    /* max-width: 70%; */
+    max-width: 30%;
 }
 
 .sidebar-open {

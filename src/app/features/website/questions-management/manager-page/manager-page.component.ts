@@ -36,9 +36,12 @@ export class ManagerPageComponent implements OnInit {
     );
   }
 
-  getActionedQuestion(question: IQuestionModel) {
+  getActionedQuestion(question?: IQuestionModel) {
     if (question) {
       this.actionedQuestion = question;
+    }
+    else {
+      this.actionedQuestion = { name: '', description: '', id: '', creationDate: null };
     }
     this.openSideBar();
   }
@@ -46,7 +49,6 @@ export class ManagerPageComponent implements OnInit {
   getUpdatedQuestion(ques: IQuestionModel) {
     try {
       if (ques) {
-        this.closeSideBar(`Question ${ques.id} was updated`);      
         this.questionsState.updateQuestion(ques);
       }
     } catch (err) {
@@ -58,18 +60,18 @@ export class ManagerPageComponent implements OnInit {
     if (ques) {
       this.qList = [...this.qList, ques];
       this.questionsState.addQuestion(ques);
-      this.closeSideBar(`Question ${ques.id} was created`);
     }
   }
 
   openSideBar() {
     this.isSideBarOpen = true;
-     //this.sidenav.open();
+    //this.sidenav.open();
   }
 
   closeSideBar(reason: string) {
     this.isSideBarOpen = false;
-    console.log(`side bar close because ${reason}`);
+    console.log(`side bar closed because ${reason}`);
+    this.actionedQuestion = { ...{ id: '', name: '', creationDate: '', description: '' } };
     //this.sidenav.close();
   }
 }

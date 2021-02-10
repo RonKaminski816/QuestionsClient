@@ -18,18 +18,21 @@
 </mat-drawer-container> -->
 <!--TODO Create the custom side-bar-->
 
-<div class="manager-container" [ngClass]="{'container-has-open ':isSideBarOpen}">
+<body [ngClass]="{'side-has-open':isSideBarOpen}">
+  <div class="manager-container">
 
-  <div class="manager-backdrop" [ngClass]="{'sidebar-shown': isSideBarOpen}"></div>
+    <div class="manager-backdrop" [ngClass]="{'sidebar-shown': isSideBarOpen}"></div>
 
-  <div class="sidebar" color="grey-dark" [ngClass]="{'sidebar-open':isSideBarOpen}">
-    <app-question-edit [actionedQuestion]="actionedQuestion" (onNewQuestion)="getNewQuestion($event)"
-      (onUpdatededQuestion)="getUpdatedQuestion($event)" (onCancelActions)="closeSideBar('cancel button')">
-    </app-question-edit>
+    <div class="sidebar" color="grey-dark" [ngClass]="{'sidebar-open':isSideBarOpen}">
+      <app-question-edit [actionedQuestion]="actionedQuestion" (onNewQuestion)="getNewQuestion($event)"
+        (onUpdatededQuestion)="getUpdatedQuestion($event)" (onCancelActions)="closeSideBar($event)">
+      </app-question-edit>
+    </div>
+
+    <div class="manager-main-page">
+      <app-questions-list [qTableData]="qList" (onQuestionActions)="getActionedQuestion($event)">
+      </app-questions-list>
+    </div>
+    
   </div>
-
-  <div class="manager-main-page">
-    <app-questions-list [qTableData]="qList" (onQuestionActions)="getActionedQuestion($event)">
-    </app-questions-list>
-  </div>
-</div>
+</body>

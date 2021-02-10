@@ -116,4 +116,5 @@ button[color="blue-dark"] {
 .p-to-del{
     display: flex;
     flex-wrap: wrap;
+    max-width: 90%;
 }
