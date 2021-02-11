@@ -37,4 +37,17 @@
         </label> -->
     </div>
   </form>
-</div>
+
+  <div id="login-error-modal" class="modal" (click)="closeErrorModal($event)"
+    [ngClass]="{'show-modal': showErrorModal.canDisplay}">
+    <div class="modal-content animate">
+      <div class="modal-text-container">
+        <h1 class="modal-title">Oops...</h1>
+        <div class="modal-text">{{showErrorModal.errorMessage}}</div>
+      </div>
+      <div class="modal-actions">
+        <button id="cancel-error-modal" stroked-button color="blue-dark" class="close-btn"
+          (click)="closeErrorModal($event)">Close</button>
+      </div>
+    </div>
+  </div>
