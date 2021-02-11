@@ -12,7 +12,7 @@ import { startOfDay, endOfDay, startOfWeek, startOfMonth } from 'date-fns';
 export class ChartsViewComponent implements OnInit {
 
   /**Full List with all the questions its porpuse is to refill and get all the question if needed without another request */
-  chartQListTemp: IQuestionModel[];
+  chartQListOrigin: IQuestionModel[];
   /**amount of question measured in charts */
   qCount: number;
   /**bool for checking if the chart values has changed in the previous date-range adjust  */
@@ -41,10 +41,10 @@ export class ChartsViewComponent implements OnInit {
   getChartsData() {
     return this.questionsState.retrieveMappedQuestionListState().subscribe(
       res => {
-        this.chartQListTemp = res;
+        this.chartQListOrigin = res;
         this.qCount = res.length;
         this.afterChangeQList = [...res];
-        this.createFullChartsObjects(this.chartQListTemp);
+        this.createFullChartsObjects(this.chartQListOrigin);
       },
       error => this.snackbarService.openSimpleTextSnackBar(`An error occurred, please refresh the page: ${error['message']}`)
     );
@@ -177,27 +177,28 @@ export class ChartsViewComponent implements OnInit {
   }
 
   onAdjustDateChange(range: Date[]) {
-    if (range.length == 0 && this.qCount != this.chartQListTemp.length) {
-      !this.isToggleChecked ? this.createFullChartsObjects(this.chartQListTemp) : this.toggleChecked(this.chartQListTemp);
-      this.qCount = this.chartQListTemp.length;
-      this.afterChangeQList = [...this.chartQListTemp];
+    if (range.length == 0 && this.qCount != this.chartQListOrigin.length) {
+      !this.isToggleChecked ? this.createFullChartsObjects(this.chartQListOrigin) : this.toggleChecked(this.chartQListOrigin);
+      this.qCount = this.chartQListOrigin.length;
+      this.afterChangeQList = [...this.chartQListOrigin];
       return;
     }
     else if (range.length === 0) {
       return;
     }
     try {
-      this.afterChangeQList = [];
-      this.chartQListTemp.forEach(q => {
+      const tempList = [];     
+      this.chartQListOrigin.forEach(q => {
         const dateCheck = new Date(q.creationDate);
         if (dateCheck >= startOfDay(range[0]) && dateCheck <= endOfDay(range[1])) {
-          this.afterChangeQList.push(q);
+          tempList.push(q);
         }
       });
-      if (this.afterChangeQList.length < 1) {
+      if (tempList.length < 1) {
         this.isChanged = false;
         return this.snackbarService.openSimpleTextSnackBar('No questions were created within this date range!');
       }
+      this.afterChangeQList = [...tempList];
       !this.isToggleChecked ? this.createFullChartsObjects(this.afterChangeQList) : this.toggleChecked(this.afterChangeQList);
       this.qCount = this.afterChangeQList.length;
       this.isChanged = true;

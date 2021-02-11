@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { IQuestionModel } from 'src/app/core/models/question.model';
-import { QuestionsService } from '../Services/questions.service';
+import { QuestionsService } from 'src/app/core/http/questions/questions.service';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { OverlayViewService } from 'src/app/shared/services/overlay-view/overlay-view.service';

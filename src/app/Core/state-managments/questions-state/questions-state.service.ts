@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IQuestionModel } from 'src/app/core/models/question.model';
-import { QuestionsService } from 'src/app/features/website/questions-management/Services/questions.service';
+import { QuestionsService } from 'src/app/core/http/questions/questions.service';
 import { map } from 'rxjs/operators';
 
 

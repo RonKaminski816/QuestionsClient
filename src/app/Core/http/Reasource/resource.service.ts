@@ -48,3 +48,4 @@ export class ResourceService {
   //     return data.map(item => this.serializer.fromJson(item));
   //   }
   }
+

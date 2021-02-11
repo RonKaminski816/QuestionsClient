@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IQuestionModel } from 'src/app/core/models/question.model';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
-import { QuestionsService } from '../Services/questions.service';
+import { QuestionsService } from 'src/app/core/http/questions/questions.service';
 
 @Component({
   selector: 'app-question-edit',
