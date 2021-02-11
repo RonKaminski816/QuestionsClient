@@ -1,6 +1,7 @@
 /* actions page container layout*/
 .actions-container {
-    padding: 20px;
+    padding: 1.3rem;
+    padding-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -114,7 +115,7 @@ button[color="blue-dark"] {
 
 
 .p-to-del{
+    font-family: inherit;
     display: flex;
     flex-wrap: wrap;
-    max-width: 90%;
 }

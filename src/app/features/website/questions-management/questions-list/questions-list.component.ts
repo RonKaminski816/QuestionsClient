@@ -1,12 +1,13 @@
-import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { IQuestionModel } from 'src/app/core/models/question.model';
-import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsService } from '../Services/questions.service';
-import { MatPaginator } from '@angular/material/paginator';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
+import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
+import { OverlayViewService } from 'src/app/shared/services/overlay-view/overlay-view.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+// import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-questions-list',
@@ -42,11 +43,12 @@ export class QuestionsListComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
+  // public dialog: MatDialog,
   constructor(
     private questionsService: QuestionsService,
     private questionsState: QuestionsStateService,
-    public dialog: MatDialog,
-    private snackbars: SnackbarService) { }
+    private snackbars: SnackbarService,
+    private overlayViewService: OverlayViewService) { }
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -57,23 +59,21 @@ export class QuestionsListComponent implements OnInit, OnChanges {
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       return data.name.toLowerCase().includes(filter) || data.id.toLowerCase().includes(filter);
     };
-
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
 
   }
+
   openQuestionActions(question?: IQuestionModel) {
     this.onQuestionActions.emit(question);
   }
-
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches 
     this.dataSource.filter = filterValue;
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -86,7 +86,6 @@ export class QuestionsListComponent implements OnInit, OnChanges {
     this.dataSource.sort.direction = sortState.direction;//Set the direction of sorting in the datasource
     this.dataSource.sort.sortChange.emit(sortState);//Datasource Invoke the sorting operation
   }
-
 
   deleteQuestion(questionId: string) {
     if (questionId) {
@@ -103,18 +102,17 @@ export class QuestionsListComponent implements OnInit, OnChanges {
 
   }
 
-
-
   openDeleteModal(selectedQuestionId: string) {
+    this.overlayViewService.overlayIsOpen();
     this.questionToDeleteID = selectedQuestionId;
   }
 
   closeDeleteModal(event: any) {
     if (event.target.id === "id01" || event.target.id === "cancelDelModal") {
+      this.overlayViewService.overlayIsClose()
       this.questionToDeleteID = undefined;
     }
   }
-
 }
 
 // @Component({
@@ -123,7 +121,7 @@ export class QuestionsListComponent implements OnInit, OnChanges {
 //   <div mat-dialog-content>Are you sure you to delete question {{data.qId}}?</div>
 //   <div mat-dialog-actions content="end">
 //   <button class="btn-dialog can" (click)="confirmDelete()" mat-dialog-close>Cancel</button>
-  
+
 //   <button class="btn-dialog del" (click)="confirmDelete(true)" mat-dialog-close cdkFocusInitial>Yes</button>
 // </div>`,
 //   styleUrls: ['./questions-list.component.css']

@@ -1,9 +1,6 @@
 
-body .side-has-open{
-    overflow: hidden;
-}
-
 /*the whole container*/
+
 .manager-container {
     background-color: transparent;
     position: relative;
@@ -12,19 +9,27 @@ body .side-has-open{
     display: block;
     overflow: hidden;
     min-height: 100%;
+    height: -webkit-fill-available;
+    padding-bottom: 2rem;
 }
 
 /*th*/
+
 .manager-main-page {
     height: 100%;
     display: block;
     text-align: -webkit-center;
 }
 
+.sticky {
+    position: fixed;
+    top: 0;
+}
+
 .sidebar {
     z-index: 4;
     display: block;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
@@ -34,11 +39,11 @@ body .side-has-open{
     visibility: hidden;
     transform: translate3d(100%, 0, 0);
     transition-duration: 0.4s;
-    max-width: 30%;
+    max-width: 35%;
 }
 
 .sidebar-open {
-    transform:none;
+    transform: none;
     visibility: visible;
 }
 
@@ -46,17 +51,24 @@ body .side-has-open{
     background-color: #cccccc;
 }
 
-.manager-backdrop{
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    position:absolute;
-    display:block;
-    z-index:3;
-    visibility:hidden;
+.manager-backdrop {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    display: block;
+    z-index: 3;
+    visibility: hidden;
     background-color: rgba(0, 0, 0, .6);
 }
-.manager-backdrop.sidebar-shown{
-    visibility:visible
+
+.manager-backdrop.sidebar-shown {
+    visibility: visible
+}
+
+@media (max-width: 776px) {
+    .sidebar{
+        max-width: fit-content;
+    }
 }

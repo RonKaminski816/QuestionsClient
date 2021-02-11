@@ -19,11 +19,13 @@ html, body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    line-height: 1;
 }
 
-/*class to disable click  any html  elements */
-
-
+.overlay-entity-open{
+    overflow: hidden;
+    /* min-height: max-content; */
+}
 
 /*Adds a red asterisk to the end to emphasize that this field is required */
 
@@ -62,7 +64,7 @@ body {
 }
 
 
-/*for disabling any element needed to be disable*/
+/*class to disable click any html elements */
 .isDisabled {
     color: currentColor;
     opacity: 0.5;

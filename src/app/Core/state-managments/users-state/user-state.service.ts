@@ -19,8 +19,10 @@ export class UserStateService {
 
   isLoggedIn(): boolean {
     const isLoggedIn = JSON.parse(this.localStorageService.getItem('isLogged'));
-    if (!isLoggedIn) {
-      this.handleIsLoggedin(false);
+    const getToken = this.localStorageService.getItem('id_token');
+    if (!isLoggedIn && !getToken || getToken === null || getToken === '') {
+    // if (!isLoggedIn) {
+      this.currentUserLoggingOut();
       return false;
     }
     return isLoggedIn;
@@ -34,17 +36,18 @@ export class UserStateService {
     return this.sharedUserName.asObservable();
   }
 
+  userLoggingIn(user) {
+    if (this.handleIsLoggedin(true) && this.localStorageService.setItem('currentUser', JSON.stringify(user))) {
+      this.mapUserLogged(user);
+    }
+  }
+
   currentUserLoggingOut() {
     if (this.handleIsLoggedin(false) && this.localStorageService.removeItem('currentUser')) {
       this.mapUserLogged();
     }
   }
 
-  userLoggingIn(user) {
-    if (this.handleIsLoggedin(true) && this.localStorageService.setItem('currentUser', JSON.stringify(user))) {
-      this.mapUserLogged(user);
-    }
-  }
 
   private handleIsLoggedin(value?): boolean {
     return this.localStorageService.setItem('isLogged', value);

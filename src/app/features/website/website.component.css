@@ -1,17 +1,24 @@
 /*the menu layout*/
-.sticky {
+
+/* .sticky {
     position: fixed;
     width: 100%;
-  }
+} */
+
 .menu-header {
+    /* height: 7%; */
     width: 100%;
-    margin-bottom: 0; 
+    margin-bottom: 0;
     box-shadow: 1px 1px 5px #888888;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     position: relative;
+}
+
+.website-container {
+    /* height: inherit; */
 }
 
 /*Logged user name*/
@@ -26,7 +33,7 @@
 .menu-navbar-btns {
     margin-left: 1rem;
     text-align: center;
-    height: max-content;
+    /* height: max-content; */
 }
 
 /*the general container's links design */

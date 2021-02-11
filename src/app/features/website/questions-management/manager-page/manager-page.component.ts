@@ -3,6 +3,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { IQuestionModel } from 'src/app/core/models/question.model';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
+import { OverlayViewService } from 'src/app/shared/services/overlay-view/overlay-view.service';
 
 @Component({
   selector: 'app-manager-page',
@@ -21,7 +22,9 @@ export class ManagerPageComponent implements OnInit {
 
   actionedQuestionId: number;
   actionedQuestion: IQuestionModel;
-  constructor(private questionsState: QuestionsStateService, private snackbarService: SnackbarService) { }
+  constructor(private questionsState: QuestionsStateService,
+    private snackbarService: SnackbarService,
+    private overlayViewService: OverlayViewService) { }
 
   ngOnInit(): void {
     this.getAllQustions();
@@ -60,12 +63,22 @@ export class ManagerPageComponent implements OnInit {
     }
   }
 
+  isSticky:boolean;
   openSideBar() {
+    let sidebar = document.getElementById("sidebar");
+    let sticky = sidebar.offsetTop;
+    if (window.pageYOffset >= sticky) {
+     this.isSticky = true;
+    } else {
+      this.isSticky = false;
+    }
+    this.overlayViewService.overlayIsOpen();
     this.isSideBarOpen = true;
     //this.sidenav.open();
   }
 
   closeSideBar(reason: string) {
+    !this.overlayViewService.overlayIsClose()
     this.isSideBarOpen = false;
     console.log(`side bar closed because ${reason}`);
     this.actionedQuestion = { ...{ id: '', name: '', creationDate: '', description: '' } };
