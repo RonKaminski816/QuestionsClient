@@ -1,0 +1,30 @@
+ul, #selection-tree-ul {
+    list-style-type: none;
+    padding-left: 2rem;
+}
+
+#selection-tree-ul {
+    padding-left: 0;
+}
+
+.root-node{
+    margin: 0;
+    margin-top: 0.5rem;
+    padding: 0
+}
+
+.filter{
+    width: 100%;
+    padding: 5px 10px;
+    display: inline-block;
+    border: 1px solid ;
+    border-color: #d9d9d9;
+    box-sizing: border-box;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    margin-bottom: 0.5rem;
+}
+
+.filter::placeholder{
+    color: #bfbfbf;
+}

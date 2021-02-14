@@ -9,7 +9,7 @@
 /*@import "~ng-zorro-antd/ng-zorro-antd.aliyun.css";*/
 
 @import "./amCharts/amChartsIndex.css";
-@import "./pipes/smallLettersBoldNumbersPipeStyle.css";
+@import "./pipes/pipesIndex.css";
 /* "node_modules/bootstrap/dist/css/bootstrap.min.css", */
 
 html, body {

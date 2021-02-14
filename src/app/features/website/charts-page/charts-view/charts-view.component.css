@@ -10,12 +10,28 @@
     padding-bottom: 2rem;
 }
 
+.charts-extra{
+    display: flex;
+    justify-content: space-between;
+    height: 10rem;
+    margin-top: 1.2rem;
+}
+
+.tree-view{
+    display: flex;
+    justify-content: flex-start;
+    width: 35%;
+    padding-right: 1rem;
+}
+.spread{
+    width: 100%;
+}
 /*div containing the manipulation on charts element*/
 
 .chart-manipulation-container {
     margin: 0.75rem;
-    margin-top: 1.2rem;
-    max-width: 50%;
+    margin-top: 0;
+    max-width: 75%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -24,8 +40,9 @@
 /*Date picker*/
 
 .date-range {
-    width: 50%;
+    width: 100%;
     margin-bottom: 0.3rem;
+    border-radius: 0.25rem;
 }
 
 /*Toggle*/

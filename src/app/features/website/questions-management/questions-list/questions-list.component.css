@@ -62,13 +62,25 @@ td, th {
 }
 
 
-.add-btn {
-    background-color: #444c54;
+/* .sticky-btn {
+
+} */
+
+div.bottom-page {
+    margin-bottom: 1rem;
+    /* position: -webkit-sticky;
+    position: sticky;
+    bottom: 3rem; */
 }
 
-.bottom-page {
-    margin-bottom: 1rem;
-}
+div.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 3rem;
+    background-color: yellow;
+    padding: 50px;
+    font-size: 20px;
+  }
 
 [content="end"] {
     display: flex;

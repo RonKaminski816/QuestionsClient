@@ -1,8 +1,6 @@
-[design="subtitle"] {
+.ellipsis {
     white-space:nowrap; 
-   font-family:sans-serif;
-   color: lightslategrey;
-   font-size: x-small;
+   font-size: small;
    width: -webkit-fill-available;
    overflow: hidden;
    text-overflow: ellipsis;

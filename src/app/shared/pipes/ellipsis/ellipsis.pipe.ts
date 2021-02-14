@@ -5,8 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class EllipsisPipe implements PipeTransform {
 
-  transform(value: string): string {
-    return `<span design="subtitle">${value}</span>`;
+  transform(value: any) {
+    return `<span class="ellipsis">${value}</span>`;
   }
-
 }

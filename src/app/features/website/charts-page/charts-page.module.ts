@@ -5,12 +5,13 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { ChartsPageRoutingModule } from './charts-page-routing.module';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FormsModule } from '@angular/forms';
+import { TreeViewComponent } from './tree-view/tree-view.component';
 
 
 
 
 @NgModule({
-  declarations: [ChartsViewComponent],
+  declarations: [ChartsViewComponent, TreeViewComponent],
   imports: [
     CommonModule,
     ChartsPageRoutingModule,

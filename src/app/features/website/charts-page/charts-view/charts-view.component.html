@@ -1,17 +1,23 @@
 <div class="charts-container">
-    <div class="chart-manipulation-container">
-        <nz-range-picker class="date-range" nzFormat="dd/MM/yyyy" [nzRanges]="ranges" ngModel
-            (ngModelChange)="onAdjustDateChange($event)">
-        </nz-range-picker>
-        <div class="popular-toggle-container" [ngClass]="{isDisabled: !isPopularAvailable}">
-            <label class="toggle">
-                <input type="checkbox" [(ngModel)]="isToggleChecked" (change)="onTogglePopularHoursChanged()">
-                <span class="slider round"></span>
-            </label>
-            <p class="toggle-lable">5 most popular hours</p>
+    <div class="charts-extra">
+        <div class="chart-manipulation-container">
+            <nz-range-picker class="date-range" nzFormat="dd/MM/yyyy" [nzRanges]="ranges" ngModel
+                (ngModelChange)="onAdjustDateChange($event)">
+            </nz-range-picker>
+            <div class="popular-toggle-container" [ngClass]="{isDisabled: !isPopularAvailable}">
+                <label class="toggle">
+                    <input type="checkbox" [(ngModel)]="isToggleChecked" (change)="onTogglePopularHoursChanged()">
+                    <span class="slider round"></span>
+                </label>
+                <p class="toggle-lable">5 most popular hours</p>
+            </div>
+        </div>
+        <div class="tree-view">
+            <app-tree-view [treesQListOrigin]="chartQListOrigin" class="spread"></app-tree-view>
         </div>
     </div>
     <app-stacked-column-chart [stackedData]="chartsData" [stackedSeries]="chartSeries"
         chartMeasuredObjectsGroupName="Questions" class="chart"></app-stacked-column-chart>
-    <app-simple-pie-chart [pieData]="chartsData" chartMeasuredObjectsGroupName="Questions" class="chart"></app-simple-pie-chart>
+    <app-simple-pie-chart [pieData]="chartsData" chartMeasuredObjectsGroupName="Questions" class="chart">
+    </app-simple-pie-chart>
 </div>

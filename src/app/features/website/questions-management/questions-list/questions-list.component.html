@@ -71,7 +71,7 @@
     </div>
 
     <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> -->
-
+    
     <div id="id01" class="modal" (click)="closeDeleteModal($event)"
         [ngClass]="{'show-modal': questionToDeleteID && questionToDeleteID.trim() !== '' && questionToDeleteID.length >= 1}">
         <div class="modal-content animate">
@@ -80,9 +80,10 @@
                 <div>Are you sure you to delete question {{questionToDeleteID}}?</div>
             </div>
             <div class="modal-actions" content="space-between">
-                <button id="cancelDelModal" stroked-button  color="blue-dark" class="btn-dialog can"
+                <button id="cancelDelModal" stroked-button color="blue-dark" class="btn-dialog can"
                     (click)="closeDeleteModal($event)">Cancel</button>
-                <button class="btn-dialog del" raised-button  color="blue-dark" (click)="deleteQuestion(questionToDeleteID)">Yes</button>
+                <button class="btn-dialog del" raised-button color="blue-dark"
+                    (click)="deleteQuestion(questionToDeleteID)">Yes</button>
             </div>
         </div>
     </div>

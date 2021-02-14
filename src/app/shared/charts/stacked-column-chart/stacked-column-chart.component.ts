@@ -3,6 +3,7 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
+import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-stacked-column-chart',
@@ -24,14 +25,13 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
    * For Example:
    *  "Questions" is possible name for a group of objects.
    */
-  @Input()
-  chartMeasuredObjectsGroupName: string;
-  constructor() { }
+  @Input() chartMeasuredObjectsGroupName: string;
+  constructor(private snackbarService: SnackbarService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.chartDispose();
-    if (!this.stackedData && !this.stackedSeries) {
-      return;
+    if (!this.stackedData || !this.stackedSeries || !this.chartMeasuredObjectsGroupName) {
+      return this.snackbarService.openSimpleTextSnackBar('One of them is missing: Data, Series, Measured Objects Group Name');
     }
     this.chart = am4core.create("stackedchartdiv", am4charts.XYChart);
     this.chart.data = this.stackedData;
@@ -84,7 +84,7 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
     // });
   }
 
-  
+
 
   // Create series
   private createSeries(field, name, colorIndex) {
