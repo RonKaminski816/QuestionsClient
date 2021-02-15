@@ -1,4 +1,4 @@
-<ul id="selection-tree-ul" *ngIf="selectionTreeRootData.nodeChildren.length >= 1">
+<ul class="selection-tree-ul" *ngIf="selectionTreeRootData.nodeChildren.length >= 1">
     <input type="text" class="filter" id="myInput" (keyup)="applyFilter($event.target.value)" placeholder="Search"
         title="Type in a question">
     <app-selection-node [selectionNode]="selectionTreeRootData">

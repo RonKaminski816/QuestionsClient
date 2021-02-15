@@ -1,11 +1,11 @@
 <li class="node" [title]="selectionNode.nodeData">
     <div class="node-content">
         <span *ngIf="selectionNode.nodeChildren.length > 0" class="node-children-pointer"
-            [ngClass]="{'pointer-down': isChildrenPointerDown}" (click)="toggleNodeChildrenPointer()"></span>
-        <input type="checkbox" [(ngModel)]="selectionNode.isChecked" (change)="onNodeCheckedChanged(selectionNode)">
-        <span [innerHTML]="selectionNode.nodeData | ellipsis" class="node-data" (click)="toggleNodeChildrenPointer()"></span>
+            [ngClass]="{ 'pointer-down': isChildrenPointerDown }" (click)="toggleNodeChildrenPointer()"></span>
+        <input type="checkbox" [(ngModel)]="selectionNode.isChecked" (change)="onNodeCheckedChanged(selectionNode)" />
+        <span class="node-data" [outerHTML]="selectionNode.nodeData| ellipsis"></span>
     </div>
-    <ul *ngIf="selectionNode.nodeChildren.length > 0" class="nested" [ngClass]="{'active': isChildrenPointerDown}">
+    <ul *ngIf="selectionNode.nodeChildren.length > 0" class="nested" [ngClass]="{ 'active': isChildrenPointerDown }">
         <app-selection-node *ngFor="let node of selectionNode.nodeChildren" [selectionNode]="node"></app-selection-node>
     </ul>
 </li>

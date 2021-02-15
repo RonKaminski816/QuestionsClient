@@ -1,11 +1,11 @@
-ul, #selection-tree-ul {
+ul, .selection-tree-ul {
     list-style-type: none;
     padding-left: 2rem;
     padding-bottom: 0.2rem;
     padding-top: 0.2rem;
 }
 
-#selection-tree-ul {
+.selection-tree-ul {
     padding-left: 0;
 }
 

@@ -22,16 +22,31 @@ export class SelectionNodeComponent implements OnInit {
   }
 
   onNodeCheckedChanged(checkedChangeNode: SelectionNode) {
-    this.selectionNode.nodeChildren.map(nc => nc.isChecked = this.selectionNode.isChecked);
-    //check if the node is root
-    if (this.selectionNode.nodeParent !== null) {
-      const parentCheckTest = this.selectionNode.nodeParent.nodeChildren.find(n => n.isChecked === false);
-      //check if all the children of the selected parent already checked, if true the is checked
-      if (!parentCheckTest) {
-        this.selectionNode.nodeParent.isChecked = true;
-      }else{
-        this.selectionNode.nodeParent.isChecked = false;
-      }
+    if (checkedChangeNode.nodeChildren.length > 0) {
+      this.checkChildren(checkedChangeNode)
     }
+    //check if the node is root
+    if (checkedChangeNode.nodeParent !== null) {
+      this.checkParent(checkedChangeNode);
+    }
+  }
+
+  private checkChildren(checkedChangeNode: SelectionNode) {
+    checkedChangeNode.nodeChildren.map(nc => {
+      nc.isChecked = checkedChangeNode.isChecked;
+      if (nc.nodeChildren.length > 0) {
+        this.checkChildren(nc);
+      }
+    });
+  }
+
+  private checkParent(checkedChangeNode: SelectionNode) {
+    //check if all the children of the selected parent already checked, if true the is checked
+    if (checkedChangeNode.nodeParent.nodeChildren.every(n => n.isChecked === true)) {
+      checkedChangeNode.nodeParent.isChecked = true;
+    } else {
+      checkedChangeNode.nodeParent.isChecked = false;
+    }
+    this.checkParent(checkedChangeNode.nodeParent)
   }
 }
