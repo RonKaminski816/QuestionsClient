@@ -2,10 +2,15 @@
     margin-bottom: 0.5rem;
     margin-top: 0.2rem;
     width: 100%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
     color: #595959;
+}
+
+.node-content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 1rem;
+    width: 100%;
 }
 
 .node-children-pointer {
@@ -21,12 +26,10 @@
 
 .node-children-pointer::before {
     content: "\25B6";
-    /* color: #595959; */
     display: inline-block;
     margin-right: 6px;
-    /* font-size: 10px */
-    -webkit-transition: .1s;
-    transition: .1s;
+    -webkit-transition: .075s;
+    transition: .075s;
 }
 
 .pointer-down::before {
@@ -37,11 +40,8 @@
     transform: rotate(90deg);
 }
 
-/* .node-children-pointer+input{
-    padding-right: 0.5rem;
-} */
-
 .node-data {
+    cursor: pointer;
     margin: 0.3rem;
 }
 

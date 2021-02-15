@@ -1,6 +1,8 @@
 ul, #selection-tree-ul {
     list-style-type: none;
     padding-left: 2rem;
+    padding-bottom: 0.2rem;
+    padding-top: 0.2rem;
 }
 
 #selection-tree-ul {
@@ -17,7 +19,7 @@ ul, #selection-tree-ul {
     width: 100%;
     padding: 5px 10px;
     display: inline-block;
-    border: 1px solid ;
+    border: 1px solid;
     border-color: #d9d9d9;
     box-sizing: border-box;
     border-radius: .25rem;
@@ -28,3 +30,32 @@ ul, #selection-tree-ul {
 .filter::placeholder{
     color: #bfbfbf;
 }
+/*design the inside filter include the caret*/
+.filter::content{
+    color:#595959;
+}
+
+.filter:focus{
+    border: 1px solid;
+    border-color: #d9d9d9;
+    outline: transparent;
+}
+
+
+
+/*style the caret of a focused <input type='text'/>*/
+/* input,
+textarea {
+    font-size: 24px;
+    padding: 10px;
+    
+    color: red;
+    text-shadow: 0px 0px 0px #000;
+    -webkit-text-fill-color: transparent;
+}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder{
+    color:
+    text-shadow: none;
+    -webkit-text-fill-color: initial;
+} */

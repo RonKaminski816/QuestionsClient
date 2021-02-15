@@ -1,7 +1,6 @@
 .ellipsis {
-    white-space:nowrap; 
-   font-size: small;
-   width: -webkit-fill-available;
-   overflow: hidden;
-   text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0.3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

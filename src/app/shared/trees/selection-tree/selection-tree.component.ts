@@ -4,8 +4,8 @@ import { INode } from 'src/app/shared/trees/node.trees';
 
 export class SelectionNode implements INode {
   nodeData: any;
-  nodeParent: INode;
-  nodeChildren: INode[];
+  nodeParent: SelectionNode;
+  nodeChildren: SelectionNode[];
   isChecked: boolean;
 }
 
@@ -33,7 +33,7 @@ export class SelectionTreeComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
-  private setSelectionTree(rootChildren: INode[]) {
+  private setSelectionTree(rootChildren: SelectionNode[]) {
     rootChildren.map(n => n.nodeParent = this.selectionTreeRootData);
     this.selectionTreeRootData.nodeChildren = [...rootChildren];
   }

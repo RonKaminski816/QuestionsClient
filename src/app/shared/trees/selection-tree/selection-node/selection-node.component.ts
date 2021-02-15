@@ -17,18 +17,19 @@ export class SelectionNodeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   toggleNodeChildrenPointer() {
-    
     this.isChildrenPointerDown = !this.isChildrenPointerDown;
-    // var toggler = document.getElementsByClassName("node-children-pointer");
-    // var i;
+  }
 
-    // for (i = 0; i < toggler.length; i++) {
-    //   const caret =  toggler[i];
-    //   caret.addEventListener("click", function () {
-    //     this.parentElement.querySelector(".nested").classList.toggle("active").classList.toggle("children-pointer-down");
-    //   });
-    // }
+  onNodeCheckedChanged() {
+    this.selectionNode.nodeChildren.map(nc => nc.isChecked = this.selectionNode.isChecked);
+    //check if the node is root
+    if (this.selectionNode.nodeParent !== null) {
+      const parentCheckTest = this.selectionNode.nodeParent.nodeChildren.find(n => n.isChecked === false);
+      //check if all the children of the selected parent already checked, if true the is checked
+      if (!parentCheckTest) {
+        this.selectionNode.nodeParent.isChecked = true;
+      }
+    }
   }
 }

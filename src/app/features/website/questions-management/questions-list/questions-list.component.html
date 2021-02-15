@@ -24,8 +24,9 @@
             <!-- ID Column -->
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> ID</th>
-                <td mat-cell *matCellDef="let question"><span
-                        [outerHTML]="question.id | smallLettersBoldNumbers"></span></td>
+                <td mat-cell *matCellDef="let question">
+                    <span [outerHTML]="question.id | smallLettersBoldNumbers"></span>
+                </td>
             </ng-container>
             <!--TODO Add the expandeble rows-->
 
@@ -71,7 +72,7 @@
     </div>
 
     <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> -->
-    
+
     <div id="id01" class="modal" (click)="closeDeleteModal($event)"
         [ngClass]="{'show-modal': questionToDeleteID && questionToDeleteID.trim() !== '' && questionToDeleteID.length >= 1}">
         <div class="modal-content animate">
