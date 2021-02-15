@@ -2,7 +2,7 @@
     <div class="node-content">
         <span *ngIf="selectionNode.nodeChildren.length > 0" class="node-children-pointer"
             [ngClass]="{'pointer-down': isChildrenPointerDown}" (click)="toggleNodeChildrenPointer()"></span>
-        <input type="checkbox" [(ngModel)]="selectionNode.isChecked" (change)="onNodeCheckedChanged()">
+        <input type="checkbox" [(ngModel)]="selectionNode.isChecked" (change)="onNodeCheckedChanged(selectionNode)">
         <span [innerHTML]="selectionNode.nodeData | ellipsis" class="node-data" (click)="toggleNodeChildrenPointer()"></span>
     </div>
     <ul *ngIf="selectionNode.nodeChildren.length > 0" class="nested" [ngClass]="{'active': isChildrenPointerDown}">

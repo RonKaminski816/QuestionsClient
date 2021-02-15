@@ -21,7 +21,7 @@ export class SelectionNodeComponent implements OnInit {
     this.isChildrenPointerDown = !this.isChildrenPointerDown;
   }
 
-  onNodeCheckedChanged() {
+  onNodeCheckedChanged(checkedChangeNode: SelectionNode) {
     this.selectionNode.nodeChildren.map(nc => nc.isChecked = this.selectionNode.isChecked);
     //check if the node is root
     if (this.selectionNode.nodeParent !== null) {
@@ -29,6 +29,8 @@ export class SelectionNodeComponent implements OnInit {
       //check if all the children of the selected parent already checked, if true the is checked
       if (!parentCheckTest) {
         this.selectionNode.nodeParent.isChecked = true;
+      }else{
+        this.selectionNode.nodeParent.isChecked = false;
       }
     }
   }
