@@ -1,8 +1,6 @@
+
 <ul class="selection-tree-ul" *ngIf="selectionTreeRootData.nodeChildren.length >= 1">
-    <input type="text" class="filter" id="myInput" (keyup)="applyFilter($event.target.value)" placeholder="Search"
-        title="Type in a question">
-    <app-selection-node [selectionNode]="selectionTreeRootData">
-    </app-selection-node>
+    <app-selection-node [selectionNode]="selectionTreeRootData"></app-selection-node>
 </ul>
 <p *ngIf="selectionTreeRootData.nodeChildren.length < 1">
     There is currently no information or data entered into the tree!

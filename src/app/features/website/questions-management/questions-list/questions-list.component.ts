@@ -63,7 +63,6 @@ export class QuestionsListComponent implements OnInit, OnChanges {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
-
   }
 
   openQuestionActions(question?: IQuestionModel) {

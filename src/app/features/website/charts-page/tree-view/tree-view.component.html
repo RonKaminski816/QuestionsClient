@@ -1,3 +1,5 @@
 <div class="tree">
+    <input type="text" class="filter" (keyup)="applyFilter($event.target.value)" placeholder="Search"
+    title="Type in a question">
     <app-selection-tree [nodeRootChildren]="treeRootNodeChildren"></app-selection-tree>
 </div>

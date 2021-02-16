@@ -4,6 +4,7 @@ import { INode } from 'src/app/shared/trees/node.trees';
 
 export class SelectionNode implements INode {
   nodeData: any;
+  nodeName: string;
   nodeParent: SelectionNode;
   nodeChildren: SelectionNode[];
   isChecked: boolean;
@@ -14,12 +15,13 @@ export class SelectionNode implements INode {
   templateUrl: './selection-tree.component.html',
   styleUrls: ['./selection-tree.component.css']
 })
-export class SelectionTreeComponent implements OnInit, OnChanges {
+export class SelectionTreeComponent implements OnChanges {
 
+  filterString: string = '';
   isNodeChildrenDown: boolean;
   @Input() nodeRootChildren: SelectionNode[];
 
-  selectionTreeRootData: SelectionNode = { nodeData: "Select All", nodeParent: null, nodeChildren: [], isChecked: false };
+  selectionTreeRootData: SelectionNode = { nodeData: "Select All", nodeName: 'Select All', nodeParent: null, nodeChildren: [], isChecked: false };
 
   constructor() { }
 
@@ -30,7 +32,8 @@ export class SelectionTreeComponent implements OnInit, OnChanges {
     this.setSelectionTree(this.nodeRootChildren);
   }
 
-  ngOnInit(): void {
+  resetFilter() {
+    this.selectionTreeRootData.nodeChildren = [...this.nodeRootChildren];
   }
 
   private setSelectionTree(rootChildren: SelectionNode[]) {
@@ -38,24 +41,38 @@ export class SelectionTreeComponent implements OnInit, OnChanges {
     this.selectionTreeRootData.nodeChildren = [...rootChildren];
   }
 
-  applyFilter(filterValue: string) {
-    // filterValue = filterValue.trim(); // Remove whitespace
-    // filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches 
-  }
-
-  // var input, filter, ul, li, a, i, txtValue;
-  // input = document.getElementById("myInput");
-  // filter = input.value.toUpperCase();
-  // ul = document.getElementById("myUL");
-  // li = ul.getElementsByTagName("li");
-  // for (i = 0; i < li.length; i++) {
-  //     a = li[i].getElementsByTagName("span")[0];
-  //     txtValue = a.textContent || a.innerText;
-  //     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-  //         li[i].style.display = "";
-  //     } else {
-  //         li[i].style.display = "none";
-  //     }
+  // applyFilter(filterValue: string) {
+  //   filterValue = filterValue.trim(); // Remove whitespace
+  //   filterValue = filterValue.toLowerCase(); //  defaults to lowercase matches 
+  //   if (!filterValue || filterValue === '' || filterValue === null) {
+  //     this.nodeRootChildren;
+  //     // console.log("Before reset:");
+  //     // console.log(`nodeRootChildren -- ${this.nodeRootChildren}`);
+  //     // console.log(`selectionTreeRootData.nodeChildren -- ${this.selectionTreeRootData.nodeChildren}`);
+  //     this.resetFilter();
+  //     this.nodeRootChildren;
+  //   } else {
+  //     this.nodeRootChildren;
+  //     this.selectionTreeRootData.nodeChildren.map(nc => this.filterNodes(filterValue, nc));
+  //     this.selectionTreeRootData.nodeChildren = this.selectionTreeRootData.nodeChildren.filter(nc => nc.nodeChildren.length > 0);
+  //     this.nodeRootChildren;
+  //     // console.log("After change:");
+  //     // console.log(`nodeRootChildren -- ${this.nodeRootChildren}`);
+  //     // console.log(`selectionTreeRootData.nodeChildren -- ${this.selectionTreeRootData.nodeChildren}`);
+  //   }
+  // }
+  
+  // filterNodes(filterValue: string, currentNode: SelectionNode) {
+  //   if (currentNode.nodeChildren.length > 0) {
+  //     currentNode.nodeChildren.map(nc => {
+  //       if (nc.nodeChildren.length > 0) {
+  //         this.filterNodes(filterValue, nc);
+  //       }
+  //     });
+  //     this.nodeRootChildren;
+  //     currentNode.nodeChildren = currentNode.nodeChildren.filter(nc => nc.nodeName.toLowerCase().includes(filterValue));
+  //     this.nodeRootChildren;
+  //   }
   // }
 }
 
