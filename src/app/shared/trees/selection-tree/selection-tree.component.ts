@@ -7,6 +7,7 @@ export class SelectionNode implements INode {
   nodeName: string;
   nodeParent: SelectionNode;
   nodeChildren: SelectionNode[];
+  isShowNode: boolean;
   isChecked: boolean;
 }
 
@@ -15,15 +16,22 @@ export class SelectionNode implements INode {
   templateUrl: './selection-tree.component.html',
   styleUrls: ['./selection-tree.component.css']
 })
-export class SelectionTreeComponent implements OnChanges {
+export class SelectionTreeComponent implements OnInit, OnChanges {
 
   filterString: string = '';
   isNodeChildrenDown: boolean;
-  @Input() nodeRootChildren: SelectionNode[];
+  noMatchFilter: boolean = false;
 
-  selectionTreeRootData: SelectionNode = { nodeData: "Select All", nodeName: 'Select All', nodeParent: null, nodeChildren: [], isChecked: false };
+  @Input() nodeRootChildren: SelectionNode[];
+  @Input() nodeRootTitle: any;
+
+  selectionTreeRootData: SelectionNode = { nodeData: '', nodeName: 'Select All', nodeParent: null, nodeChildren: [], isChecked: false, isShowNode: true };
 
   constructor() { }
+
+  ngOnInit(): void {
+    this.selectionTreeRootData.nodeData = this.nodeRootTitle;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes.nodeRootChildren) {
@@ -32,8 +40,15 @@ export class SelectionTreeComponent implements OnChanges {
     this.setSelectionTree(this.nodeRootChildren);
   }
 
-  resetFilter() {
-    this.selectionTreeRootData.nodeChildren = [...this.nodeRootChildren];
+  resetFilter(selectionNode: SelectionNode) {
+    if (selectionNode.nodeChildren.length > 0) {
+      selectionNode.nodeChildren.map(nc => {
+        if (nc.nodeChildren.length > 0) {
+          this.resetFilter(nc);
+        }
+      });
+      selectionNode.nodeChildren.map(nc => nc.isShowNode = true);
+    }
   }
 
   private setSelectionTree(rootChildren: SelectionNode[]) {
@@ -41,39 +56,34 @@ export class SelectionTreeComponent implements OnChanges {
     this.selectionTreeRootData.nodeChildren = [...rootChildren];
   }
 
-  // applyFilter(filterValue: string) {
-  //   filterValue = filterValue.trim(); // Remove whitespace
-  //   filterValue = filterValue.toLowerCase(); //  defaults to lowercase matches 
-  //   if (!filterValue || filterValue === '' || filterValue === null) {
-  //     this.nodeRootChildren;
-  //     // console.log("Before reset:");
-  //     // console.log(`nodeRootChildren -- ${this.nodeRootChildren}`);
-  //     // console.log(`selectionTreeRootData.nodeChildren -- ${this.selectionTreeRootData.nodeChildren}`);
-  //     this.resetFilter();
-  //     this.nodeRootChildren;
-  //   } else {
-  //     this.nodeRootChildren;
-  //     this.selectionTreeRootData.nodeChildren.map(nc => this.filterNodes(filterValue, nc));
-  //     this.selectionTreeRootData.nodeChildren = this.selectionTreeRootData.nodeChildren.filter(nc => nc.nodeChildren.length > 0);
-  //     this.nodeRootChildren;
-  //     // console.log("After change:");
-  //     // console.log(`nodeRootChildren -- ${this.nodeRootChildren}`);
-  //     // console.log(`selectionTreeRootData.nodeChildren -- ${this.selectionTreeRootData.nodeChildren}`);
-  //   }
-  // }
-  
-  // filterNodes(filterValue: string, currentNode: SelectionNode) {
-  //   if (currentNode.nodeChildren.length > 0) {
-  //     currentNode.nodeChildren.map(nc => {
-  //       if (nc.nodeChildren.length > 0) {
-  //         this.filterNodes(filterValue, nc);
-  //       }
-  //     });
-  //     this.nodeRootChildren;
-  //     currentNode.nodeChildren = currentNode.nodeChildren.filter(nc => nc.nodeName.toLowerCase().includes(filterValue));
-  //     this.nodeRootChildren;
-  //   }
-  // }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); //  defaults to lowercase matches 
+    if (!filterValue || filterValue === '' || filterValue === null) {
+      this.resetFilter(this.selectionTreeRootData);
+    } else {
+      this.selectionTreeRootData.nodeChildren.map(nc => this.filterNodes(filterValue, nc));
+      if (this.selectionTreeRootData.nodeChildren.every(nc => nc.isShowNode === false)) {
+        this.selectionTreeRootData.isShowNode = false;
+        this.noMatchFilter = true;
+      } else {
+        this.selectionTreeRootData.isShowNode = true;
+        this.noMatchFilter = false;
+      }
+    }
+  }
+
+  filterNodes(filterValue: string, currentNode: SelectionNode) {
+    if (currentNode.nodeChildren.length > 0) {
+      currentNode.nodeChildren.map(nc => {
+        if (nc.nodeChildren.length > 0) {
+          this.filterNodes(filterValue, nc);
+        }
+      });
+      currentNode.nodeChildren.map(nc => nc.nodeName.toLowerCase().includes(filterValue) ? nc.isShowNode = true : nc.isShowNode = false);
+      currentNode.nodeChildren.every(nc => nc.isShowNode === false) ? currentNode.isShowNode = false : currentNode.isShowNode = true;
+    }
+  }
 }
 
 
