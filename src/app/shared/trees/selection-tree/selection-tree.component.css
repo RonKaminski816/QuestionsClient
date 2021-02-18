@@ -15,16 +15,24 @@ ul, .selection-tree-ul {
     padding: 0
 }
 
+.tree-list-container{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 80%;
+}
+
 .filter{
     width: 100%;
     padding: 5px 10px;
     display: inline-block;
     border: 1px solid;
     border-color: #d9d9d9;
-    box-sizing: border-box;
     border-radius: .25rem;
+    box-sizing: border-box;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.15rem;
+    height: 20%;
+    box-shadow: 0 1px 4px #5959592f;
 }
 
 .filter::placeholder{
