@@ -3,4 +3,5 @@ export interface INode {
     nodeName: string;
     nodeParent: INode;
     nodeChildren: INode[];
+    isShowNode: boolean;
 }

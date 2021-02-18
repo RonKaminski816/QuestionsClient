@@ -35,10 +35,12 @@ export class SelectionNodeComponent implements OnInit {
   /**Check or uncheck all the children of the inserted node, according to the inserted node isCheck value */
   private checkChildren(checkedChangeNode: SelectionNode) {
     checkedChangeNode.nodeChildren.map(nc => {
-      nc.isChecked = checkedChangeNode.isChecked;
-      // checkedChangeNode.isChecked === true ? this.isChildrenPointerDown = true : this.isChildrenPointerDown = false;
-      if (nc.nodeChildren.length > 0) {
-        this.checkChildren(nc);
+      if (nc.isShowNode === true) {
+        nc.isChecked = checkedChangeNode.isChecked;
+        // checkedChangeNode.isChecked === true ? this.isChildrenPointerDown = true : this.isChildrenPointerDown = false;
+        if (nc.nodeChildren.length > 0) {
+          this.checkChildren(nc);
+        }
       }
     });
   }

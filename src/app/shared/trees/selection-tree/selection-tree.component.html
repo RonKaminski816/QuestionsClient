@@ -1,7 +1,10 @@
-
+<input type="text" class="filter" (keyup)="applyFilter($event.target.value)" placeholder="Search"
+title="Type in a question"  #input>
 <ul class="selection-tree-ul" *ngIf="selectionTreeRootData.nodeChildren.length >= 1">
     <app-selection-node [selectionNode]="selectionTreeRootData"></app-selection-node>
 </ul>
-<p *ngIf="selectionTreeRootData.nodeChildren.length < 1">
-    There is currently no information or data entered into the tree!
+<p *ngIf="noMatchFilter">
+    <!-- There is currently no information or data entered into the tree! -->
+    There are no {{selectionTreeRootData.nodeData}} that match "{{input.value}}".
+    <!--TODO change the phrase to: There are no Questions(from the root node nodeData) that match {{input.value}} -->
 </p>

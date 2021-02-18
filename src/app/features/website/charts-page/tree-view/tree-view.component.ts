@@ -13,6 +13,7 @@ export class TreeViewComponent implements OnChanges {
   @Input() treesQListOrigin: IQuestionModel[];
 
   treeRootNodeChildren: INode[];
+  rootNodeTitle = "Question";
 
   constructor() { }
 
@@ -35,13 +36,13 @@ export class TreeViewComponent implements OnChanges {
         const nodeDataItem = {};
         nodeDataItem[q.id] = date;
         if (!months.includes(month)) {
-          const tempNewNode: INode = { nodeData: [nodeDataItem], nodeName: month, nodeParent: null, nodeChildren: [] };
-          tempNewNode.nodeChildren.push({ nodeData: q, nodeName: `${q.id} - ${q.description}`, nodeParent: tempNewNode, nodeChildren: [] });
+          const tempNewNode: INode = { nodeData: [nodeDataItem], nodeName: month, nodeParent: null, nodeChildren: [], isShowNode: true };
+          tempNewNode.nodeChildren.push({ nodeData: q, nodeName: `${q.id} - ${q.description}`, nodeParent: tempNewNode, nodeChildren: [], isShowNode: true });
           tempRootNodeChildren.push(tempNewNode);
           months.push(month);
         } else {
           const tempExistNode: INode = tempRootNodeChildren.find(n => n.nodeName === month);
-          tempExistNode.nodeChildren.push({ nodeData: q, nodeName: `${q.id} - ${q.description}`, nodeParent: tempExistNode, nodeChildren: [] });
+          tempExistNode.nodeChildren.push({ nodeData: q, nodeName: `${q.id} - ${q.description}`, nodeParent: tempExistNode, nodeChildren: [], isShowNode: true });
           tempExistNode.nodeData = [...tempExistNode.nodeData, nodeDataItem];
         }
       }
@@ -49,33 +50,4 @@ export class TreeViewComponent implements OnChanges {
     //this.treeData = {...tempRootNode};
     this.treeRootNodeChildren = [...tempRootNodeChildren];
   }
-
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); //  defaults to lowercase matches 
-    if (!filterValue || filterValue === '' || filterValue === null) {
-      // this.nodeRootChildren;
-      // // console.log("Before reset:");
-      // // console.log(`nodeRootChildren -- ${this.nodeRootChildren}`);
-      // // console.log(`selectionTreeRootData.nodeChildren -- ${this.selectionTreeRootData.nodeChildren}`);
-      this.createTreesObjects(this.treesQListOrigin);     
-    } else {
-      this.createTreesObjects(this.treesQListOrigin.filter(nc => 
-        nc.id.toLowerCase().includes(filterValue) || nc.description.toLowerCase().includes(filterValue)))
-      // this.selectionTreeRootData.nodeChildren.map(nc => this.filterNodes(filterValue, nc));
-      // this.selectionTreeRootData.nodeChildren = this.selectionTreeRootData.nodeChildren.filter(nc => nc.nodeChildren.length > 0);
-    }
-  }
-  
-  filterNodes(filterValue: string, currentNode: INode) {
-    if (currentNode.nodeChildren.length > 0) {
-      currentNode.nodeChildren.map(nc => {
-        if (nc.nodeChildren.length > 0) {
-          this.filterNodes(filterValue, nc);
-        }
-      });
-      currentNode.nodeChildren = currentNode.nodeChildren.filter(nc => nc.nodeName.toLowerCase().includes(filterValue));
-    }
-  }
-
 }

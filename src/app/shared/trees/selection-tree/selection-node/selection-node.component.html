@@ -1,4 +1,4 @@
-<li class="node">
+<li class="node" *ngIf="selectionNode.isShowNode === true">
     <div class="node-content" [title]="selectionNode.nodeName">
         <span *ngIf="selectionNode.nodeChildren.length > 0" class="node-children-pointer"
             [ngClass]="{ 'pointer-down': isChildrenPointerDown }" (click)="toggleNodeChildrenPointer()"></span>
