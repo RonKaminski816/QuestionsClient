@@ -79,7 +79,6 @@ export class SelectionTreeComponent implements OnInit, OnChanges {
         else {
           nc.nodeName.toLowerCase().includes(filterValue) ? nc.isShowNode = true : nc.isShowNode = false;
         }
-
       });
       currentNode.nodeChildren.every(nc => nc.isShowNode === false) ? currentNode.isShowNode = false : currentNode.isShowNode = true;
       this.isParentCheckedAfterFilter(currentNode);
