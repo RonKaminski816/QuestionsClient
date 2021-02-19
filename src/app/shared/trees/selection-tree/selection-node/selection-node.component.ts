@@ -24,7 +24,7 @@ export class SelectionNodeComponent implements OnInit {
   }
 
 
-  // onNodeClicked(event: any){
+  onNodeClicked(event: any){
   //   if (event.target.classList.includes("checkbox") || event.target.classList.includes("checkbox")) {
 
 
@@ -34,7 +34,7 @@ export class SelectionNodeComponent implements OnInit {
   //   // } else {
   //   //   this.onNodeCheckedChanged(clickedNode);
   //   // }
-  // }
+  }
 
   onNodeCheckedChanged(checkedChangeNode: SelectionNode) {
     //Splitting the function logic into two different external recursive 
