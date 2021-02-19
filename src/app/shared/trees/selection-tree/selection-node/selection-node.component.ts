@@ -10,6 +10,7 @@ export class SelectionNodeComponent implements OnInit {
 
   isChildrenPointerDown: boolean;
 
+  nodeDataActionAsHTMLString = ''
 
   @Input() selectionNode: SelectionNode;
 
@@ -22,6 +23,18 @@ export class SelectionNodeComponent implements OnInit {
     this.isChildrenPointerDown = !this.isChildrenPointerDown;
   }
 
+
+  // onNodeClicked(event: any){
+  //   if (event.target.classList.includes("checkbox") || event.target.classList.includes("checkbox")) {
+
+
+  //   }
+  //   // if (clickedNode.nodeChildren.length > 0) {
+  //   //   this.toggleNodeChildrenPointer();
+  //   // } else {
+  //   //   this.onNodeCheckedChanged(clickedNode);
+  //   // }
+  // }
 
   onNodeCheckedChanged(checkedChangeNode: SelectionNode) {
     //Splitting the function logic into two different external recursive 

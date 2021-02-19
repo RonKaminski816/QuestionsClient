@@ -27,6 +27,11 @@ body {
     /* min-height: max-content; */
 }
 
+
+input[type="checkbox"]{
+    cursor: pointer;
+}
+
 /*Adds a red asterisk to the end to emphasize that this field is required */
 
 [required-icon]:after {

@@ -1,58 +1,62 @@
 .node {
-    margin-bottom: 0.5rem;
-    margin-top: 0.2rem;
-    width: 100%;
-    color: #595959;
+  margin-bottom: 0.5rem;
+  margin-top: 0.2rem;
+  width: 100%;
+  color: #595959;
 }
 
 .node-content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 1rem;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 1rem;
+  width: 100%;
 }
 
 .node-children-pointer {
-    cursor: pointer;
-    -webkit-user-select: none;
-    /* Safari 3.1+ */
-    -moz-user-select: none;
-    /* Firefox 2+ */
-    -ms-user-select: none;
-    /* IE 10+ */
-    user-select: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+  /* Safari 3.1+ */
+  -moz-user-select: none;
+  /* Firefox 2+ */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
 }
 
 .node-children-pointer::before {
-    content: "\25B6";
-    display: inline-block;
-    margin-right: 6px;
-    -webkit-transition: .075s;
-    transition: .075s;
+  content: "\25B6";
+  display: inline-block;
+  margin-right: 6px;
+  -webkit-transition: .075s;
+  transition: .075s;
 }
 
 .pointer-down::before {
-    -ms-transform: rotate(90deg);
-    /* IE 9 */
-    -webkit-transform: rotate(90deg);
-    /* Safari */
-    transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  /* IE 9 */
+  -webkit-transform: rotate(90deg);
+  /* Safari */
+  transform: rotate(90deg);
+}
+
+.checkbox {
+  cursor: pointer;
 }
 
 .node-data {
-    cursor: pointer;
-    margin: 0.3rem;
+  cursor: pointer;
+  margin: 0.3rem;
+  width: 100%;
 }
 
 .nested {
-    display: none;
+  display: none;
 }
 
 .active {
-    display: block;
+  display: block;
 }
-
 
 /*custom checkbox*
 
