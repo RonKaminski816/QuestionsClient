@@ -52,3 +52,108 @@
 .active {
     display: block;
 }
+
+
+/*custom checkbox*
+
+.container-check input:indeterminate~.checkmark:before {
+    content: '\25FC';
+    color:  #0075ff;
+    position: absolute;
+    left: 10%;
+  }
+  
+  
+  /* Customize the label (the container) *
+  
+  .container-check {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 11px;
+    cursor: pointer;
+  }
+  
+  .container-list ul {
+    list-style: none;
+    margin-left: -14px;
+  }
+  
+  
+  /* Hide the browser's default checkbox *
+  
+  .container-check input {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  /* Create a custom checkbox *
+  
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: #fff;
+    border: solid 1px #626579;
+    border-radius: 4px;
+  }
+  
+  
+  /* When the checkbox is checked, add a blue background *
+  
+  .container-check input:checked~.checkmark {
+    background-color: #0075ff;
+    border: solid 1px #0075ff;
+  }
+  
+  
+  /* Create the checkmark/indicator (hidden when not checked) *
+  
+  .checkmark:after {
+    content: " ";
+    position: absolute;
+     display: none;
+  }
+  
+  
+  /* Show the checkmark when checked *
+  
+  .container-check input:checked~.checkmark:after {
+     display: block;
+  }
+  
+  
+  /* Style the checkmark/indicator *
+  
+  .container-check .checkmark:after {
+      content:'\2714';
+    left: 0.7px;
+    color:white;
+    border-width: 0 2px 2px 0;
+      -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(10deg);
+  }
+  
+  
+  /* disabled checkmark *
+  
+  .container-check.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  
+  /* Intermediate css *
+  
+  .container-check .intermediate:after {
+    left: 5px;
+    top: 2px;
+    width: 0px;
+    height: 9px;
+    border: solid white;
+    border-width: 0px 0px 6px 3px;
+  
+  }
+  */

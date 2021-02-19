@@ -35,13 +35,13 @@ export class TreeViewComponent implements OnChanges {
         const month = date.toLocaleString('en-us', { month: 'long' });
         const nodeDataItem = {};
         nodeDataItem[q.id] = date;
-        if (!months.includes(month)) {
+        if (!months[month]) {
           const tempNewNode: INode = { nodeData: [nodeDataItem], nodeName: month, nodeParent: null, nodeChildren: [], isShowNode: true };
           tempNewNode.nodeChildren.push({ nodeData: q, nodeName: `${q.id} - ${q.description}`, nodeParent: tempNewNode, nodeChildren: [], isShowNode: true });
           tempRootNodeChildren.push(tempNewNode);
-          months.push(month);
+          months[month] = tempNewNode;
         } else {
-          const tempExistNode: INode = tempRootNodeChildren.find(n => n.nodeName === month);
+          const tempExistNode: INode = months[month];
           tempExistNode.nodeChildren.push({ nodeData: q, nodeName: `${q.id} - ${q.description}`, nodeParent: tempExistNode, nodeChildren: [], isShowNode: true });
           tempExistNode.nodeData = [...tempExistNode.nodeData, nodeDataItem];
         }

@@ -10,6 +10,7 @@ export class SelectionNodeComponent implements OnInit {
 
   isChildrenPointerDown: boolean;
 
+
   @Input() selectionNode: SelectionNode;
 
   constructor() { }
@@ -26,6 +27,7 @@ export class SelectionNodeComponent implements OnInit {
     //Splitting the function logic into two different external recursive 
     //private functions that each have their own unique role,
     //so that their logic does not affect each other and the end result
+    checkedChangeNode.isSemiCheck = false;
     if (checkedChangeNode.nodeChildren.length > 0) {
       this.checkChildren(checkedChangeNode)
     }
@@ -37,6 +39,7 @@ export class SelectionNodeComponent implements OnInit {
     checkedChangeNode.nodeChildren.map(nc => {
       if (nc.isShowNode === true) {
         nc.isChecked = checkedChangeNode.isChecked;
+        nc.isSemiCheck = false;
         // checkedChangeNode.isChecked === true ? this.isChildrenPointerDown = true : this.isChildrenPointerDown = false;
         if (nc.nodeChildren.length > 0) {
           this.checkChildren(nc);
@@ -50,8 +53,15 @@ export class SelectionNodeComponent implements OnInit {
   private checkParent(checkedChangeNode: SelectionNode) {
     //check if the node is not the root
     if (checkedChangeNode.nodeParent !== null) {
-      //check if all the children of the selected node parent already checked, if true the is checked
-      checkedChangeNode.nodeParent.isChecked = checkedChangeNode.nodeParent.nodeChildren.every(n => n.isChecked === true);
+      //check if all the showed children of the selected node parent already checked. if true- checked, if false- checks if semicheck or full uncheck
+      const tempShowedChildren = checkedChangeNode.nodeParent.nodeChildren.filter(nc => nc.isShowNode === true);
+      checkedChangeNode.nodeParent.isChecked = tempShowedChildren.every(nc => nc.isChecked === true && nc.isSemiCheck === false);
+      // checkedChangeNode.nodeParent.isChecked = checkedChangeNode.nodeParent.nodeChildren.every(nc => nc.isShowNode === true && nc.isChecked === true && nc.isSemiCheck === false);
+      if (checkedChangeNode.nodeParent.isChecked === false) {
+        checkedChangeNode.nodeParent.isSemiCheck = checkedChangeNode.nodeParent.nodeChildren.some(nc => nc.isChecked === true || nc.isSemiCheck === true);
+      } else {
+        checkedChangeNode.nodeParent.isSemiCheck = false;
+      }
       this.checkParent(checkedChangeNode.nodeParent)
     }
   }

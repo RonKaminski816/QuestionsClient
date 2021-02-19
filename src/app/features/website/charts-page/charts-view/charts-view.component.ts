@@ -63,9 +63,9 @@ export class ChartsViewComponent implements OnInit {
         this.chartsData[day][hour] += 1;
         this.chartsData[day]["count"] = this.chartsData[day]["count"] || 0;
         this.chartsData[day]["count"] += 1;
-        if (!days.includes(day)) {
+        if (!days[day]) {
           this.chartsData[day]["category"] = day;
-          days.push(day);
+          days[day] = day;
           this.chartsData.push(this.chartsData[day]);
         }
         if (!this.chartSeries.includes(hour)) {
@@ -109,9 +109,9 @@ export class ChartsViewComponent implements OnInit {
             chartHoursTempData[hour] = chartHoursTempData[hour] || {};
             chartHoursTempData[hour]["count"] = chartHoursTempData[hour]["count"] || 0;
             chartHoursTempData[hour]["count"] += 1;
-            if (!hours.includes(hour)) {
+            if (!hours[hour]) {
               chartHoursTempData[hour]["hour"] = hour;
-              hours.push(hour);
+              hours[hour] = hour;
               chartHoursTempData.push(chartHoursTempData[hour]);
             }
           }
