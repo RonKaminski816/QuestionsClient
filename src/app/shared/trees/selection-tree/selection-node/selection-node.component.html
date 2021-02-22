@@ -8,7 +8,7 @@
         </label> -->
         <input class="checkbox" type="checkbox" [(ngModel)]="selectionNode.isChecked" (change)="onNodeCheckedChanged(selectionNode)"
             [indeterminate]="selectionNode.isSemiCheck" />
-        <span class="node-data" (click)="onNodeClicked($event)" [innerHTML]="selectionNode.nodeName | ellipsis"></span>
+        <span class="node-data" (click)="onNodeClicked(selectionNode)" [innerHTML]="selectionNode.nodeName | ellipsis"></span>
     </div>
     <ul *ngIf="selectionNode.nodeChildren.length > 0" class="nested" [ngClass]="{ 'active': isChildrenPointerDown }">
         <app-selection-node *ngFor="let node of selectionNode.nodeChildren" [selectionNode]="node"></app-selection-node>

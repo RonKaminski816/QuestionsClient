@@ -8,9 +8,8 @@ import { SelectionNode } from '../selection-tree.component';
 })
 export class SelectionNodeComponent implements OnInit {
 
+  // nodeDataActionAsHTMLString = ''
   isChildrenPointerDown: boolean;
-
-  nodeDataActionAsHTMLString = ''
 
   @Input() selectionNode: SelectionNode;
 
@@ -24,17 +23,20 @@ export class SelectionNodeComponent implements OnInit {
   }
 
 
-  onNodeClicked(event: any){
-  //   if (event.target.classList.includes("checkbox") || event.target.classList.includes("checkbox")) {
-
-
-  //   }
-  //   // if (clickedNode.nodeChildren.length > 0) {
-  //   //   this.toggleNodeChildrenPointer();
-  //   // } else {
-  //   //   this.onNodeCheckedChanged(clickedNode);
-  //   // }
+  onNodeClicked(clickedNode: SelectionNode) {
+    if (clickedNode.nodeChildren.length > 0) {
+      this.toggleNodeChildrenPointer();
+    } else {
+      clickedNode.isChecked = !clickedNode.isChecked;
+      this.onNodeCheckedChanged(clickedNode);
+    }
   }
+
+  // onNodeClicked(event: any){
+  //   if (event.target.classList.includes("checkbox") || event.target.classList.includes("checkbox")) {
+  //
+  //   }
+  // }
 
   onNodeCheckedChanged(checkedChangeNode: SelectionNode) {
     //Splitting the function logic into two different external recursive 

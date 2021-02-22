@@ -47,7 +47,11 @@
 .node-data {
   cursor: pointer;
   margin: 0.3rem;
-  width: 100%;
+  width:fit-content;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nested {

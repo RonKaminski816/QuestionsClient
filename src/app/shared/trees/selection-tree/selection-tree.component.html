@@ -5,8 +5,6 @@
         <app-selection-node [selectionNode]="selectionTreeRootData"></app-selection-node>
     </ul>
     <p *ngIf="noMatchFilter">
-        <!-- There is currently no information or data entered into the tree! -->
         There are no {{selectionTreeRootData.nodeData}} that match "{{input.value}}".
-        <!--TODO change the phrase to: There are no Questions(from the root node nodeData) that match {{input.value}} -->
     </p>
 </div>
