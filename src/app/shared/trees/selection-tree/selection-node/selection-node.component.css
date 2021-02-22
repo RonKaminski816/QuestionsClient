@@ -49,9 +49,7 @@
   margin: 0.3rem;
   width:fit-content;
   max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: flex;
 }
 
 .nested {
