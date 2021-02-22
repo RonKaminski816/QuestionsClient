@@ -74,8 +74,55 @@ export class ChartsViewComponent implements OnInit {
       }
     }
     this.chartsData = [...this.chartsData];
-    //this.chartSeries = this.chartSeries.sort();
+
+    this.chartSeries = this.sortByHours(this.chartSeries);
     //TODO Fix the sorting
+
+  }
+
+  private sortByHours(hoursSeries: string[]): string[] {
+    if (hoursSeries && hoursSeries.length > 0) {
+      const AmHours = this.sortHoursStringInSameTimeConvention(hoursSeries.filter(hs => hs.includes('AM')), 'AM');
+      const PmHours = this.sortHoursStringInSameTimeConvention(hoursSeries.filter(hs => hs.includes('PM')), 'PM');
+
+      return [...AmHours, ...PmHours];
+    }
+    return undefined;
+  }
+
+  private sortHoursStringInSameTimeConvention(arr: string[], timeConvention: string): string[] {
+    if (arr && arr.length > 0 && (timeConvention.trim().toUpperCase() === 'AM' || 'PM')) {
+      let numHoursArr = [];
+      arr.forEach(s => numHoursArr.push(Number.parseInt(s.slice(0, 2))));
+      numHoursArr = this.bubbleSort(numHoursArr);
+      if (numHoursArr[numHoursArr.length-1] === 12) {
+        let n = numHoursArr.pop();
+        numHoursArr.unshift(n);
+      }
+      for (let i = 0; i < numHoursArr.length; i++) {
+        const element = numHoursArr[i];
+        arr[i] = `${element} ${timeConvention}`;
+      }
+      return [...arr];
+    }
+    return undefined;
+  }
+
+  private bubbleSort(arr: number[]): number[] {
+    if (arr && arr.length > 0) {
+      let tmp;
+      for (let i = arr.length - 1; i > 0; i--) {
+        for (let j = 0; j < i; j++) {
+          if (arr[j] > arr[j + 1]) {
+            tmp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = tmp;
+          }
+        }
+      }
+      return [...arr];
+    }
+    return undefined;
   }
 
   async onTogglePopularHoursChanged() {
@@ -153,7 +200,9 @@ export class ChartsViewComponent implements OnInit {
               this.chartsData[day]["category"] = day;
               days.push(day);
               this.chartsData.push(this.chartsData[day]);
-              this.chartsData[day]["Others"] ? this.chartSeries.push("Others") : null;
+            }
+            if (this.chartsData[day]["Others"] && !this.chartSeries.includes("Others")) {
+              this.chartSeries.push("Others")
             }
           }
         });
