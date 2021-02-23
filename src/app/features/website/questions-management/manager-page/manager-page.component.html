@@ -27,7 +27,8 @@
   </div>
 
   <div class="manager-main-page">
-    <app-questions-list [qTableData]="qList" (onQuestionActions)="getActionedQuestion($event)">
+    <!--[qTableData]="(qList | async).questions"-->
+    <app-questions-list [qTableData]="qList" (onDeleteQuestion)="getDeletedQuestionId($event)" (onQuestionActions)="getActionedQuestion($event)">
     </app-questions-list>
   </div>
 

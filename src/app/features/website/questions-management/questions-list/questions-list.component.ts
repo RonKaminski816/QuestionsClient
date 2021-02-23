@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { IQuestionModel } from 'src/app/core/models/question.model';
 import { QuestionsService } from 'src/app/core/http/questions/questions.service';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
+import { Store } from '@ngrx/store';
+
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { OverlayViewService } from 'src/app/shared/services/overlay-view/overlay-view.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,6 +23,8 @@ export class QuestionsListComponent implements OnInit, OnChanges {
   @Input() qTableData: IQuestionModel[];
 
   @Output() onQuestionActions: EventEmitter<IQuestionModel> = new EventEmitter();
+
+  @Output() onDeleteQuestion: EventEmitter<string> = new EventEmitter();
 
   dataSource = new MatTableDataSource<IQuestionModel>();
   columnsToDisplay: string[] = ['id', 'name', 'creationDate', 'edit-btns'];
@@ -47,6 +51,12 @@ export class QuestionsListComponent implements OnInit, OnChanges {
   constructor(
     private questionsService: QuestionsService,
     private questionsState: QuestionsStateService,
+    /**The store Type is a description of the different parts we have in the store.
+     * here the type should be a JS object where we have a 'questionsState' key (it has 
+     * to be the name I chose as a key of the JS object inside the forRoot() in app.module).
+     * And the type of the data stored in that questionsState area is now not the reducer function
+     * but what does the reducer finction yields(מניב). It yields a state of the type of the JS object of the state.*/
+    private store: Store<{questionsState: {questions: IQuestionModel[]}}>,
     private snackbars: SnackbarService,
     private overlayViewService: OverlayViewService) { }
 
@@ -93,7 +103,7 @@ export class QuestionsListComponent implements OnInit, OnChanges {
           this.questionToDeleteID = undefined;
           this.dataSource.data = this.dataSource.data.filter(ques => ques.id !== questionId);
           this.snackbars.openSimpleTextSnackBar(data.message);
-          this.questionsState.deleteQuestion(questionId);
+          this.onDeleteQuestion.emit(questionId);
         },
         error => this.snackbars.openSimpleTextSnackBar(`${error.message}, please refresh the page and try again if necessary`)
       );

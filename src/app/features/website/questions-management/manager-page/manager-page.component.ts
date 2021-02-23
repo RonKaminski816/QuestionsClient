@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IQuestionModel } from 'src/app/core/models/question.model';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
@@ -17,16 +20,26 @@ export class ManagerPageComponent implements OnInit {
   canLeave: boolean = false;
   reason: string;
 
+  /** This is the data format becacause this is the format of our store. */
+  // qList: Observable<{ questions: IQuestionModel[] }>;
   qList: IQuestionModel[];
   isSideBarOpen: boolean;
 
-  actionedQuestionId: number;
   actionedQuestion: IQuestionModel;
   constructor(private questionsState: QuestionsStateService,
+    /**The store Type is a description of the different parts we have in the store.
+    * here the type should be a JS object where we have a 'questionsState' key (it has 
+    * to be the name I chose as a key of the JS object inside the forRoot() in app.module).
+    * And the type of the data stored in that questionsState area is now not the reducer function
+    * but what does the reducer finction yields(מניב). It yields a state of the type of the JS object of the state.*/
+    private store: Store<{ questionsState: { questions: IQuestionModel[] } }>,
     private snackbarService: SnackbarService,
     private overlayViewService: OverlayViewService) { }
 
   ngOnInit(): void {
+    /**In the the questionsState part of the store We select here, we get an object with
+     *  questions thats holds an array of IQuestionModel ({ questions: IQuestionModel[] }) */
+    // this.qList = this.store.select('questionsState');
     this.getAllQustions();
   }
 
@@ -58,17 +71,23 @@ export class ManagerPageComponent implements OnInit {
 
   getNewQuestion(ques: IQuestionModel) {
     if (ques) {
-      this.qList = [...this.qList, ques];
+      // this.qList = [...this.qList, ques];
       this.questionsState.addQuestion(ques);
     }
   }
 
-  isSticky:boolean;
+  getDeletedQuestionId(questionId: string){
+    if(questionId || questionId !== '' || questionId !== null){
+      this.questionsState.deleteQuestion(questionId);
+    }
+  }
+
+  isSticky: boolean;
   openSideBar() {
     let sidebar = document.getElementById("sidebar");
     let sticky = sidebar.offsetTop;
     if (window.pageYOffset >= sticky) {
-     this.isSticky = true;
+      this.isSticky = true;
     } else {
       this.isSticky = false;
     }
