@@ -26,12 +26,15 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
    *  "Questions" is possible name for a group of objects.
    */
   @Input() chartMeasuredObjectsGroupName: string;
-  constructor(private snackbarService: SnackbarService) { }
+  constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.chartDispose();
     if (!this.stackedData || !this.stackedSeries || !this.chartMeasuredObjectsGroupName) {
-      return this.snackbarService.openSimpleTextSnackBar('One of them is missing: Data, Series, Measured Objects Group Name');
+      if(changes.stackedData.isFirstChange() && changes.stackedSeries.isFirstChange() && changes.chartMeasuredObjectsGroupName.isFirstChange()) {
+        return;
+      }   
+      return console.log('One of them is missing: Data, Series, Measured Objects Group Name');
     }
     this.chart = am4core.create("stackedchartdiv", am4charts.XYChart);
     this.chart.data = this.stackedData;
