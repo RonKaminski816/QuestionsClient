@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IUserModel } from 'src/app/core/models/user.model';
+import { IUserModel } from 'src/app/shared/models/iuser.model';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/core/authentication/http/auth.service';
 import { UserStateService } from 'src/app/core/state-managments/users-state/user-state.service';

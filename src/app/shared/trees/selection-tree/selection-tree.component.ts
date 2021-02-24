@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { INode } from 'src/app/shared/trees/node.trees';
+import { INode } from 'src/app/shared/trees/tree-models/inode.trees';
 
 
 export class SelectionNode implements INode {

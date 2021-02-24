@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IUserModel } from 'src/app/core/models/user.model';
+import { IUserModel } from 'src/app/shared/models/iuser.model';
 import { LocalStorageService } from '../../storages/local-storage/local-storage.service';
 
 @Injectable({

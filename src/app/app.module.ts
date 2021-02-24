@@ -4,23 +4,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+//HTTP Auth
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/authentication/interceptors/auth-interceptor/auth.interceptor';
-
 //Material
 import { MaterialModule } from './materials.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
-
 //NgRx 
 import { StoreModule } from '@ngrx/store';
 import { questionsStateReducer } from './core/state-managments/questions-state/questions-state.reducer';
-
 //My Custom Creations
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from "./core/core.module";
 import { AppComponent } from './app.component';
-
 //ANT
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';

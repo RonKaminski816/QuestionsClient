@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { IQuestionModel } from 'src/app/core/models/question.model';
+import { IQuestionModel } from 'src/app/shared/models/iquestion.model';
 import { QuestionsService } from 'src/app/core/http/questions/questions.service';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 import { Store } from '@ngrx/store';

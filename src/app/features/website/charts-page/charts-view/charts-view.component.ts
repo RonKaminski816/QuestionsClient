@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IQuestionModel } from 'src/app/core/models/question.model';
+import { IQuestionModel } from 'src/app/shared/models/iquestion.model';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 import { startOfDay, endOfDay, startOfWeek, startOfMonth } from 'date-fns';

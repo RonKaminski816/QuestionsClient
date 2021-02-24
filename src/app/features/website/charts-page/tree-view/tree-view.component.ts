@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { IQuestionModel } from 'src/app/core/models/question.model';
-import { INode } from 'src/app/shared/trees/node.trees';
+import { IQuestionModel } from 'src/app/shared/models/iquestion.model';
+import { INode } from 'src/app/shared/trees/tree-models/inode.trees';
 
 @Component({
   selector: 'app-tree-view',

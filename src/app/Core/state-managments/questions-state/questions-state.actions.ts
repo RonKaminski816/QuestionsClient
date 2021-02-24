@@ -1,6 +1,6 @@
 /**An Interface that forces any action to have a 'type' property*/
 import { Action } from '@ngrx/store';
-import { IQuestionModel } from '../../models/question.model';
+import { IQuestionModel } from 'src/app/shared/models/iquestion.model';
 
 
 //A convension to save the action identifier by using a 

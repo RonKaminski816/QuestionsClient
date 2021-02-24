@@ -1,4 +1,4 @@
-import { IQuestionModel } from 'src/app/core/models/question.model';
+import { IQuestionModel } from 'src/app/shared/models/iquestion.model';
 
 //Because I exports the identifier and the class from the 
 //same file i can import everything from that file with the star and give
