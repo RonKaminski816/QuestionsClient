@@ -76,15 +76,12 @@ export class ChartsViewComponent implements OnInit {
     this.chartsData = [...this.chartsData];
 
     this.chartSeries = this.sortByHours(this.chartSeries);
-    //TODO Fix the sorting
-
   }
 
   private sortByHours(hoursSeries: string[]): string[] {
     if (hoursSeries && hoursSeries.length > 0) {
       const AmHours = this.sortHoursStringInSameTimeConvention(hoursSeries.filter(hs => hs.includes('AM')), 'AM');
       const PmHours = this.sortHoursStringInSameTimeConvention(hoursSeries.filter(hs => hs.includes('PM')), 'PM');
-
       return [...AmHours, ...PmHours];
     }
     return undefined;
@@ -95,7 +92,7 @@ export class ChartsViewComponent implements OnInit {
       let numHoursArr = [];
       arr.forEach(s => numHoursArr.push(Number.parseInt(s.slice(0, 2))));
       numHoursArr = this.bubbleSort(numHoursArr);
-      if (numHoursArr[numHoursArr.length-1] === 12) {
+      if (numHoursArr[numHoursArr.length - 1] === 12) {
         let n = numHoursArr.pop();
         numHoursArr.unshift(n);
       }
@@ -105,7 +102,7 @@ export class ChartsViewComponent implements OnInit {
       }
       return [...arr];
     }
-    return undefined;
+    return [];
   }
 
   private bubbleSort(arr: number[]): number[] {
@@ -184,7 +181,7 @@ export class ChartsViewComponent implements OnInit {
             this.chartsData[day] = this.chartsData[day] || {};
             // The filtering if the 'chartSeries' array contain the specipic hour value.
             if (this.chartSeries.includes(hour)) {
-              // If the hour value included in series, it's mean the hour is one of the popular 
+              // If the hour value included in series, it's mean the hour is one of the popular
               // and we insert it to the 'day object' that is been creating.
               this.chartsData[day][hour] = this.chartsData[day][hour] || 0;
               this.chartsData[day][hour] += 1;
@@ -237,7 +234,7 @@ export class ChartsViewComponent implements OnInit {
       return;
     }
     try {
-      //new temp list because if there is no results, I don't 
+      //new temp list because if there is no results, I don't
       //want the afterChangeQList to change its current state.
       const tempList = [];
       this.chartQListOrigin.forEach(q => {
@@ -253,6 +250,7 @@ export class ChartsViewComponent implements OnInit {
       !this.isToggleChecked ? this.createFullChartsObjects(this.afterChangeQList) : this.toggleChecked(this.afterChangeQList);
       this.qCount = this.afterChangeQList.length;
     } catch (error) {
+      console.log(error.message);
       this.snackbarService.openSimpleTextSnackBar(error.message);
     }
   }

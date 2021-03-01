@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/core/authentication/http/auth.service';
 import { UserStateService } from 'src/app/core/state-managments/users-state/user-state.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from 'src/app/core/state-ngrx/app.reducer';
+import * as UsersAuthStateActions from 'src/app/core/state-ngrx/users-state/user-auth-state.actions';
 
 
 @Component({
@@ -14,17 +17,19 @@ export class WebsiteComponent implements OnInit {
   loggedName: string; //= "Ron";
   constructor(
     private authService: AuthService,
+    private store: Store<fromApp.IAppState>,
     private userState: UserStateService,
     private router: Router) { }
 
   ngOnInit(): void {
     this.getLoggedName();
   }
+
   getLoggedName() {
-    this.userState.retrieveMappedLoggedInUser()
-      .subscribe(res => {
-        if (res) {
-          this.loggedName = res.username;
+    this.store.select('usersAuthState')
+      .subscribe(stateData => {
+        if (stateData.user) {
+          this.loggedName = stateData.user.username;
         } else {
           this.loggedName = null;
         }
@@ -37,12 +42,6 @@ export class WebsiteComponent implements OnInit {
   }
 
   logOut() {
-    if (this.authService.logout()) {
-      this.router.navigate(['/users/login']);
-      this.userState.currentUserLoggingOut();
-    }
+    this.store.dispatch(new UsersAuthStateActions.Logout());
   }
-
-  //for the sticky side
-  //document.body.scrollTop > 20
 }

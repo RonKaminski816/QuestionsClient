@@ -7,6 +7,11 @@ import { AuthService } from 'src/app/core/authentication/http/auth.service';
 import { UserStateService } from 'src/app/core/state-managments/users-state/user-state.service';
 import { OverlayViewService } from 'src/app/shared/services/overlay-view/overlay-view.service';
 
+import { Store } from '@ngrx/store';
+import * as UserStateActions from "src/app/core/state-ngrx/users-state/user-auth-state.actions";
+//convention to describe an import to my reducer and/or state for a certain part of my application
+import * as fromApp from 'src/app/core/state-ngrx/app.reducer';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,23 +19,29 @@ import { OverlayViewService } from 'src/app/shared/services/overlay-view/overlay
 })
 export class LoginComponent implements OnInit {
 
+  // passwordInputType: string = "password";
+  // passwordInputVisibility: boolean = false;
   loading = false;
   isValidFormSubmitted: boolean = false;
   regex = new RegExp("((?=.*[0-9])(?=.*[A-Z]))");
 
-  showErrorModal: { canDisplay: boolean, errorMessage: string };
+  showErrorModal = { canDisplay: false, errorMessage: null };
 
-  loginUser: IUserModel;
+  loginUsername: string = '';
+  loginPassword: string = '';
+
+  // loginUser: IUserModel;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
+    private store: Store<fromApp.IAppState>,
     private userState: UserStateService,
-    public dialog: MatDialog,
+    // public dialog: MatDialog,
     private overlayViewService: OverlayViewService) { }
 
   ngOnInit(): void {
-    this.loginUser = { id: '', username: '', password: '' };
+    this.setAuthState()
     //this.isFromRegister();
   }
   // private isFromRegister() {
@@ -44,34 +55,58 @@ export class LoginComponent implements OnInit {
   //   );
   // }
 
-  onSubmit(form: NgForm) {
+  setAuthState() {
+    this.store.select('usersAuthState').subscribe(authState => {
+      this.loading = authState.loading;
+      if (authState.authError !== null && authState.authError.message.trim() !== '') {
+        this.openErrorModal(authState.authError.message);
+        this.loginPassword = '';
+        console.log(authState.authError.message);
+      }
+    });
+  }
 
+  onSubmit(form: NgForm) {
     this.isValidFormSubmitted = false;
     this.loading = false;
     if (form.invalid) {
       return;
     }
+    // setTimeout(() => {
+    //   console.log('end timeout');
+    // }, 5000);
 
     this.isValidFormSubmitted = true;
     this.loading = true;
-    this.authService.login(this.loginUser).subscribe(
-      res => {
-        if (res) {
-          this.userState.userLoggingIn(res);
-          this.router.navigate(['/website']);
-          this.loading = false;
-        }
-      },
-      err => {
-        this.loading = false;
-        // this.dialog.open(ErrorElementsDialog, {
-        //   data: { error: err }
-        // });
-        this.openErrorModal(err["message"]);
-        this.loginUser.password = "";
-        console.log(err["message"]);
-      });
+    // this.authService.login(this.loginUser).subscribe(
+    //   res => {
+    //     if (res) {
+    //       this.router.navigate(['/website']);
+    //       this.loading = false;
+    //     }
+    //   },
+    //   err => {
+    //     this.loading = false;
+    //     // this.dialog.open(ErrorElementsDialog, {
+    //     //   data: { error: err }
+    //     // });
+    //     this.openErrorModal(err["message"]);
+    //     this.loginUser.password = "";
+    //     console.log(err["message"]);
+    //   });
+    //console.log(this.loginUser.username + '//' + this.loginUser.password);
+    this.store.dispatch(new UserStateActions.LoginStart({ username: this.loginUsername, password: this.loginPassword }));
+
   }
+
+  // onPasswordInputVisibility(){
+  //   this.passwordInputVisibility = !this.passwordInputVisibility;
+  //   if(this.passwordInputVisibility === true){
+  //     this.passwordInputType = "text";
+  //   }else{
+  //     this.passwordInputType = "password";
+  //   }
+  // }
 
   openErrorModal(errorMessage: string) {
     if (!errorMessage || errorMessage === '') {
@@ -85,6 +120,7 @@ export class LoginComponent implements OnInit {
     if (event.target.id === "login-error-modal" || event.target.id === "cancel-error-modal") {
       this.overlayViewService.overlayIsClose()
       this.showErrorModal = { canDisplay: false, errorMessage: null }
+      this.store.dispatch(new UserStateActions.ClearError());
     }
   }
 }

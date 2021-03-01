@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
    * Since it's a generic chart and we do not know in advance what the objects will be or
    * what their type will be, I would like to get from the outside what these objects are and
    * what their name is as a multiple group.
-   * 
+   *
    * For Example:
    *  "Questions" is possible name for a group of objects.
    */
@@ -33,7 +32,7 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
     if (!this.stackedData || !this.stackedSeries || !this.chartMeasuredObjectsGroupName) {
       if(changes.stackedData.isFirstChange() && changes.stackedSeries.isFirstChange() && changes.chartMeasuredObjectsGroupName.isFirstChange()) {
         return;
-      }   
+      }
       return console.log('One of them is missing: Data, Series, Measured Objects Group Name');
     }
     this.chart = am4core.create("stackedchartdiv", am4charts.XYChart);
@@ -110,7 +109,7 @@ export class StackedColumnChartComponent implements OnInit, OnDestroy, OnChanges
     series.columns.template.width = am4core.percent(85);
     series.columns.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
 
-    //Configure tooltip    
+    //Configure tooltip
     series.tooltip.getFillFromObject = false;
     series.tooltip.label.fill = currentColor
     series.tooltip.background.stroke = currentColor;

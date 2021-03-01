@@ -10,10 +10,10 @@ import { environment } from 'src/environments/environment'
   providedIn: 'root'
 })
 export class QuestionsService {
-  private questionsPath = environment.baseUrl + environment.questionsPath;
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });//, "Authorization": 
-  constructor(private http: HttpClient) { }
 
+  private questionsPath = environment.baseUrl + environment.questionsPath;
+  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });//, "Authorization":
+  constructor(private http: HttpClient) { }
 
   getAllQuestions(): Observable<IQuestionModel[]> {
     return this.http.get<{ questions: IQuestionModel[] }>(`${this.questionsPath}/`, { headers: this.headers })

@@ -8,13 +8,13 @@ import { LocalStorageService } from '../../storages/local-storage/local-storage.
 })
 export class UserStateService {
 
-  private sharedUserName = new BehaviorSubject<IUserModel>({id: '', username:'', password:''});
+  private sharedUserName = new BehaviorSubject<IUserModel>({id: '', username:'', token:''});
 
   constructor(private localStorageService: LocalStorageService) {
-    if (this.isLoggedIn()) {
-      const LoggedInUser = JSON.parse(this.localStorageService.getItem('currentUser'));
-      this.mapUserLogged(LoggedInUser);
-    }
+    // if (this.isLoggedIn()) {
+    //   const LoggedInUser = JSON.parse(this.localStorageService.getItem('currentUser'));
+    //   this.mapUserLogged(LoggedInUser);
+    // }
   }
 
   isLoggedIn(): boolean {
@@ -36,7 +36,7 @@ export class UserStateService {
     return this.sharedUserName.asObservable();
   }
 
-  userLoggingIn(user) {
+  userLoggingIn(user: IUserModel) {
     if (this.handleIsLoggedin(true) && this.localStorageService.setItem('currentUser', JSON.stringify(user))) {
       this.mapUserLogged(user);
     }

@@ -1,93 +1,108 @@
 <div class="actions-container">
-    <div *ngIf="actionedQuestion && actionedQuestion.id.trim().length >= 1">
-        <h1 weight="bold" color="blue-dark"> {{actionedQuestion.id}}</h1>
-        <p>Creation Date: <span weight="bold" color="blue-dark">{{actionedQuestion.creationDate
-                |date:"fullDate"}}</span></p>
+  <div *ngIf="actionedQuestion && actionedQuestion.id.trim().length >= 1">
+    <h1 weight="bold" color="blue-dark"> {{actionedQuestion.id}}</h1>
+    <p>Creation Date: <span weight="bold" color="blue-dark">{{actionedQuestion.creationDate
+        |date:"fullDate"}}</span></p>
+  </div>
+
+  <form #quesForm="ngForm" class="form-group" (ngSubmit)="onSubmit()">
+    <div class="form-container">
+      <div class="form-set">
+        <label for="name" weight="bold" color="blue-dark" required-icon>Question name</label>
+        <input autocomplete="off" type="text" name="name" class="form-input"
+          [ngClass]="{ 'is-invalid': submitted===true && !qname.valid }" required [(ngModel)]="questionName"
+          #qname="ngModel" />
+      </div>
+
+      <div class="form-set">
+        <label for="description" weight="bold" color="blue-dark" required-icon>Question description</label>
+        <textarea type="text" name="description" class="form-input"
+          [ngClass]="{ 'is-invalid': submitted===true && !qdesc.valid}" required [(ngModel)]="questionDescription"
+          #qdesc="ngModel"></textarea>
+      </div>
+
+      <input
+
+      type="password"
+      class="form-input"
+      placeholder="Enter Password"
+      name="psw"
+      required
+      [minlength]="6"
+      [maxlength]="20"
+      [ngClass]="{ 'is-invalid': submitted===true && password.errors }"
+      [(ngModel)]="questionDescription"
+      #password="ngModel">
+
+      <div class="form-set actions-btns">
+        <button [ngClass]="{isDisabled: !quesForm.form.valid}" raised-button type="submit" color="blue-dark">
+          <span *ngIf="loading">
+            <app-loading-spinner></app-loading-spinner>
+          </span>
+          <span *ngIf="!actionedQuestion || actionedQuestion.id.trim().length < 1">Create</span>
+          <span *ngIf="actionedQuestion && actionedQuestion.id.trim().length >= 1">Save</span>
+        </button>
+        <button stroked-button class="cancel-btn" (click)="canCloseActions('cancel button')" type="button"
+          color="blue-medium">Cancel</button>
+      </div>
     </div>
-
-    <form #quesForm="ngForm" class="form-group" (ngSubmit)="onSubmit()">
-        <div class="form-container">
-            <div class="form-set">
-                <label for="name" weight="bold" color="blue-dark" required-icon>Question name</label>
-                <input autocomplete="off" type="text" name="name" class="form-input"
-                    [ngClass]="{ 'is-invalid': submitted===true && !qname.valid }" required
-                    [(ngModel)]="questionName" #qname="ngModel" />
-            </div>
-
-            <div class="form-set">
-                <label for="description" weight="bold" color="blue-dark" required-icon>Question description</label>
-                <textarea type="text" name="description" class="form-input"
-                    [ngClass]="{ 'is-invalid': submitted===true && !qdesc.valid}" required
-                    [(ngModel)]="questionDescription" #qdesc="ngModel"></textarea>
-            </div>
-
-            <div class="form-set actions-btns">
-                <button [ngClass]="{isDisabled: !quesForm.form.valid}" raised-button type="submit" color="blue-dark">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    <span *ngIf="!actionedQuestion || actionedQuestion.id.trim().length < 1">Create</span>
-                    <span *ngIf="actionedQuestion && actionedQuestion.id.trim().length >= 1">Save</span>
-                </button>
-                <button stroked-button class="cancel-btn" (click)="canCloseActions('cancel button')" type="button"
-                    color="blue-medium">Cancel</button>
-            </div>
-        </div>
-    </form>
-    <p class="p-to-del">
-        erisque enim ligula venenatis dolor.
-        Maecenas nisl est, ultrices nec congue eget,
-        auctor vitae massa.
-        Fusce luctus vestibulum augue ut aliquet.
-        Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
-        In at libero sed nunc venenatis imperdiet sed ornare turpis.
-        Donec vitae dui eget tellus gravida venenatis.
-        Integer fringilla congue eros non fermentum.
-        Sed dapibus pulvinar nibh tempor porta.
-        erisque enim ligula venenatis dolor.
-        Maecenas nisl est, ultrices nec congue eget,
-        auctor vitae massa.
-        Fusce luctus vestibulum augue ut aliquet.
-        Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
-        In at libero sed nunc venenatis imperdiet sed ornare turpis.
-        Donec vitae dui eget tellus gravida venenatis.
-        Integer fringilla congue eros non fermentum.
-        Sed dapibus pulvinar nibh tempor porta.
-        erisque enim ligula venenatis dolor.
-        Maecenas nisl est, ultrices nec congue eget,
-        auctor vitae massa.
-        Fusce luctus vestibulum augue ut aliquet.
-        Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
-        In at libero sed nunc venenatis imperdiet sed ornare turpis.
-        Donec vitae dui eget tellus gravida venenatis.
-        Integer fringilla congue eros non fermentum.
-        Sed dapibus pulvinar nibh tempor porta.
-        erisque enim ligula venenatis dolor.
-        Maecenas nisl est, ultrices nec congue eget,
-        auctor vitae massa.
-        Fusce luctus vestibulum augue ut aliquet.
-        Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
-        In at libero sed nunc venenatis imperdiet sed ornare turpis.
-        Donec vitae dui eget tellus gravida venenatis.
-        Integer fringilla congue eros non fermentum.
-        Sed dapibus pulvinar nibh tempor porta.
-        erisque enim ligula venenatis dolor.
-        Maecenas nisl est, ultrices nec congue eget,
-        auctor vitae massa.
-        Fusce luctus vestibulum augue ut aliquet.
-        Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
-        In at libero sed nunc venenatis imperdiet sed ornare turpis.
-        Donec vitae dui eget tellus gravida venenatis.
-        Integer fringilla congue eros non fermentum.
-        Sed dapibus pulvinar nibh tempor porta.
-        erisque enim ligula venenatis dolor.
-        Maecenas nisl est, ultrices nec congue eget,
-        auctor vitae massa.
-        Fusce luctus vestibulum augue ut aliquet.
-        Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
-        In at libero sed nunc venenatis imperdiet sed ornare turpis.
-        Donec vitae dui eget tellus gravida venenatis.
-        Integer fringilla congue eros non fermentum.
-        Sed dapibus pulvinar nibh tempor porta.
-        erisque enim ligula venenatis dolor.
-        Maecenas nisl est, ultrices nec congue eget,
-    </p>
+  </form>
+  <p class="p-to-del">
+    erisque enim ligula venenatis dolor.
+    Maecenas nisl est, ultrices nec congue eget,
+    auctor vitae massa.
+    Fusce luctus vestibulum augue ut aliquet.
+    Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
+    In at libero sed nunc venenatis imperdiet sed ornare turpis.
+    Donec vitae dui eget tellus gravida venenatis.
+    Integer fringilla congue eros non fermentum.
+    Sed dapibus pulvinar nibh tempor porta.
+    erisque enim ligula venenatis dolor.
+    Maecenas nisl est, ultrices nec congue eget,
+    auctor vitae massa.
+    Fusce luctus vestibulum augue ut aliquet.
+    Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
+    In at libero sed nunc venenatis imperdiet sed ornare turpis.
+    Donec vitae dui eget tellus gravida venenatis.
+    Integer fringilla congue eros non fermentum.
+    Sed dapibus pulvinar nibh tempor porta.
+    erisque enim ligula venenatis dolor.
+    Maecenas nisl est, ultrices nec congue eget,
+    auctor vitae massa.
+    Fusce luctus vestibulum augue ut aliquet.
+    Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
+    In at libero sed nunc venenatis imperdiet sed ornare turpis.
+    Donec vitae dui eget tellus gravida venenatis.
+    Integer fringilla congue eros non fermentum.
+    Sed dapibus pulvinar nibh tempor porta.
+    erisque enim ligula venenatis dolor.
+    Maecenas nisl est, ultrices nec congue eget,
+    auctor vitae massa.
+    Fusce luctus vestibulum augue ut aliquet.
+    Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
+    In at libero sed nunc venenatis imperdiet sed ornare turpis.
+    Donec vitae dui eget tellus gravida venenatis.
+    Integer fringilla congue eros non fermentum.
+    Sed dapibus pulvinar nibh tempor porta.
+    erisque enim ligula venenatis dolor.
+    Maecenas nisl est, ultrices nec congue eget,
+    auctor vitae massa.
+    Fusce luctus vestibulum augue ut aliquet.
+    Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
+    In at libero sed nunc venenatis imperdiet sed ornare turpis.
+    Donec vitae dui eget tellus gravida venenatis.
+    Integer fringilla congue eros non fermentum.
+    Sed dapibus pulvinar nibh tempor porta.
+    erisque enim ligula venenatis dolor.
+    Maecenas nisl est, ultrices nec congue eget,
+    auctor vitae massa.
+    Fusce luctus vestibulum augue ut aliquet.
+    Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
+    In at libero sed nunc venenatis imperdiet sed ornare turpis.
+    Donec vitae dui eget tellus gravida venenatis.
+    Integer fringilla congue eros non fermentum.
+    Sed dapibus pulvinar nibh tempor porta.
+    erisque enim ligula venenatis dolor.
+    Maecenas nisl est, ultrices nec congue eget,
+  </p>
 </div>

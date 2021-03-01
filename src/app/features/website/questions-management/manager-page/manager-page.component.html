@@ -8,13 +8,13 @@
   </mat-drawer>
 
   <mat-drawer-content>
-    
+
     <div class="manager-main-page">
       <app-questions-list [qTableData]="qList" (onQuestionActions)="getActionedQuestion($event)">
       </app-questions-list>
     </div>
-    
-  </mat-drawer-content> 
+
+  </mat-drawer-content>
 </mat-drawer-container> -->
 
 <div class="manager-container" [ngClass]="{'side-has-open':isSideBarOpen}">

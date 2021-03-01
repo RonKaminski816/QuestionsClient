@@ -2,8 +2,6 @@ import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
-
 @Component({
   selector: 'app-simple-pie-chart',
   templateUrl: './simple-pie-chart.component.html',
@@ -15,7 +13,7 @@ export class SimplePieChartComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() pieData: any[]
   @Input() chartMeasuredObjectsGroupName: string;
-  constructor(private questionsState: QuestionsStateService) { }
+  constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.chartDispose();

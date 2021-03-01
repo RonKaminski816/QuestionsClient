@@ -8,7 +8,7 @@
         <label for="uname"><b>Username</b></label>
         <input type="text" autocomplete="off" class="form-input" placeholder="Enter Username" name="username"
           [ngClass]="{ 'is-invalid': !isValidFormSubmitted && (loginForm.submitted===true || username.touched) && username.errors }"
-          required [(ngModel)]="loginUser.username" #username="ngModel">
+          required [(ngModel)]="loginUsername" #username="ngModel">
         <div *ngIf="!isValidFormSubmitted && (loginForm.submitted===true || username.touched) && username.errors"
           class="error">
           <div *ngIf="password.errors?.required">This field is required.</div>
@@ -19,7 +19,18 @@
         <input type="password" class="form-input" placeholder="Enter Password" name="psw" required [minlength]="6"
           [maxlength]="20" [pattern]="regex"
           [ngClass]="{ 'is-invalid': !isValidFormSubmitted && (loginForm.submitted===true || password.touched) && password.errors }"
-          [(ngModel)]="loginUser.password" #password="ngModel">
+          [(ngModel)]="loginPassword" #password="ngModel">
+          <!-- <div class="form-input"
+          [ngClass]="{ 'is-invalid': !isValidFormSubmitted && (loginForm.submitted===true || password.touched) && password.errors }"
+          >
+            <input [type]="passwordInputType" class="form-input-text" placeholder="Enter Password" name="psw" required
+              [minlength]="6" [maxlength]="20" [pattern]="regex"
+
+              [(ngModel)]="loginUser.password" #password="ngModel">
+
+
+            <button class="form-input-btn-icon vis-btn" (click)="onPasswordInputVisibility()"></button>
+          </div> -->
         <div *ngIf="!isValidFormSubmitted && (loginForm.submitted===true || password.touched) && password.errors"
           class="error">
           <div *ngIf="password.errors?.required">This field is required.</div>
@@ -29,8 +40,12 @@
         </div>
       </div>
       <button btn-design="raised" [disabled]="loading" color="blue-dark" class="btn-login" type="submit">
-        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-        Login
+        <!-- <span *ngIf="loading">
+          <app-loading-spinner></app-loading-spinner>
+        </span> -->
+        <span>
+          Login
+        </span>
       </button>
       <!-- <label>
           <span class="rgtr">Forgot to<a routerLink='/register'> register?</a></span>

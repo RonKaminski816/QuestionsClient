@@ -1,91 +1,94 @@
 <div class="table-view">
 
-    <div class="table-features">
-        <mat-form-field color="blue-dark" hintLabel="Max 10 characters" appearance="fill">
-            <mat-label class="field-labl">Search</mat-label>
-            <input autocomplete="off" matInput maxlength="10" (keyup)="applyFilter($event.target.value)"
-                placeholder="Enter a question's name" #input>
-            <mat-icon color="blue-dark" matSuffix>search</mat-icon>
-            <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
-        </mat-form-field>
+  <div class="table-features">
+    <mat-form-field color="blue-dark" hintLabel="Max 10 characters" appearance="fill">
+      <mat-label class="field-labl">Search</mat-label>
+      <input autocomplete="off" matInput maxlength="10" (keyup)="applyFilter($event.target.value)"
+        placeholder="Enter a question's name" #input>
+      <mat-icon color="blue-dark" matSuffix>search</mat-icon>
+      <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+    </mat-form-field>
 
-        <mat-form-field appearance="fill">
-            <mat-label class="field-labl">Sort by</mat-label>
-            <mat-select [(ngModel)]="selectedColumn" (selectionChange)="sortTableByKey(selectedColumn)">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let option of sortingColumns" [value]="option.key">{{option.title}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label class="field-labl">Sort by</mat-label>
+      <mat-select [(ngModel)]="selectedColumn" (selectionChange)="sortTableByKey(selectedColumn)">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let option of sortingColumns " [value]="option.key">{{option.title}}</mat-option>
+        <!--; let i = index-->
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table multiTemplateDataRows [dataSource]="dataSource" color="grey-light" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID</th>
+        <td mat-cell *matCellDef="let question">
+          <span [outerHTML]="question.id | smallLettersBoldNumbers"></span>
+        </td>
+      </ng-container>
+      <!--TODO Add the expandeble rows-->
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let question"> {{question.name}} </td>
+      </ng-container>
+
+      <!-- creationDate Column -->
+      <ng-container matColumnDef="creationDate">
+        <th mat-header-cell *matHeaderCellDef> Creation Date </th>
+        <td mat-cell *matCellDef="let question"> {{question.creationDate | date:"mediumDate"}} </td>
+      </ng-container>
+
+      <!-- Edit buttons Column -->
+      <ng-container matColumnDef="edit-btns">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell class="edit-btns-cell" *matCellDef="let question">
+          <button mat-icon-button (click)="openQuestionActions(question)" color="blue-light">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="openDeleteModal(question.id)" color="blue-medium">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No question matching the id or name "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
+  </div>
+  <div class="bottom-page" content="end">
+    <button (click)="openQuestionActions()" raised-button color="blue-dark">
+      Add a question
+    </button>
+  </div>
+
+  <!-- Since the modal container <div> has the (click)="closeDeleteModal($event)" the function will
+      work on every clicked element inside this modal container <div>.The function check what is the
+      id of the clicked target to know if to close the modal or not,so I don't have to call
+      the (click)="closeDeleteModal($event)" again inside a children element, but inside the function
+      (in the .ts) just check the element by it's id if it can close the modal or not. -->
+  <div id="id01" class="modal" (click)="closeDeleteModal($event)"
+    [ngClass]="{'show-modal': questionToDeleteID && questionToDeleteID.trim() !== '' && questionToDeleteID.length >= 1}">
+    <div class="modal-content animate">
+      <div class="modal-text">
+        <h1>Delete</h1>
+        <div>Are you sure you to delete question {{questionToDeleteID}}?</div>
+      </div>
+      <div class="modal-actions" content="space-between">
+        <button id="cancelDelModal" stroked-button color="blue-dark" class="btn-dialog can">Cancel</button>
+        <button id="confirmDelModal" class="btn-dialog del" raised-button color="blue-dark"
+          (click)="deleteQuestion(questionToDeleteID)">Yes</button>
+      </div>
     </div>
-
-    <div class="mat-elevation-z8">
-        <table mat-table multiTemplateDataRows [dataSource]="dataSource" color="grey-light" matSort>
-
-            <!-- ID Column -->
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> ID</th>
-                <td mat-cell *matCellDef="let question">
-                    <span [outerHTML]="question.id | smallLettersBoldNumbers"></span>
-                </td>
-            </ng-container>
-            <!--TODO Add the expandeble rows-->
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let question"> {{question.name}} </td>
-            </ng-container>
-
-            <!-- creationDate Column -->
-            <ng-container matColumnDef="creationDate">
-                <th mat-header-cell *matHeaderCellDef> Creation Date </th>
-                <td mat-cell *matCellDef="let question"> {{question.creationDate | date:"mediumDate"}} </td>
-            </ng-container>
-
-            <!-- Edit buttons Column -->
-            <ng-container matColumnDef="edit-btns">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell class="edit-btns-cell" *matCellDef="let question">
-                    <button mat-icon-button (click)="openQuestionActions(question)" color="blue-light">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-icon-button (click)="openDeleteModal(question.id)" color="blue-medium">
-                        <mat-icon>delete_forever</mat-icon>
-                    </button>
-                </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-
-            <!-- Row shown when there is no matching data. -->
-            <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" colspan="4">No question matching the id or name "{{input.value}}"</td>
-            </tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10]"></mat-paginator>
-    </div>
-    <div class="bottom-page" content="end">
-        <button (click)="openQuestionActions()" raised-button color="blue-dark">
-            Add a question
-        </button>
-    </div>
-
-    <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span> -->
-
-    <div id="id01" class="modal" (click)="closeDeleteModal($event)"
-        [ngClass]="{'show-modal': questionToDeleteID && questionToDeleteID.trim() !== '' && questionToDeleteID.length >= 1}">
-        <div class="modal-content animate">
-            <div class="modal-text">
-                <h1>Delete</h1>
-                <div>Are you sure you to delete question {{questionToDeleteID}}?</div>
-            </div>
-            <div class="modal-actions" content="space-between">
-                <button id="cancelDelModal" stroked-button color="blue-dark" class="btn-dialog can"
-                    (click)="closeDeleteModal($event)">Cancel</button>
-                <button class="btn-dialog del" raised-button color="blue-dark"
-                    (click)="deleteQuestion(questionToDeleteID)">Yes</button>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>

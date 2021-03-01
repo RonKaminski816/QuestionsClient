@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/authentication/http/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,8 +8,9 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'QuestionsClient';
 
-  constructor(private router: Router) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.autoLogin();
   }
 }

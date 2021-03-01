@@ -78,6 +78,53 @@ button:hover {
   opacity: 0.8;
 }
 
+/*
+.form-input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  height: calc(1.5em + .75rem + 2px);
+  font-size: 1rem;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+
+
+.form-input:hover {
+  border: 3px solid #53768c;
+}
+
+
+
+.form-input:focus {
+  outline: 0px solid #53768c;
+  border: 2px solid #53768c;
+}
+
+.form-input-text {
+  width: 97%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  font-size: 1rem;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-input-text:focus {
+  outline: none;
+  border: none;
+} */
+
+
 /*form error for the inputs*/
 .is-invalid {
   border: solid 1px red;
