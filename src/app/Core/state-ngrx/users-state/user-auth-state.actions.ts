@@ -1,6 +1,7 @@
 import { Action } from "@ngrx/store";
 import { IUserModel } from "src/app/shared/models/iuser.model";
 
+export const AUTO_LOGIN = '[User State] Auto Login';
 export const LOGIN_START = '[User State] Login Start';
 export const LOGIN_SUCCESS = '[User State] Login Success';
 export const LOGIN_FAIL = '[User State] Login Fail';
@@ -32,6 +33,10 @@ export class Logout implements Action {
 
 export class ClearError implements Action {
   readonly type = CLEAR_ERROR;
+}
+
+export class AutoLogin implements Action {
+  readonly type = AUTO_LOGIN;
 }
 
 export type UserStateActions = LoginStart | LoginSuccess | LoginFail | Logout | ClearError;
