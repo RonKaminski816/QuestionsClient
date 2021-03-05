@@ -18,8 +18,14 @@ export class LocalStorageService {
     }
   }
 
-  getItem(key: string): string {
-    return localStorage.getItem(key);
+  /**
+   *Get a specific item from the local storage as the given type by the key of the local storage item
+   * @param key The key of the item in the local storage
+   * @returns Returns the object as the given type
+   */
+  getItem<T>(key: string): T {
+    const item: T = JSON.parse(localStorage.getItem(key));
+    return item;
   }
 
   removeItem(key: string): boolean {
@@ -31,6 +37,6 @@ export class LocalStorageService {
   }
 
   isKeyExist(key: string): boolean {
-      return localStorage.getItem(key) ? true : false;
-    }
+    return localStorage.getItem(key) ? true : false;
+  }
 }

@@ -33,7 +33,6 @@ export class UserAuthStateEffects {
               return new UserStateActions.LoginSuccess(res.user);
             }),
             catchError((err) => {
-              alert("inside login effect catch error");
               this.handleError(err);
               console.log(err["error"]);
               //Must use 'of' because without this operator the effect wont work again after catching an error.
@@ -48,8 +47,8 @@ export class UserAuthStateEffects {
     this.actions$.pipe(
       ofType(UserStateActions.AUTO_LOGIN),
       map(() => {
-        const isLoggedIn = JSON.parse(this.localStorageService.getItem('isLogged'));
-        const userData = JSON.parse(this.localStorageService.getItem('currentUser'));
+        const isLoggedIn = this.localStorageService.getItem<boolean>('isLogged');
+        const userData = this.localStorageService.getItem<IUserModel>('currentUser');
         if (!userData || !isLoggedIn && (!userData.token || userData.token === null || userData.token === '')) {
           return new UserStateActions.Logout()
         }
@@ -72,9 +71,9 @@ export class UserAuthStateEffects {
       tap(() => {
         this.localStorageService.removeItem('currentUser');
         this.localStorageService.setItem('isLogged', `${false}`);
+        console.log("before logout navigate")
         this.router.navigate(['/users/login']);
-        console.log("after navigate")
-        //TODO fix the logout navigation
+        console.log("after logout navigate")
       })
     );
   }, { dispatch: false });//If I don't need to return an action

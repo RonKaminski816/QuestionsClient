@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
   setAuthState() {
     this.store.select('usersAuthState').subscribe(authState => {
       this.loading = authState.loading;
-      if (authState.authError !== null && authState.authError.message.trim() !== '') {
+      if (authState.authError.message !== null) {
         this.openErrorModal(authState.authError.message);
         this.loginPassword = '';
         console.log(authState.authError.message);
