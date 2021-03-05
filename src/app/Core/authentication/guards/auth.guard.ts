@@ -23,6 +23,7 @@ export class AuthGuard implements CanActivate, CanDeactivate<WebsiteComponent> {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    //without NgRx
     // if (!this.userService.isLoggedIn() && this.router.url !== '/users/login') {
     //   // when the user is not logged in,
     //   // instead of just returning false

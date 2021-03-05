@@ -37,7 +37,7 @@ export class UserStateService {
   }
 
   userLoggingIn(user: IUserModel) {
-    if (this.handleIsLoggedin(true) && this.localStorageService.setItem('currentUser', JSON.stringify(user))) {
+    if (this.handleIsLoggedin(true) && this.localStorageService.setItem('currentUser', user)) {
       this.mapUserLogged(user);
     }
   }

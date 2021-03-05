@@ -14,18 +14,19 @@ import * as UsersAuthStateActions from 'src/app/core/state-ngrx/users-state/user
 })
 export class WebsiteComponent implements OnInit {
 
-  loggedName: string; //= "Ron";
+  loggedName: string;
+
   constructor(
     private authService: AuthService,
-    private store: Store<fromApp.IAppState>,
     private userState: UserStateService,
+    private store: Store<fromApp.IAppState>,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.getLoggedName();
+    this.getLoggedUserName();
   }
 
-  getLoggedName() {
+  getLoggedUserName() {
     this.store.select('usersAuthState')
       .subscribe(stateData => {
         if (stateData.user) {

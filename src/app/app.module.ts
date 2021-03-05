@@ -14,7 +14,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 //NgRx
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import * as fromAppState from "src/app/core/state-ngrx/app.reducer";
+import { QuestionsStateEffects } from './core/state-ngrx/questions-state/questions-state.effects';
+import { UserAuthStateEffects } from './core/state-ngrx/users-state/user-auth-state.effects';
 //My Custom Creations
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from "./core/core.module";
@@ -23,8 +26,7 @@ import { AppComponent } from './app.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import en from '@angular/common/locales/en';
-import { QuestionsStateEffects } from './core/state-ngrx/questions-state/questions-state.effects';
-import { UserAuthStateEffects } from './core/state-ngrx/users-state/user-auth-state.effects';
+import { environment } from 'src/environments/environment';
 
 registerLocaleData(en);
 @NgModule({
@@ -44,7 +46,8 @@ registerLocaleData(en);
     //and any actions that are dispatched will reach that reducer.
 
     EffectsModule.forRoot([QuestionsStateEffects, UserAuthStateEffects]),
-
+    //We basically restricting the output to only log messages when we are in production
+    StoreDevtoolsModule.instrument({logOnly: environment.production}),
     //MaterialModule,
     MatSnackBarModule,
     MatDialogModule,

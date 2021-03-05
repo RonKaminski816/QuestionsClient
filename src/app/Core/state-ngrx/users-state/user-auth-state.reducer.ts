@@ -23,7 +23,6 @@ export function userAuthStateReducer(state = initialState, action: UserStateActi
         loading: true,
       }
     case UserStateActions.LOGIN_SUCCESS:
-      console.log("inside login success reducer");
       return {
         ...state,
         authError: { message: null },
@@ -40,6 +39,7 @@ export function userAuthStateReducer(state = initialState, action: UserStateActi
     case UserStateActions.LOGOUT:
       return {
         ...state,
+        authError: { message: null },
         user: { id: '', username: '', password: '', token: '' },
       }
     case UserStateActions.CLEAR_ERROR:

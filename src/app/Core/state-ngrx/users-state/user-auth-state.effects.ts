@@ -28,8 +28,8 @@ export class UserAuthStateEffects {
             map((res) => {
               res.user.token = res.token;
               console.log(res.message);
-              this.localStorageService.setItem('isLogged', `${true}`);
-              this.localStorageService.setItem('currentUser', JSON.stringify(res.user));
+              this.localStorageService.setItem('isLogged', true);
+              this.localStorageService.setItem('currentUser', res.user);
               return new UserStateActions.LoginSuccess(res.user);
             }),
             catchError((err) => {
@@ -70,10 +70,8 @@ export class UserAuthStateEffects {
       ofType(UserStateActions.LOGOUT),
       tap(() => {
         this.localStorageService.removeItem('currentUser');
-        this.localStorageService.setItem('isLogged', `${false}`);
-        console.log("before logout navigate")
+        this.localStorageService.setItem('isLogged', false);
         this.router.navigate(['/users/login']);
-        console.log("after logout navigate")
       })
     );
   }, { dispatch: false });//If I don't need to return an action

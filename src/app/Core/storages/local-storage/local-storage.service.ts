@@ -8,9 +8,10 @@ export class LocalStorageService {
   constructor() { }
 
 
-  setItem(key: string, value: string): boolean {
+  setItem<T>(key: string, value: T): boolean {
     try {
-      localStorage.setItem(key, value);
+      const item = JSON.stringify(value);
+      localStorage.setItem(key, item);
       return true;
     } catch (error) {
       console.log(error["massege"]);

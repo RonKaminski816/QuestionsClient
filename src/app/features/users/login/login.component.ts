@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
     // }, 5000);
 
     this.isValidFormSubmitted = true;
-    this.loading = true;
+    // this.loading = true;
     // this.authService.login(this.loginUser).subscribe(
     //   res => {
     //     if (res) {
@@ -94,9 +94,8 @@ export class LoginComponent implements OnInit {
     //     this.loginUser.password = "";
     //     console.log(err["message"]);
     //   });
-    //console.log(this.loginUser.username + '//' + this.loginUser.password);
-    this.store.dispatch(new UserStateActions.LoginStart({ username: this.loginUsername, password: this.loginPassword }));
 
+    this.store.dispatch(new UserStateActions.LoginStart({ username: this.loginUsername, password: this.loginPassword }));
   }
 
   // onPasswordInputVisibility(){
