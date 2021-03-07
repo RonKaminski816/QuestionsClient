@@ -11,23 +11,26 @@ export interface IQuestionsState {
   //I can add it just in this interface and not in every use
   //of this interface across my application
   questions: IQuestionModel[];
+  authError: { message: string };
 }
 
 
 /**for checking */
 const initialState: IQuestionsState = {
-  questions: [
-    { name: "Interaction 1", creationDate: new Date("2021-01-11T10:23:13.432Z"), description: "What annoys you most?", id: "Q43" },
-    { id: "Q87", name: "Covid-19", creationDate: new Date("Wed Feb 17 2021 10:18:14 GMT+0200 (שעון ישראל (חורף))"), description: "Do you think the vaccin would be affective?" },
-    { name: "Interaction 2", creationDate: new Date("2021-01-11T10:44:13.432Z"), description: "What’s your favorite thing about your current job?", id: "Q42" },
-    { name: "Interaction 4", creationDate: new Date("2021-01-11T12:22:13.432Z"), description: "Do you think you’ll stay in your current gig awhile? Why or why not?", id: "Q45" },
-    { id: "Q85", name: "Job", creationDate: new Date("Tue Feb 16 2021 18:23:00 GMT+0200 (שעון ישראל (חורף))"), description: "What to say in a job interview?" },
-    { name: "Interaction 5", creationDate: new Date("2021-01-11T12:22:13.432Z"), description: "What type of role do you want to take on after this one?", id: "Q46" },
-    { name: "Interaction 7", creationDate: new Date("2021-01-12T10:01:16.799Z"), description: "How do you take your coffee?", id: "Q36" },
-    { id: "Q88", name: "covid-19", creationDate: new Date("Wed Feb 17 2021 10:18:14 GMT+0200 (שעון ישראל (חורף))"), description: "Do you think the vaccin would be affective?" },
-    { id: "Q86", name: "Tell", creationDate: new Date("Tue Feb 16 2021 20:28:32 GMT+0200 (שעון ישראל (חורף))"), description: "Is there anything you wanna tell me?" },
-    { name: "Interaction 6", creationDate: new Date("2021-01-11T12:54:13.432Z"), description: "Are you more of a 'work to live' or a 'live to work' type of person?", id: "Q47" },
-  ],
+  questions: [],
+  // [
+  //   { name: "Interaction 1", creationDate: new Date("2021-01-11T10:23:13.432Z"), description: "What annoys you most?", id: "Q43" },
+  //   { id: "Q87", name: "Covid-19", creationDate: new Date("Wed Feb 17 2021 10:18:14 GMT+0200 (שעון ישראל (חורף))"), description: "Do you think the vaccin would be affective?" },
+  //   { name: "Interaction 2", creationDate: new Date("2021-01-11T10:44:13.432Z"), description: "What’s your favorite thing about your current job?", id: "Q42" },
+  //   { name: "Interaction 4", creationDate: new Date("2021-01-11T12:22:13.432Z"), description: "Do you think you’ll stay in your current gig awhile? Why or why not?", id: "Q45" },
+  //   { id: "Q85", name: "Job", creationDate: new Date("Tue Feb 16 2021 18:23:00 GMT+0200 (שעון ישראל (חורף))"), description: "What to say in a job interview?" },
+  //   { name: "Interaction 5", creationDate: new Date("2021-01-11T12:22:13.432Z"), description: "What type of role do you want to take on after this one?", id: "Q46" },
+  //   { name: "Interaction 7", creationDate: new Date("2021-01-12T10:01:16.799Z"), description: "How do you take your coffee?", id: "Q36" },
+  //   { id: "Q88", name: "covid-19", creationDate: new Date("Wed Feb 17 2021 10:18:14 GMT+0200 (שעון ישראל (חורף))"), description: "Do you think the vaccin would be affective?" },
+  //   { id: "Q86", name: "Tell", creationDate: new Date("Tue Feb 16 2021 20:28:32 GMT+0200 (שעון ישראל (חורף))"), description: "Is there anything you wanna tell me?" },
+  //   { name: "Interaction 6", creationDate: new Date("2021-01-11T12:54:13.432Z"), description: "Are you more of a 'work to live' or a 'live to work' type of person?", id: "Q47" },
+  // ],
+  authError: { message: null },
 };
 
 /**
@@ -40,22 +43,49 @@ const initialState: IQuestionsState = {
 export function questionsStateReducer(state = initialState, action: QuestionsStateActions.QuestionsStateActions) {
   switch (action.type) {
     //Convention to use all uppercase text
+    case QuestionsStateActions.SET_QUESTIONS:
+      return {
+        //return a new object which will replace the old state
+        ...state,
+        questions: [...action.payload],
+        authError: { message: null },
+      };
+
     case QuestionsStateActions.ADD_QUESTION:
-      const newQuestionPayload = action.payload;
       return {
         //return a new object which will replace the old state
         ...state,
         //to not lose all the old data copy the old state with the spread operator.
-        questions: [...state.questions, newQuestionPayload]
+        questions: state.questions,
+        authError: { message: null },
       };
-    case QuestionsStateActions.UPDATE_QUESTION:
-      const qPayload = action.payload;
-      const qIndex = state.questions.findIndex(q => q.id === qPayload.id)
+
+      case QuestionsStateActions.ADD_QUESTION_SUCCESS:
+        const newQuestionPayload = action.payload;
+        return {
+          //return a new object which will replace the old state
+          ...state,
+          //to not lose all the old data copy the old state with the spread operator.
+          questions: [...state.questions, newQuestionPayload],
+          authError: { message: null },
+        };
+
+        case QuestionsStateActions.UPDATE_QUESTION:
+          return {
+            //return a new object which will replace the old state
+            ...state,
+            //to not lose all the old data copy the old state with the spread operator.
+            questions: state.questions,
+            authError: { message: null },
+          };
+
+    case QuestionsStateActions.UPDATE_QUESTION_SUCCESS:
+      const qIndex = state.questions.findIndex(q => q.id === action.payload.id)
       const question = state.questions[qIndex];
       const updatedQuestion = {
         //We copy the old data to keep things like ID unchanged and not overwrite it by mistake
         ...question,
-        ...qPayload
+        ...action.payload
       }
       //We creating a copy of the current questions list state
       const updatedQuestions = [...state.questions];
@@ -66,14 +96,32 @@ export function questionsStateReducer(state = initialState, action: QuestionsSta
       updatedQuestions[qIndex] = updatedQuestion;
       return {
         ...state,
-        questions: updatedQuestions
-      };
-    case QuestionsStateActions.DELETE_QUESTION:
-      return {
-        ...state,
-        questions: state.questions.filter(ques => ques.id !== action.payload)
+        questions: updatedQuestions,
+        authError: { message: null },
       };
 
+      case QuestionsStateActions.DELETE_QUESTION:
+        return {
+          //return a new object which will replace the old state
+          ...state,
+          //to not lose all the old data copy the old state with the spread operator.
+          questions: state.questions,
+          authError: { message: null },
+        };
+
+    case QuestionsStateActions.DELETE_QUESTION_SUCCESS:
+      return {
+        ...state,
+        questions: state.questions.filter(ques => ques.id !== action.payload),
+        authError: { message: null },
+      };
+
+    case QuestionsStateActions.QUESTION_ACTION_FAIL:
+      return {
+        ...state,
+        questions: state.questions,
+        authError: action.payload,
+      }
     /**
     * At the first time when this application starts up and
     * NgRx loads our reducer, it would initialize our state with the initialState,

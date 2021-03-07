@@ -21,19 +21,6 @@
           #qdesc="ngModel"></textarea>
       </div>
 
-      <input
-
-      type="password"
-      class="form-input"
-      placeholder="Enter Password"
-      name="psw"
-      required
-      [minlength]="6"
-      [maxlength]="20"
-      [ngClass]="{ 'is-invalid': submitted===true && password.errors }"
-      [(ngModel)]="questionDescription"
-      #password="ngModel">
-
       <div class="form-set actions-btns">
         <button [ngClass]="{isDisabled: !quesForm.form.valid}" raised-button type="submit" color="blue-dark">
           <span *ngIf="loading">

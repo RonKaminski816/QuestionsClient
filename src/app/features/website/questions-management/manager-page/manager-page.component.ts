@@ -47,8 +47,11 @@ export class ManagerPageComponent implements OnInit, OnDestroy {
   private getAllQustions() {
     // return this.questionsState.retrieveMappedQuestionListState().subscribe(
     return this.store.select('questionsState').subscribe(
-      stateData => this.qList = stateData.questions,
-      error => this.snackbarService.openSimpleTextSnackBar(`An error occurred, please refresh the page: ${error['message']}`)
+      stateData => {
+        stateData.authError.message === null ?
+          this.qList = stateData.questions :
+          this.snackbarService.openSimpleTextSnackBar(`An error occurred, please refresh the page: ${stateData.authError.message}`)
+      }
     );
   }
 
@@ -71,7 +74,7 @@ export class ManagerPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  getNewQuestion(ques: IQuestionModel) {
+  getNewAddedQuestion(ques: IQuestionModel) {
     if (ques) {
       // this.qList = [...this.qList, ques];
       // this.questionsState.addQuestion(ques);

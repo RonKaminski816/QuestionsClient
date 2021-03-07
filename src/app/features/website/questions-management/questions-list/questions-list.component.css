@@ -1,232 +1,235 @@
 .table-view {
-    width: 55%;
-    flex-direction: column;
-    padding-top: 1.3rem;
+  width: 55%;
+  flex-direction: column;
+  padding-top: 1.3rem;
 }
 
 .mat-elevation-z8 {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 2rem;
 }
 
 .table-features {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .table-features>mat-form-field {
-    width: 30%;
-    cursor: pointer;
+  width: 30%;
+  cursor: pointer;
 }
 
 :host ::ng-deep .mat-form-field-ripple {
-    background-color: #444c54;
+  background-color: #444c54;
 }
 
 :host ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
-    background-color: #444c54;
+  background-color: #444c54;
 }
 
 :host ::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
-    color: #444c54;
+  color: #444c54;
 }
 
 .field-labl {
-    color: #444c54;
+  color: #444c54;
 }
 
 table {
-    width: 100%;
-    font-size: medium;
-    background-color: #eeeeee;
+  width: 100%;
+  font-size: medium;
+  background-color: #eeeeee;
 }
 
 mat-paginator {
-    margin-bottom: 1rem;
-    font-size: small;
-    background-color: #eeeeee;
+  margin-bottom: 1rem;
+  font-size: small;
+  background-color: #eeeeee;
 }
 
 :host ::ng-deep .mat-paginator-range-actions>button:focus {
-    outline: 0px auto transparent;
+  outline: 0px auto transparent;
 }
 
 td, th {
-    width: 25%;
-    font-size: medium;
+  width: 25%;
+  font-size: medium;
 }
 
 .edit-btns-cell>button:focus {
-    outline: 0px auto transparent;
+  outline: 0px auto transparent;
 }
 
-
-/* .sticky-btn {
-
-} */
 
 div.bottom-page {
-    margin-bottom: 1rem;
-    /* position: -webkit-sticky;
-    position: sticky;
-    bottom: 3rem; */
+  margin: 1rem;
 }
 
-div.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    bottom: 3rem;
-    background-color: yellow;
-    padding: 50px;
-    font-size: 20px;
-  }
+/* .sticky button */
+.add-q-btn {
+  padding: 0.75rem 1.5em;
+  font-size: 16px;
+  margin-bottom: 2rem;
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+}
 
 [content="end"] {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
 [content="space-between"] {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 [color="blue-light"] {
-    color: #a9c2e6;
+  color: #a9c2e6;
 }
 
 [color="blue-medium"] {
-    color: #53768c;
+  color: #53768c;
 }
 
 [color="blue-dark"] {
-    background-color: #444c54;
-    color: white;
+  background-color: #444c54;
+  color: white;
 }
 
 mat-icon[color="blue-dark"] {
-    background-color: inherit;
-    color: #444c54;
+  background-color: inherit;
+  color: #444c54;
 }
 
 mat-form-field[color="blue-dark"] {
-    background-color: inherit;
-    color: #444c54;
+  background-color: inherit;
+  color: #444c54;
 }
 
 [stroked-button][color="blue-dark"] {
-    background-color: inherit;
-    color: #444c54;
+  background-color: inherit;
+  color: #444c54;
 }
 
 /* The Modal (background) */
 
 .modal {
-    display: none;    /* Hidden by default */
-    position: fixed;  /* Stay in place */
-    z-index: 1;  /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%;    /* Full width */
-    height: 100%;   /* Full height */
-    overflow: hidden;   /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);  /* Black w/ opacity */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: hidden;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 .show-modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Modal Content/Box */
 
 .modal-content {
-    background-color: #fefefe;
-    cursor: default;
-    /*margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 0px;
-    width: fit-content;
-    padding: 2rem 3rem 2rem 2rem;
-    border-radius: .3rem;
-    outline: transparent;
-    box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+  background-color: #fefefe;
+  cursor: default;
+  /*margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 0px;
+  width: fit-content;
+  padding: 2rem 3rem 2rem 2rem;
+  border-radius: .3rem;
+  outline: transparent;
+  box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%), 0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
 }
 
-#id01:hover{
-    cursor: pointer;
+#id01:hover {
+  cursor: pointer;
 }
 
 .modal-text {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 /* Add Zoom Animation */
 
 .animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
 }
 
 @-webkit-keyframes animatezoom {
-    from {
-        -webkit-transform: scale(0)
-    }
-    to {
-        -webkit-transform: scale(1)
-    }
+  from {
+    -webkit-transform: scale(0)
+  }
+  to {
+    -webkit-transform: scale(1)
+  }
 }
 
 @keyframes animatezoom {
-    from {
-        transform: scale(0)
-    }
-    to {
-        transform: scale(1)
-    }
+  from {
+    transform: scale(0)
+  }
+  to {
+    transform: scale(1)
+  }
 }
 
 @media (max-width: 776px) {
-    .table-view {
-        max-width: 85%;
-        width: max-content;
-    }
-    .table-features {
-        justify-content: space-between;
-        margin-bottom: 0rem;
-    }
-    .table-features>mat-form-field {
-        margin-bottom: 1rem;
-    }
-    .edit-btns-cell {
-        padding: 0;
-        text-align: center;
-    }
+  .table-view {
+    max-width: 85%;
+    width: max-content;
+  }
+  .table-features {
+    justify-content: space-between;
+    margin-bottom: 0rem;
+  }
+  .table-features>mat-form-field {
+    margin-bottom: 1rem;
+  }
+  .edit-btns-cell {
+    padding: 0;
+    text-align: center;
+  }
 }
 
 @media (max-width: 525px) {
-    .table-features {
-        flex-direction: column;
-    }
-    .table-features>mat-form-field {
-        width: 85%;
-    }
-    th[mat-header-cell]:last-of-type, td[mat-cell]:last-of-type {
-        padding-right: 3%;
-    }
-    th[mat-header-cell], td[mat-cell] {
-        font-size: small;
-        padding-left: 3%;
-    }
+  .table-features {
+    flex-direction: column;
+  }
+  .table-features>mat-form-field {
+    width: 85%;
+  }
+  th[mat-header-cell]:last-of-type, td[mat-cell]:last-of-type {
+    padding-right: 3%;
+  }
+  th[mat-header-cell], td[mat-cell] {
+    font-size: small;
+    padding-left: 3%;
+  }
 }
 
 @media (max-width: 400px) {
-    td[mat-cell] {
-        font-size: x-small;
-    }
+  td[mat-cell] {
+    font-size: x-small;
+  }
 }

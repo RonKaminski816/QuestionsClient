@@ -21,7 +21,7 @@
 
   <div id="sidebar" class="sidebar" color="grey-dark" [ngClass]="{'sticky': isSticky}"
     [ngClass]="{'sidebar-open':isSideBarOpen}">
-    <app-question-edit [actionedQuestion]="actionedQuestion" (onNewQuestion)="getNewQuestion($event)"
+    <app-question-edit [actionedQuestion]="actionedQuestion" (onNewQuestion)="getNewAddedQuestion($event)"
       (onUpdatededQuestion)="getUpdatedQuestion($event)" (onCancelActions)="closeSideBar($event)">
     </app-question-edit>
   </div>

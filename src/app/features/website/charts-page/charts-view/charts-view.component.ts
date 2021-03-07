@@ -4,6 +4,10 @@ import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.s
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 import { startOfDay, endOfDay, startOfWeek, startOfMonth } from 'date-fns';
 
+import { Store } from '@ngrx/store';
+import * as QuestionsStateActions from 'src/app/core/state-ngrx/questions-state/questions-state.actions';
+//convention to describe an import to my reducer and/or state for a certain part of my application
+import * as fromApp from 'src/app/core/state-ngrx/app.reducer';
 @Component({
   selector: 'app-charts-view',
   templateUrl: './charts-view.component.html',
@@ -30,22 +34,36 @@ export class ChartsViewComponent implements OnInit {
   /**Array of the custom strings for the charts series */
   chartSeries: string[];
 
-  constructor(private questionsState: QuestionsStateService, private snackbarService: SnackbarService) { }
+  constructor(private questionsState: QuestionsStateService,
+    private store: Store<fromApp.IAppState>,
+    private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
     this.getChartsData();
   }
 
   getChartsData() {
-    return this.questionsState.retrieveMappedQuestionListState().subscribe(
-      res => {
-        this.chartQListOrigin = res;
-        this.qCount = res.length;
-        this.afterChangeQList = [...res];
-        this.createFullChartsObjects(this.chartQListOrigin);
-      },
-      error => this.snackbarService.openSimpleTextSnackBar(`An error occurred, please refresh the page: ${error['message']}`)
-    );
+    // return this.questionsState.retrieveMappedQuestionListState().subscribe(
+    //   res => {
+    //     this.chartQListOrigin = res;
+    //     this.qCount = res.length;
+    //     this.afterChangeQList = [...res];
+    //     this.createFullChartsObjects(this.chartQListOrigin);
+    //   },
+    //   error => this.snackbarService.openSimpleTextSnackBar(`An error occurred, please refresh the page: ${error['message']}`)
+    // );
+    return this.store.select('questionsState').subscribe(
+      stateData => {
+        if (stateData.authError.message === null) {
+          this.chartQListOrigin = stateData.questions;
+          this.qCount = stateData.questions.length;
+          this.afterChangeQList = [...stateData.questions];
+          this.createFullChartsObjects(this.chartQListOrigin);
+        } else {
+          this.snackbarService.openSimpleTextSnackBar(`An error occurred, please refresh the page: ${stateData.authError.message}`)
+        }
+      });
+
   }
 
   createFullChartsObjects(questions: IQuestionModel[]) {

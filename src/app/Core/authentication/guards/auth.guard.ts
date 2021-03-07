@@ -47,17 +47,9 @@ export class AuthGuard implements CanActivate, CanDeactivate<WebsiteComponent> {
     );
   }
 
-
   canDeactivate(component: WebsiteComponent): Observable<boolean> | Promise<boolean> | boolean | UrlTree {
     return this.store.select('usersAuthState').pipe(
-      map(authState => {
-        if (authState.user.id === '' || authState.user.token === '') {
-          return true;
-        }
-        return false;
-      }),
-
+      map(authState => authState.user.id === '' || authState.user.token === '' ? true : false),
     );
   }
-
 }

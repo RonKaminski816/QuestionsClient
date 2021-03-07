@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Actions, createEffect, Effect, ofType } from "@ngrx/effects";
-import { of, throwError } from "rxjs";
-import { catchError, map, switchMap, tap } from "rxjs/operators";
+import { Router } from "@angular/router";
 import { IUserModel } from "src/app/shared/models/iuser.model";
 import { environment } from "src/environments/environment";
-import * as UserStateActions from "./user-auth-state.actions";
-import { Router } from "@angular/router";
 import { LocalStorageService } from "../../storages/local-storage/local-storage.service";
+
+import * as UserStateActions from "./user-auth-state.actions";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { of, throwError } from "rxjs";
+import { catchError, map, switchMap, tap } from "rxjs/operators";
+
 
 /**The idea in the effects class is that I don't change any state but that I can
  * execute any other code that should happen when such action is dispatched.
@@ -17,7 +19,6 @@ export class UserAuthStateEffects {
 
   private usersPath = environment.baseUrl + environment.userPath;
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });//, "Authorization":
-
 
   userLogin = createEffect(() =>
     this.actions$.pipe(

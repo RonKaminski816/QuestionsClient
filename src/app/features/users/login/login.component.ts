@@ -72,11 +72,11 @@ export class LoginComponent implements OnInit {
     if (form.invalid) {
       return;
     }
-    // setTimeout(() => {
-    //   console.log('end timeout');
-    // }, 5000);
 
     this.isValidFormSubmitted = true;
+    this.store.dispatch(new UserStateActions.LoginStart({ username: this.loginUsername, password: this.loginPassword }));
+
+    //Without NgRx
     // this.loading = true;
     // this.authService.login(this.loginUser).subscribe(
     //   res => {
@@ -94,10 +94,9 @@ export class LoginComponent implements OnInit {
     //     this.loginUser.password = "";
     //     console.log(err["message"]);
     //   });
-
-    this.store.dispatch(new UserStateActions.LoginStart({ username: this.loginUsername, password: this.loginPassword }));
   }
 
+  //Password visibility
   // onPasswordInputVisibility(){
   //   this.passwordInputVisibility = !this.passwordInputVisibility;
   //   if(this.passwordInputVisibility === true){

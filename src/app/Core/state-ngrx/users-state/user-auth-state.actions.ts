@@ -11,19 +11,16 @@ export const CLEAR_ERROR = ' [User State] ClearError';
 
 export class LoginStart implements Action {
   readonly type = LOGIN_START;
-
   constructor(public payload: { username: string, password: string }) { }
 }
 
 export class LoginSuccess implements Action {
   readonly type = LOGIN_SUCCESS;
-
   constructor(public payload: IUserModel) { }
 }
 
 export class LoginFail implements Action {
   readonly type = LOGIN_FAIL;
-
   constructor(public payload: { message: string }) { }
 }
 

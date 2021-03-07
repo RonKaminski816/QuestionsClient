@@ -12,23 +12,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private authService: AuthService, private store: Store<fromApp.IAppState>) { }
 
-  intercept(req: HttpRequest<any>,
-    next: HttpHandler): Observable<HttpEvent<any>> {
-
-   /** not ngrx way
-    * const idToken = this.authService.getToken();
-    *  if (idToken) {
-    * const cloned = req.clone({
-    *  headers: req.headers.set("Authorization",
-    *  "Bearer " + idToken)
-    *  });
-    *  return next.handle(cloned);
-    *  }
-    *  else {
-    *  return next.handle(req);
-    * }
-    */
-  //ngrx way
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    //ngrx way
     return this.store.select('usersAuthState').pipe(
       take(1),
       map(authState => {
@@ -45,5 +30,19 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(modifiedReq);
       })
     );
+
+    /** not ngrx way
+     * const idToken = this.authService.getToken();
+     *  if (idToken) {
+     * const cloned = req.clone({
+     *  headers: req.headers.set("Authorization",
+     *  "Bearer " + idToken)
+     *  });
+     *  return next.handle(cloned);
+     *  }
+     *  else {
+     *  return next.handle(req);
+     * }
+     */
   }
 }

@@ -29,7 +29,6 @@ export class QuestionsService {
   addQuestion(question: IQuestionModel): Observable<{ message: string, qa?: IQuestionModel }> {
     return this.http.post<{ message: string, qa?: IQuestionModel }>(`${this.questionsPath}/create`, JSON.stringify(question), { headers: this.headers })
       .pipe(catchError(this.handleError));
-
   }
 
   updateQuestion(question: IQuestionModel): Observable<IQuestionModel> {
@@ -42,7 +41,6 @@ export class QuestionsService {
     return this.http.delete<{ message }>(`${this.questionsPath}/delete/${questionId}`, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
-
 
   private handleError(error: any) {
     let msg = error.error;
