@@ -32,33 +32,29 @@ export class FetchQuestions implements Action {
 
 export class AddQuestion implements Action {
   /**The identifier of this action and it will alaways be an add question action */
-  readonly type = ADD_QUESTION;
   //The 'readonly' indicates to TypeScript that this must never be changed from the outside.
-
+  readonly type = ADD_QUESTION;
+  constructor(public payload: IQuestionModel) { }
   /**We are getting the payload of the action inside the constructor
-   * to the payload as an argument when the the action get dispatched.
-   * It has to be public because I want to access the payload fron
-   * inside my reducer where I'm extracting it to store the question in
+   * to the payload as an argument when the action is dispatched.
+   * It has to be public because I want to access the payload from the
+   * inside of my reducer where I'm extracting it to store the question in
    * the Questions array.
   */
-  constructor(public payload: IQuestionModel) { }
 }
 
 export class AddQuestionSuccess implements Action {
   readonly type = ADD_QUESTION_SUCCESS;
-
   constructor(public payload: IQuestionModel) { }
 }
 
 export class UpdateQuestion implements Action {
   readonly type = UPDATE_QUESTION;
-  // constructor(public payload: { index: number, question: IQuestionModel }) { }
   constructor(public payload: IQuestionModel) { }
 }
 
 export class UpdateQuestionSuccess implements Action {
   readonly type = UPDATE_QUESTION_SUCCESS;
-
   constructor(public payload: IQuestionModel) { }
 }
 
@@ -69,11 +65,11 @@ export class DeleteQuestion implements Action {
 
 export class DeleteQuestionSuccess implements Action {
   readonly type = DELETE_QUESTION_SUCCESS;
-
   constructor(public payload: string) { }
 }
 
-export class QuestionsActionFails implements Action {
+/**A general Failure Action to be dispatched every time when a NgRx question state related error accurs*/
+export class QuestionsStateFailureAction implements Action {
   readonly type = QUESTION_ACTION_FAIL;
   constructor(public payload: { message: string }) { }
 }
@@ -91,7 +87,7 @@ export type QuestionsStateActions =
   | UpdateQuestionSuccess
   | DeleteQuestion
   | DeleteQuestionSuccess
-  | QuestionsActionFails
+  | QuestionsStateFailureAction
 
 // The pipe symbol 'AddQuestion | DeleteQuestion' is a TypeScript feature, that simply says the
 // type of QuestionsStateActions is AddQuestion or DeleteQuestion.

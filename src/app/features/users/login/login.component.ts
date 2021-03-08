@@ -75,6 +75,8 @@ export class LoginComponent implements OnInit {
 
     this.isValidFormSubmitted = true;
     this.store.dispatch(new UserStateActions.LoginStart({ username: this.loginUsername, password: this.loginPassword }));
+    //New conventional syntax
+    // this.store.dispatch(UserStateActions.login({ username: this.loginUsername, password: this.loginPassword }));
 
     //Without NgRx
     // this.loading = true;

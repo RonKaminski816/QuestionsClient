@@ -20,6 +20,7 @@ export class UserAuthStateEffects {
   private usersPath = environment.baseUrl + environment.userPath;
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });//, "Authorization":
 
+
   userLogin = createEffect(() =>
     this.actions$.pipe(
       ofType(UserStateActions.LOGIN_START),
@@ -34,10 +35,7 @@ export class UserAuthStateEffects {
               return new UserStateActions.LoginSuccess(res.user);
             }),
             catchError((err) => {
-              this.handleError(err);
-              console.log(err["error"]);
-              //Must use 'of' because without this operator the effect wont work again after catching an error.
-              return of(new UserStateActions.LoginFail({ message: err.error.message }));
+              return this.handleAuthError(err);
             }),
           )
       })
@@ -53,7 +51,7 @@ export class UserAuthStateEffects {
         if (!userData || !isLoggedIn && (!userData.token || userData.token === null || userData.token === '')) {
           return new UserStateActions.Logout()
         }
-       return new UserStateActions.LoginSuccess(userData);
+        return new UserStateActions.LoginSuccess(userData);
       })
     ))
 
@@ -75,8 +73,32 @@ export class UserAuthStateEffects {
         this.router.navigate(['/users/login']);
       })
     );
-  }, { dispatch: false });//If I don't need to return an action
+  }, { dispatch: false });//If I don't need to return a new action
 
+  //NgRx Actions new convNew conventional syntax
+  // userLogin = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(UserStateActions.LOGIN_START),
+  //     switchMap(({ username, password }) => {
+  //       return this.http.post<{ message: string, user: IUserModel, token: string }>(`${this.usersPath}/login`, JSON.stringify({ username, password }), { headers: this.headers })
+  //         .pipe(
+  //           map((res) => {
+  //             res.user.token = res.token;
+  //             console.log(res.message);
+  //             this.localStorageService.setItem('isLogged', true);
+  //             this.localStorageService.setItem('currentUser', res.user);
+  //             return new UserStateActions.LoginSuccess(res.user);
+  //           }),
+  //           catchError((err) => {
+  //             this.handleError(err);
+  //             console.log(err["error"]);
+  //             //Must use 'of' because without this operator the effect wont work again after catching an error.
+  //             return of(new UserStateActions.LoginFail({ message: err.error.message }));
+  //           }),
+  //         )
+  //     })
+  //   )
+  // );
 
   constructor(
     private actions$: Actions,
@@ -85,8 +107,9 @@ export class UserAuthStateEffects {
     private localStorageService: LocalStorageService,
   ) { }
 
-  private handleError(error: any) {
-    let msg = error.error;
-    return throwError(msg);
+  private handleAuthError(error: any) {
+    console.log(error["error"]);
+    //Must use 'of' because without this operator the effect wont work again after catching an error.
+    return of(new UserStateActions.AuthFailure({ message: error.error.message }));
   }
 }

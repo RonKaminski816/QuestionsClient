@@ -22,6 +22,7 @@ export function userAuthStateReducer(state = initialState, action: UserStateActi
         authError: { message: null },
         loading: true,
       }
+
     case UserStateActions.LOGIN_SUCCESS:
       return {
         ...state,
@@ -29,23 +30,26 @@ export function userAuthStateReducer(state = initialState, action: UserStateActi
         user: action.payload,
         loading: false,
       }
-    case UserStateActions.LOGIN_FAIL:
-      return {
-        ...state,
-        user: { id: '', username: '', token: '' },
-        authError: action.payload,
-        loading: false,
-      }
+
     case UserStateActions.LOGOUT:
       return {
         ...state,
         authError: { message: null },
         user: { id: '', username: '', password: '', token: '' },
       }
+
     case UserStateActions.CLEAR_ERROR:
       return {
         ...state,
         authError: { message: null },
+      }
+
+    case UserStateActions.AUTH_FAILURE:
+      return {
+        ...state,
+        user: { id: '', username: '', token: '' },
+        authError: action.payload,
+        loading: false,
       }
 
     default:

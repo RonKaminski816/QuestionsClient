@@ -50,7 +50,7 @@ export class ManagerPageComponent implements OnInit, OnDestroy {
       stateData => {
         stateData.authError.message === null ?
           this.qList = stateData.questions :
-          this.snackbarService.openSimpleTextSnackBar(`An error occurred, please refresh the page: ${stateData.authError.message}`)
+          this.snackbarService.openSimpleTextSnackBar(`An error occurred: ${stateData.authError.message}. please try again`)
       }
     );
   }
