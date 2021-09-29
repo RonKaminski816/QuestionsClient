@@ -29,8 +29,11 @@ export class WebsiteComponent implements OnInit {
   getLoggedUserName() {
     this.store.select('usersAuthState')
       .subscribe(stateData => {
+        console.log(stateData);
+        console.log(stateData.user);
+        console.log(stateData.user.name);
         if (stateData.user) {
-          this.loggedName = stateData.user.username;
+          this.loggedName = stateData.user.name;
         } else {
           this.loggedName = null;
         }

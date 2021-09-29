@@ -3,10 +3,6 @@ import { IQuestionModel } from 'src/app/shared/models/iquestion.model';
 import { QuestionsService } from 'src/app/core/http/questions/questions.service';
 import { QuestionsStateService } from 'src/app/core/state-managments/questions-state/questions-state.service';
 
-// import { Store } from '@ngrx/store';
-// //convention to describe an import to my reducer and/or state for a certain part of my application
-// import * as fromApp from 'src/app/core/state-ngrx/app.reducer';
-
 import { SnackbarService } from 'src/app/core/popup-messages/snackbar/snackbar.service';
 import { OverlayViewService } from 'src/app/shared/services/overlay-view/overlay-view.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -14,12 +10,18 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 // import { MatDialog } from '@angular/material/dialog';
 
+import { jsPDF } from "jspdf";
+import autoTable from 'jspdf-autotable'
+// import { ExportExcelService } from 'src/app/core/exports/excel/export-excel.service';
+
 @Component({
   selector: 'app-questions-list',
   templateUrl: './questions-list.component.html',
   styleUrls: ['./questions-list.component.css']
 })
 export class QuestionsListComponent implements OnInit, OnChanges {
+
+  // private jspdf: jsPDF;
 
   questionToDeleteID: string;
 
@@ -58,9 +60,11 @@ export class QuestionsListComponent implements OnInit, OnChanges {
      * to be the name I chose as a key of the JS object inside the forRoot() in app.module).
      * And the type of the data stored in that questionsState area is now not the reducer function
      * but what does the reducer finction yields(מניב). It yields a state of the type of the JS object of the state.*/
-   // private store: Store<fromApp.IAppState>,
-    private snackbars: SnackbarService,
-    private overlayViewService: OverlayViewService) { }
+    // private store: Store<fromApp.IAppState>,
+    //   private jspdf: jsPDF,
+    private overlayViewService: OverlayViewService,
+    // private exportToExcel: ExportExcelService,
+  ) { }
 
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -71,10 +75,42 @@ export class QuestionsListComponent implements OnInit, OnChanges {
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       return data.name.toLowerCase().includes(filter) || data.id.toLowerCase().includes(filter);
     };
+
+    // this.jspdf.
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  exportPDF() {
+    // pdf = new jsPDF();
+    // pdf.text("Hello world!", 10, 10);
+    // pdf.save();
+
+    const pdf = new jsPDF({
+      unit: "px",
+    });
+
+    autoTable(pdf, {
+      margin: { top: 30 },
+      rowPageBreak: 'avoid',
+      head: [['id', 'name', 'creationDate', 'description']],
+      headStyles: { fontStyle: "bold" },
+      //body:
+      html: '#questionsTable',
+      columnStyles: { 3: { cellWidth: 50 }, 0: { fontStyle: "bold", cellWidth: 15, textColor: "black" } }
+    },
+    )
+
+    let numOfPages = pdf.getNumberOfPages();
+
+    for (let i = 0; i <= numOfPages; i++) {
+      pdf.setPage(i);
+      pdf.setFontSize(16);
+      pdf.text(`Questions - page ${i} of ${numOfPages}`, 45, 15)
+    }
+    pdf.save("Questions.pdf");
   }
 
   openQuestionActions(question?: IQuestionModel) {
@@ -117,6 +153,11 @@ export class QuestionsListComponent implements OnInit, OnChanges {
       // );
       this.onDeleteQuestion.emit(questionId);
     }
+  }
+
+
+  ExportExcel(){
+
   }
 
   openDeleteModal(selectedQuestionId: string) {

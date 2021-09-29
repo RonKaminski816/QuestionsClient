@@ -9,7 +9,8 @@ export interface IUserAuthState {
 
 
 const initialState: IUserAuthState = {
-  user: { id: '', username: '', token: '' },
+  // user: { id: '', username: '', token: '' },
+  user: { id: '', name: '', token: '' },
   authError: { message: null },
   loading: false,
 }
@@ -35,7 +36,7 @@ export function userAuthStateReducer(state = initialState, action: UserStateActi
       return {
         ...state,
         authError: { message: null },
-        user: { id: '', username: '', password: '', token: '' },
+        user: { id: '', name: '', password: '', token: '' },
       }
 
     case UserStateActions.CLEAR_ERROR:
@@ -47,7 +48,7 @@ export function userAuthStateReducer(state = initialState, action: UserStateActi
     case UserStateActions.AUTH_FAILURE:
       return {
         ...state,
-        user: { id: '', username: '', token: '' },
+        user: { id: '', name: '', token: '' },
         authError: action.payload,
         loading: false,
       }

@@ -8,7 +8,8 @@ import { LocalStorageService } from '../../storages/local-storage/local-storage.
 })
 export class UserStateService {
 
-  private sharedUserName = new BehaviorSubject<IUserModel>({id: '', username:'', token:''});
+  // private sharedUserName = new BehaviorSubject<IUserModel>({id: '', username:'', token:''});
+  private sharedUserName = new BehaviorSubject<IUserModel>({id: '', name:'', token:''});
 
   constructor(private localStorageService: LocalStorageService) {
     // if (this.isLoggedIn()) {

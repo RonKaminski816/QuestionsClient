@@ -9,6 +9,8 @@
       <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
     </mat-form-field>
 
+<!-- <button stroked-button color="blue-dark" (click)="exportPDF()">export PDF</button> -->
+
     <mat-form-field appearance="fill">
       <mat-label class="field-labl">Sort by</mat-label>
       <mat-select [(ngModel)]="selectedColumn" (selectionChange)="sortTableByKey(selectedColumn)">
@@ -20,7 +22,7 @@
   </div>
 
   <div class="mat-elevation-z8">
-    <table mat-table multiTemplateDataRows [dataSource]="dataSource" color="grey-light" matSort>
+    <table id="questionsTable" mat-table multiTemplateDataRows [dataSource]="dataSource" color="grey-light" matSort>
 
       <!-- ID Column -->
       <ng-container matColumnDef="id">
@@ -45,7 +47,9 @@
 
       <!-- Edit buttons Column -->
       <ng-container matColumnDef="edit-btns">
-        <th mat-header-cell *matHeaderCellDef></th>
+        <th mat-header-cell *matHeaderCellDef>
+          <!-- <button (click)="ExportExcel()"></button> -->
+        </th>
         <td mat-cell class="edit-btns-cell" *matCellDef="let question">
           <button mat-icon-button (click)="openQuestionActions(question)" color="blue-light">
             <mat-icon>edit</mat-icon>
